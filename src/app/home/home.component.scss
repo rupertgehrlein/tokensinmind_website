@@ -1,0 +1,37 @@
+.container.text {
+  margin: 3% 5%;
+}
+
+.welcome_text {
+  margin: 5%;
+  text-align: justify center;
+}
+
+hr {
+  color: #ffffff;
+  border: none;
+  height: 5px;
+  background-color: #ffffff;
+  margin: 80px 0;
+}
+
+.btn_link {
+  margin: 10px;
+  text-decoration: none !important;
+}
+
+.card.secondary-color:hover {
+  cursor: pointer;
+}
+
+.display-1 {
+  margin-top: 30px;
+  margin-bottom: 50px;
+}
+
+.card-img-top {
+  max-width: 300px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}

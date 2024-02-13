@@ -1,0 +1,159 @@
+<div class="container">
+  <h1 class="display-4 text">Blockchain</h1>
+</div>
+
+<div class="container">
+  <div class="row align-items-center">
+    <div class="col text">
+
+      <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <li class="nav-item" role="presentation">
+          <button class="nav-link active" id="lektion1-tab" data-bs-toggle="tab" data-bs-target="#lektion1-tab-pane"
+            type="button" role="tab" aria-controls="lektion1-tab-pane" aria-selected="true">Was ist eine
+            Blockchain?</button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link" id="lektion2-tab" data-bs-toggle="tab" data-bs-target="#lektion2-tab-pane"
+            type="button" role="tab" aria-controls="lektion2-tab-pane" aria-selected="false">Ein einzelner
+            Block</button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link" id="lektion3-tab" data-bs-toggle="tab" data-bs-target="#lektion3-tab-pane"
+            type="button" role="tab" aria-controls="lektion3-tab-pane" aria-selected="false">NONCE</button>
+        </li>
+      </ul>
+
+      <div class="tab-content" id="myTabContent">
+
+        <!-- Was ist die Blockchain -->
+
+        <div class="tab-pane fade show active" id="lektion1-tab-pane" role="tabpanel" aria-labelledby="lektion1-tab"
+          tabindex="0">
+          <div class="container tabs">
+            <div class="row">
+              <div class="col">
+                Eine Blockchain ist eine Art Datenbank, die auf einem Netzwerk von Computern verteilt ist. In dieser
+                Datenbank werden Informationen gespeichert, die nicht geändert werden können. <br><br>
+
+                <b>Wie funktioniert eine Blockchain?</b><br>
+                Die Informationen in einer Blockchain werden in Blöcken gespeichert. Jeder Block enthält eine Liste von
+                Transaktionen, die durchgeführt wurden. Die Blöcke sind miteinander verbunden, so dass jede Änderung an
+                einem Block auch alle anderen Blöcke beeinflusst. <br><br>
+
+              </div>
+              <div class="col">Video</div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <b>Wofür wird eine Blockchain verwendet?</b><br>
+                Blockchains werden in vielen verschiedenen Bereichen eingesetzt, zum Beispiel:
+                <ul>
+                  <li>In der Finanzwelt werden Blockchains verwendet, um Kryptowährungen wie Bitcoin zu speichern.</li>
+                  <li>In der Logistik werden Blockchains verwendet, um Lieferketten zu verfolgen.</li>
+                  <li>In der Gesundheitsversorgung werden Blockchains verwendet, um Patientendaten zu speichern.</li>
+                </ul>
+
+                <b>Ein Beispiel</b><br>
+                Jedes Mal, wenn ihr euch trefft, schreibt ihr auf, wer dabei war und was gespielt wurde. Diese Liste
+                könnt ihr dann an alle Freunde schicken, damit jeder weiß, was passiert ist. Wenn jemand etwas ändern
+                möchte, muss er alle anderen Freunde darüber informieren. Wenn jemand versucht, eine Liste zu ändern,
+                ohne alle anderen Freunde darüber zu informieren, wird das sofort bemerkt. So ähnlich funktioniert eine
+                Blockchain auch.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Ein einzelner Block -->
+
+        <div class="tab-pane fade" id="lektion2-tab-pane" role="tabpanel" aria-labelledby="lektion2-tab" tabindex="0">
+          <div class="container tabs">
+            <div class="row">
+              <div class="col">
+                <b>Wie ist ein einzelner Block in der Blockchain aufgebaut?</b><br>
+                Ein einzelner Block in der Blockchain ist wie ein kleines Paket, das Informationen enthält. Dieses Paket
+                wird von einem Computer erstellt und dann an alle anderen Computer im Blockchain-Netzwerk verteilt.
+                <br><br>
+
+                <b>Was ist in einem Block enthalten?</b><br>
+                In einem Block sind folgende Informationen enthalten:
+                <ul>
+                  <li>Der Hashwert des vorherigen Blocks. Dieser Hashwert ist eine Art Fingerabdruck, der den vorherigen
+                    Block identifiziert.</li>
+                  <li>Die Transaktionen. Dies sind die Informationen, die in diesem Block gespeichert werden.</li>
+                  <li>Der Zeitstempel. Dieser Zeitstempel zeigt an, wann der Block erstellt wurde.</li>
+                  <li>Der Hash des Blocks. Dieser Hash ist eine Art Fingerabdruck, der den aktuellen Block
+                    identifiziert.</li>
+                </ul>
+              </div>
+              <div class="col">Video</div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <b>Wie werden die Informationen in einem Block gesichert?</b><br>
+                Die Informationen in einem Block werden durch einen Hash gesichert. Ein Hash ist eine mathematische
+                Funktion, die eine Eingabe in eine feste Zeichenkette ausgibt. Wenn man eine Information in einen Hash
+                umwandelt, ist es sehr schwierig, diese Information wiederherzustellen. Das bedeutet, dass die
+                Informationen im Block nicht geändert werden können, ohne den Hash zu ändern.<br><br>
+
+                <b>Wie werden die Blöcke miteinander verbunden?</b><br>
+                Die Blöcke in einer Blockchain sind miteinander verbunden, indem der Hash des vorherigen Blocks in den
+                aktuellen Block geschrieben wird. Diese Verbindung sorgt dafür, dass die Blöcke in einer bestimmten
+                Reihenfolge angeordnet sind.<br><br>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- NONCE -->
+
+        <div class="tab-pane fade" id="lektion3-tab-pane" role="tabpanel" aria-labelledby="lektion3-tab" tabindex="0">
+          <div class="container tabs">
+            <div class="row">
+              <div class="col">
+                <b>Was ist die NONCE in einem Block?</b><br>
+                Die NONCE ist eine Abkürzung für "number used once" und bedeutet "Zahl, die nur einmal verwendet wird".
+                In einem Block der Blockchain ist die NONCE eine Zahl, die von einem Computer generiert wird, der einen
+                neuen Block erstellen möchte.<br><br>
+
+                <b>Wofür wird die NONCE verwendet?</b><br>
+                Die NONCE wird verwendet, um den Hash des Blocks zu generieren. Der Hash ist eine Art Fingerabdruck, der
+                den Block identifiziert.<br><br>
+              </div>
+              <div class="col">Video</div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <b>Wie funktioniert die NONCE?</b><br>
+                Die NONCE wird zusammen mit den anderen Informationen in einem Block verwendet, um einen Hash zu
+                generieren. Der Hash muss eine bestimmte Anzahl von Nullen am Anfang haben. Der Computer, der den neuen
+                Block erstellen möchte, muss also die NONCE so lange ändern, bis der Hash die gewünschte Anzahl von
+                Nullen hat.<br><br>
+
+                <b>Warum ist die NONCE wichtig?</b><br>
+                Die NONCE ist wichtig, um die Sicherheit der Blockchain zu gewährleisten. Wenn jemand versuchen würde,
+                einen Block zu ändern, müsste er auch die NONCE ändern. Da die NONCE nur einmal verwendet wird, wäre das
+                sehr schwierig.<br><br>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- SHA 256 -->
+
+        <div class="tab-pane fade" id="lektion4-tab-pane" role="tabpanel" aria-labelledby="lektion4-tab" tabindex="0">
+          <div class="container tabs">
+            <div class="row">
+              <div class="col">Text</div>
+              <div class="col">Video</div>
+            </div>
+            <div class="row">
+              <div class="col">Text</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </div>

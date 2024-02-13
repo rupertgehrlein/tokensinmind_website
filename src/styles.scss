@@ -1,1 +1,114 @@
 /* You can add global styles to this file, and also import other style files */
+@import "~bootstrap/dist/css/bootstrap.css";
+
+:root {
+  --primary_color: #0f0137;
+  --secondary_color: #8cdede;
+  --accent_color: #c94a4a;
+  --text-color: #fff;
+}
+
+body {
+  height: 100%;
+  margin: 0;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-image: linear-gradient(170deg, #5835bd, #190c3c);
+}
+
+.text {
+  color: var(--text-color);
+  text-decoration: none;
+}
+
+.primary-color {
+  background-color: var(--primary_color);
+  color: var(--text-color);
+}
+
+.secondary-color {
+  background-color: var(--secondary_color);
+  color: var(--primary_color);
+}
+
+.bottom-right {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+}
+
+a:hover,
+a:visited,
+a:link,
+a:active,
+a.active {
+  text-decoration: none;
+  color: var(--text-color) !important;
+}
+
+.tabs {
+  margin-top: 30px;
+}
+
+/* .flex-display {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.flex-display-item {
+  flex: 1;
+} */
+
+/*Änderungen an Bootstrap*/
+
+.btn-primary {
+  background-color: var(--accent_color);
+  border-color: var(--accent_color);
+}
+
+.btn-primary:hover {
+  background-color: #672424;
+  border-color: #672424;
+}
+
+.btn-secondary {
+  background-color: var(--secondary_color);
+  border-color: var(--secondary_color);
+}
+
+.navbar-toggler {
+  background-color: transparent !important;
+  border: none !important;
+  outline: none !important;
+}
+
+.navbar-toggler:focus {
+  box-shadow: none;
+  border-color: transparent;
+}
+
+.card {
+  box-shadow: 10px 10px 2px 1px rgba(0, 0, 0, 0.3);
+  border: none;/*
+  margin: 20px 20px 20px 20px; */
+}
+
+.display-4 {
+  margin-bottom: 30px;
+}
+
+button.nav-link, button.nav-link:hover {
+  background-color: var(--accent_color);
+  border-color: var(--accent_color);
+  color: var(--text_color);
+}
+
+.list-group-item {
+  border: none;
+  background-color: var(--primary_color);
+}
+
+.nav-link.active {
+  color: var(--text-color);
+}

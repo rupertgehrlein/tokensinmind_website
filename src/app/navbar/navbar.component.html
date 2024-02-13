@@ -1,0 +1,53 @@
+<nav class="navbar navbar-expand-lg">
+  <a class="navbar-brand" href="">
+    <img src="./assets/Logo.png" alt="Logo" width="200px">
+  </a>
+
+  <!-- Burger-Menü für kleine Bildschirme -->
+  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span>
+      <img src="./assets/menu.svg" class="resize">
+    </span>
+  </button>
+
+  <!-- Menüpunkte -->
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav ms-auto">
+      <li class="nav-item">
+        <a class="nav-link text" routerLink="/lektionen" routerLinkActive="active" (click)="closeNavbar()">Lektionen</a>
+      </li>
+      <li class="nav-item" routerLinkActive="active">
+        <a class="nav-link text" routerLink="/uebungen" (click)="closeNavbar()">Übungen</a>
+      </li>
+      <li class="nav-item" routerLinkActive="active">
+        <a class="nav-link text" routerLink="/downloads" (click)="closeNavbar()">Downloads</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+
+<!--
+<nav class="navbar navbar-expand-lg">
+  <a class="navbar-brand" href="#">
+    <img src="./assets/Logo.png" alt="Logo" width="200px">
+  </a>
+
+  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav ms-auto">
+      <li class="nav-item">
+        <a class="nav-link text" routerLink="/lektionen" routerLinkActive="active">Lektionen</a>
+      </li>
+      <li class="nav-item" routerLinkActive="active">
+        <a class="nav-link text" routerLink="/uebungen">Übungen</a>
+      </li>
+      <li class="nav-item" routerLinkActive="active">
+        <a class="nav-link text" routerLink="/">Downloads</a>
+      </li>
+    </ul>
+  </div>
+</nav> -->
