@@ -1,1 +1,19 @@
+.card {
+  height: 320px;
+}
 
+/* .card.last_element {
+  margin-bottom: 30px;
+} */
+
+@media screen and (max-width: 991px) {
+  .last_element {
+    margin-bottom: 30px;
+  }
+}
+
+@media screen and (min-width: 992px) {
+  .bottom_row {
+    margin-bottom: 30px;
+  }
+}
