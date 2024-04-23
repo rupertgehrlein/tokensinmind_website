@@ -34,17 +34,15 @@ export class LoginHomeComponent {
       const email = this.signInForm.value.username + '@fake.com';
       const password = this.signInForm.value.password;
 
-      console.log(this.signInForm.value.username)
-      console.log(this.signInForm.value.password)
-
-      console.log(email, password);
-
       const { data, error } = await this.supabase.auth.signUp({
         email: `${email}`,
         password: `${password}`
-      })
+      });
 
-      console.log(data);
+      if (error) throw error;
+
+      this.supabaseService.listenForNewUser();
+
     } catch (error) {
       if (error instanceof Error) {
         alert(error.message);
