@@ -1,5 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~bootstrap/dist/css/bootstrap.css";
+@import '~@fortawesome/fontawesome-free/css/all.css';
+
 
 :root {
   --primary_color: #0f0137;
@@ -111,4 +113,8 @@ button.nav-link, button.nav-link:hover {
 
 .nav-link.active {
   color: var(--text-color);
+}
+
+.btn-link:hover {
+  color: var(--accent_color);
 }

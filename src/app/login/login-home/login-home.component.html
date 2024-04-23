@@ -1,0 +1,37 @@
+<div class="container">
+  <h1 class="display-4 text">Login</h1>
+</div>
+
+<div class="container">
+  <div class="row align-items-center">
+    <div class="col text">
+      <form (ngSubmit)="signUp()" [formGroup]="signInForm">
+        <div class="row g-2">
+          <div class="col-2">
+            <label class="text">Nutzername</label>
+          </div>
+          <div class="col">
+            <input type="text" class="input" id="username" formControlName="username">
+          </div>
+        </div>
+        <div class="row g-2">
+          <div class="col-2">
+            <label class="text">Passwort</label>
+          </div>
+          <div class="col">
+            <input [type]="passwordVisible ? 'text' : 'password'" class="input" id="password" formControlName="password">
+            <button class="btn btn-link text" type="button" (click)="togglePasswordVisibility()">
+              <i class="material-icons" style="font-size: 18px;">{{passwordVisible ? 'visibility_off' :
+                'visibility'}}</i>
+            </button>
+          </div>
+        </div>
+        <div class="row g-2">
+          <div class="col-2">
+            <button class="btn btn-primary" type="submit">Login</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
