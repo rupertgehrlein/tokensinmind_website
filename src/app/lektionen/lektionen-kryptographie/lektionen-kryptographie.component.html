@@ -26,7 +26,7 @@
         </li>
         <li class="nav-item" role="presentation">
           <button class="nav-link" id="lektion4-tab" data-bs-toggle="tab" data-bs-target="#lektion4-tab-pane"
-            type="button" role="tab" aria-controls="lektion4-tab-pane" aria-selected="false">SHA 256</button>
+            type="button" role="tab" aria-controls="lektion4-tab-pane" aria-selected="false">SHA-256</button>
         </li>
       </ul>
 
@@ -39,7 +39,7 @@
           <div class="container tabs">
             <div class="row">
               <div class="col">Kryptographie ist eine Wissenschaft, die sich damit beschäftigt, Informationen so zu
-                verschlüsseln, dass nur die richtige Person sie lesen kann. Das Wort Kryptographie kommt aus dem
+                verschlüsseln, dass nur die richtige Person sie lesen kann. Das Wort Kryptographie stammt aus dem
                 Griechischen und bedeutet "geheimes Schreiben". <br><br> Kryptographie wird in vielen Bereichen
                 eingesetzt,
                 zum Beispiel in der Kommunikation, im Internet und in der Sicherheit. <br><br>
@@ -60,7 +60,7 @@
               <div class="col">
                 <b>Wie funktioniert Kryptographie?</b> <br> Kryptographie funktioniert mithilfe von Algorithmen. Ein
                 Algorithmus ist eine Reihe von Regeln, die eine bestimmte Aufgabe erfüllen. In der Kryptographie werden
-                Algorithmen verwendet, um Informationen so zu verschlüsseln, dass sie für Unbefugte unlesbar sind.
+                Algorithmen verwendet, um Informationen so zu verschlüsseln, dass nicht Jeder sie einfach lesen kann.
                 <br><br>
 
                 <b>Warum ist Kryptographie wichtig?</b> <br> Kryptographie ist wichtig, um die Sicherheit von
@@ -78,19 +78,24 @@
             <div class="row">
               <div class="col">
                 <b>Was ist die Caesar-Chiffre?</b> <br>
-                Die Caesar-Chiffre ist eine der einfachsten und ältesten Verschlüsselungsmethoden. Sie wurde vor mehr
-                als 2000 Jahren von Julius Caesar verwendet, um geheime Nachrichten auszutauschen. <br><br>
+                Die Caesar-Chiffre ist eine der einfachsten und ältesten Verschlüsselungsmethoden. Sie wurde vor über 2000 Jahren
+                von Julius Caesar verwendet, um geheime Nachrichten zu verschicken. <br><br>
 
                 <b>Wie funktioniert die Caesar-Chiffre?</b> <br>
-                Bei der Caesar-Chiffre wird jeder Buchstabe im Text durch einen anderen Buchstaben ersetzt. Die
-                Verschiebung des Buchstabens hängt von einem geheimen Schlüssel ab. <br><br>
-
+                Die Caesar-Chiffre nutzt zwei Alphabete: Ein Originalalphabet und ein verschobenes Alphabet.
+                Stell dir die Alphabete direkt untereinander vor und verschiebe nun das Untere.
+                So wird in einer Nachricht jeder Buchstabe durch einen anderen Buchstaben ersetzt. Die
+                Verschiebung der Buchstaben wird im Vorraus bereits festgelegt, dafür steht der geheime Schlüssel. <br><br>
+                   <div class="img">
+                  <img src="../assets/Caesar-Verschluesselung.png"> <br><br>
+                   <!-- Image Source:https://wiki.opencaching.de/index.php/Datei:Caesar-Verschluesselung.svg -->
+                  </div> 
                 <b>Zum Beispiel:</b> <br>
                 <ul>
-                  <li>Wenn der Schlüssel 3 ist, wird der Buchstabe A durch den Buchstaben D ersetzt, der Buchstabe B
-                    durch den Buchstaben E usw.</li>
-                  <li>Wenn der Schlüssel 5 ist, wird der Buchstabe A durch den Buchstaben F ersetzt, der Buchstabe B
-                    durch den Buchstaben G usw.</li>
+                  <li>Wenn der Schlüssel 3 ist, wird das Alphabet um drei Stellen verschoben. Dadurch wird das A durch ein D und das B
+                    durch ein E ersetzt usw.</li>
+                  <li>Ist der Schlüssel 5, wird das A durch ein F ersetzt, das B
+                    durch ein G usw.</li>
                 </ul> <br>
               </div>
               <div class="col">Video</div>
@@ -98,17 +103,22 @@
             <div class="row">
               <div class="col">
                 <b>Ein Beispiel</b> <br>
-                Sagen wir, wir haben den Text "Hallo Welt!" und der Schlüssel ist 3. Dann wird der verschlüsselte Text
-                wie folgt aussehen: <b>Khoor Zruog!</b> <br><br>
+                Wollen wir den Text <b>"Hallo Welt!"</b> mit dem Schlüssel 3 verschlüsseln, müssen wir jeden Buchstaben der Nachricht um drei Stellen verschieben. <br>
+                Der verschlüsselte Text sieht dann wie folgt aus: <b>"Kdoor Zhow!"</b> <br>
+                Nehmen wir nun 5 als unseren Schlüssel, wird aus unserem Text <b>"Hallo Welt!"</b> die verschlüsselte Nachricht:<b>"Mfqqt bjqy"</b>
+                <br><br>
 
                 <b>Wie kann man die Caesar-Chiffre entschlüsseln?</b> <br>
-                Um die Caesar-Chiffre zu entschlüsseln, braucht man den geheimen Schlüssel. Wenn man den Schlüssel
-                kennt, kann man jeden Buchstaben im verschlüsselten Text durch den Buchstaben ersetzen, der drei
-                Buchstaben davor steht. <br><br>
+                Um die Caesar-Chiffre zu entschlüsseln, muss man den Schlüssel kennen bzw. wissen, um wieviele Stellen der Text verschoben wurde. Wenn man den Schlüssel
+                kennt, kann man jeden Buchstaben im verschlüsselten Text durch den ursprünglichen Buchstaben ersetzen.
+                Ist der Schlüssel, wie im Beispiel 3, so müssen wir jeden Buchstaben der verschlüsselten Nachricht um 3 Stellen zurück verschieben und erhalten den Originaltext. <br><br>
 
                 <b>Ist die Caesar-Chiffre sicher?</b> <br>
-                Die Caesar-Chiffre ist nicht sehr sicher. Sie kann leicht durch Brute-Force-Angriffe geknackt werden.
-                Bei einem Brute-Force-Angriff wird jeder mögliche Schlüssel ausprobiert, bis der richtige gefunden ist.
+                Die Caesar-Chiffre ist keine sichere Art der Verschlüsselung. Bspw. kann man einfach alle Schlüssel ausprobieren, bis die Nachricht wieder Sinn ergibt.
+                Diese Art nennt man einen Brute-Force-Angriff. Dabei geht es darum die Verschlüsselung mit bloßer Kraft (brute force) zu knacken.<br>
+                Ein weiterer Nachteil der Caesar-Chiffre ist das jeder Buchstabe in einer Nachricht immer gleich verschlüsselt wird.
+                Das Problem dabei ist, das einige Buchstaben viel häufiger vorkommen als Andere.
+                Im Deutschen ist bspw. der Buchstabe E mit Abstand der Häufigste. Weiß man darüber Bescheid, kann man bei längeren Texten schnell vermuten, was der Schlüssel sein könnte.
                 <br><br>
               </div>
             </div>
@@ -122,18 +132,16 @@
             <div class="row">
               <div class="col">
                 <b>Was ist RSA Verschlüsselung?</b> <br>
-                RSA ist eine Verschlüsselungsmethode, die verwendet wird, um Informationen so zu verschlüsseln, dass nur
-                der richtige Empfänger sie lesen kann. RSA ist sehr sicher und wird in vielen Bereichen eingesetzt, zum
-                Beispiel im Internet. <br><br>
+                RSA ist eine Methode, um Informationen so zu verschlüsseln. Das Ziel? Nur der richtige Empfänger soll sie lesen können.
+                Die RSA-Verschlüsselung ist sehr sicher und wird in vielen Bereichen eingesetzt, zum Beispiel im Internet. <br><br>
 
                 <b>Wie funktioniert RSA Verschlüsselung?</b> <br>
-                RSA basiert auf zwei Schlüsseln, einem öffentlichen Schlüssel und einem privaten Schlüssel. Der
-                öffentliche Schlüssel kann von jedem verwendet werden, um Informationen zu verschlüsseln. Der private
-                Schlüssel wird geheim gehalten und wird nur vom Empfänger verwendet, um die Informationen zu
-                entschlüsseln. <br>
-                Um zu verstehen, wie RSA funktioniert, können wir uns ein Schloss mit zwei Schlüsseln vorstellen. Der
-                öffentliche Schlüssel ist wie ein Schlüssel, der das Schloss öffnen kann, aber nur von außen. Der
-                private Schlüssel ist wie ein Schlüssel, der das Schloss öffnen kann, aber nur von innen. <br><br>
+                RSA nutzt zwei Schlüssel, einen öffentlichen Schlüssel und einen privaten Schlüssel.
+                Der öffentliche Schlüssel kann von jedem verwendet werden, um Informationen zu verschlüsseln.
+                Der private Schlüssel wird geheim gehalten und wird nur vom Empfänger verwendet, um die Informationen wieder zu entschlüsseln. <br>
+                RSA funktioniert ein bisschen wie ein Schloss mit zwei Schlüsseln. Der
+                öffentliche Schlüssel ist wie ein Schlüssel, der das Schloss nur von Außen öffnen kann. Der
+                private Schlüssel kann das Schloss nur von Innen öffnen. <br><br>
               </div>
               <div class="col">Video</div>
             </div>
@@ -141,13 +149,13 @@
               <div class="col">
                 <b>Ein Beispiel</b> <br>
                 Sagen wir, wir möchten eine Nachricht an einen Freund schicken. Wir verwenden den öffentlichen Schlüssel
-                unseres Freundes, um die Nachricht zu verschlüsseln. Die verschlüsselte Nachricht kann nun von jedem
-                gelesen werden, der den öffentlichen Schlüssel hat. Nur unser Freund kann die Nachricht mit seinem
-                privaten Schlüssel entschlüsseln. <br><br>
+                unseres Freundes, um die Nachricht zu verschlüsseln.
+                Die verschlüsselte Nachricht kann nun zwar abgefangen werden, aber sie entschlüsseln und den Inhalt lesen kann man nur mit dem privaten Schlüssel.
+                So kann sichergestellt werden, dass nur unser Freund die Nachricht lesen kann.
+                Dieses System zweier Schlüssel wird z.B. auch bei Messengern wie Whatsapp oder Signal verwendet.<br><br>
 
                 <b>Ist RSA Verschlüsselung sicher?</b> <br>
-                RSA ist sehr sicher. Es ist sehr schwierig, den privaten Schlüssel zu knacken, selbst mit modernsten
-                Computern. <br><br>
+                RSA ist sehr sicher. Selbst mit den modernsten Computern ist sehr schwierig, den privaten Schlüssel zu knacken. <br><br>
               </div>
             </div>
           </div>
@@ -160,79 +168,63 @@
             <div class="row">
               <div class="col">
                 <b>Was ist Hashing?</b> <br>
-                Hashing ist eine Methode, um Informationen in eine kürzere, feste Zeichenkette umzuwandeln. Diese
-                Zeichenkette wird als Hashwert bezeichnet. <br><br>
+                Kurzgesagt ist Hashing eine Methode, um ganze Mengen von Informationen in eine kurze Kette aus wirren Zahlen und Buchstaben umzuwandeln.
+                Das nennt man dann den Hashwert und eigentlich ist es nur wie eine digitale Unterschrift. <br><br>
 
                 <b>Wie funktioniert Hashing?</b> <br>
-                Hashing funktioniert mithilfe einer Hashfunktion. Eine Hashfunktion ist ein Algorithmus, der
-                Informationen in einen Hashwert umwandelt. <br>
-                Hashfunktionen sind so konzipiert, dass es sehr schwierig ist, aus einem Hashwert die ursprünglichen
-                Informationen wiederherzustellen. Das bedeutet, dass Hashwerte verwendet werden können, um Informationen
-                zu schützen. <br><br>
+                Beim Hashing werden die Informationen durch eine mathematische Formel gejagt: Die Hashfunktion.
+                Als Ergebnis erhält man den Hashwert: Eine wirre Kombination aus Buchstaben, Zahlen usw.
+                Anders als bei der  RSA-Verschlüsselung, ist es nicht möglich nach dem Hashing wieder an die Informationen zu kommen. <br>
+                Der Hashwert ist aber einzigartig. Das heißt das auch nur durch die kleinsten Änderungen einen ganz anderen Hashwert entsteht.
+                Deshalb kann er zur Identifizierung der Information genutzt werden, also wie eine Unterschrift, oder ein Fingerabdruck! <br><br>
               </div>
               <div class="col">Video</div>
             </div>
             <div class="row">
               <div class="col">
-                <b>Beispiele für Hashing</b> <br>
-                Hashing wird in vielen Bereichen eingesetzt, zum Beispiel:
-                <ul>
-                  <li>In der Computersicherheit wird Hashing verwendet, um Passwörter zu speichern. So können die
-                    Passwörter selbst nicht von Unbefugten gelesen werden, sondern nur der Hashwert.</li>
-                  <li>In der Datenspeicherung wird Hashing verwendet, um Dateien zu identifizieren. So können Dateien
-                    schnell und einfach gefunden werden.</li>
-                  <li>In der Datenintegrität wird Hashing verwendet, um sicherzustellen, dass Daten nicht verändert
-                    wurden. So kann zum Beispiel überprüft werden, ob eine heruntergeladene Datei unverändert ist.</li>
-                </ul>
-
                 <b>Ein Beispiel</b> <br>
-                Sagen wir, wir haben den Text "Hallo Welt!". Wir können diesen Text mit einer Hashfunktion in einen
-                Hashwert umwandeln. Der Hashwert könnte zum Beispiel "6f8fa7b1eb947f4e901a" sein. <br><br>
-
-                <b>Wie kann man den Hashwert entschlüsseln?</b> <br>
-                Es ist nicht möglich, den Hashwert in den ursprünglichen Text wiederherzustellen. Das bedeutet, dass der
-                Hashwert nur verwendet werden kann, um zu überprüfen, ob der Text unverändert ist. <br>
-                Wenn wir den Text ändern, ändert sich auch der Hashwert. So können wir sicherstellen, dass der Text
-                nicht verändert wurde. <br><br>
+                Schauen wir uns einmal genauer an, wie Hashing genutzt wird, um Passwörter zu speichern:
+                Wir erstellen uns einen Account auf einer Website und suchen uns als Passwort "meintollespasswort" aus.
+                Die Website will nicht wissen was unser Passwort tatsächlich ist, darum wird auf das Passwort eine Hashfunktion angewendet
+                und es wird nur der dadurch entstandene Hashwert gespeichert.
+                Dieser könnte z.B. so aussehen: "1cc73d8853e076cea70eb5b667e0e26dda9b7cf3". <br>
+                Nun möchten wir uns, ein paar Tage später, erneut in unseren Account einloggen und schreiben ausversehen: "meinzollespasswort".
+                Der Text wird gehasht und es ergibt sich der Hashwert:"43b8d4f0c155acd995ced147e80bb7e5c901ac75".
+                Wie schnell zu sehen ist, sind das zwei sehr unterschiedliche Hashwerte. <br>
+                Das sieht auch die Website: Uns wird der Zugriff verweigert und wir müssen das Passwort erneut eintippen. <br><br>
               </div>
             </div>
           </div>
         </div>
 
-        <!-- SHA 256 -->
+        <!-- SHA-256 -->
 
         <div class="tab-pane fade" id="lektion4-tab-pane" role="tabpanel" aria-labelledby="lektion4-tab" tabindex="0">
           <div class="container tabs">
             <div class="row">
               <div class="col">
-                <b>Was ist SHA256?</b> <br>
-                SHA256 ist ein ganz spezieller Hashing-Algorithmus. Hashing ist eine Methode, um Informationen in eine kürzere, feste Zeichenkette umzuwandeln. Diese Zeichenkette wird als Hashwert bezeichnet. <br><br>
+                <b>Was ist SHA?</b> <br>
+                SHA ist eine Art von Hashing-Algorithmus, der Name steht für "Secure Hash Algorithm".
+                Es gibt eine Reihe von SHA Algorithmen, SHA-256 ist aber einer der Beliebtesten, weil er eine gute Balance zwischen Sicherheit und Schnelligkeit bietet.
+                 <br><br>
 
-                <b>Wie funktioniert SHA256?</b> <br>
-                SHA256 funktioniert mithilfe einer mathematischen Formel. Diese Formel nimmt die Informationen als Eingabe und erzeugt einen Hashwert als Ausgabe. <br>
-                Der Hashwert von SHA256 ist 256 Bit lang. Das bedeutet, dass er aus 64 Zeichen besteht. <br><br>
+                <b>Wie funktioniert SHA-256?</b> <br>
+                SHA-256 nutzt eine Hashfunktion um einen Hashwert zu erzeugen, der immer 256 Bit lang ist, was in der Informatik 64 Zeichen entspricht.
+                So sind die Hashwerte immer gleich lang, das lässt sich einfacher Speichern. <br><br>
               </div>
               <div class="col">Video</div>
             </div>
             <div class="row">
               <div class="col">
-
-                <b>Warum ist SHA256 so sicher</b> <br>
-                SHA256 ist ein sehr sicherer Hashing-Algorithmus. Es ist sehr schwierig, aus einem Hashwert die ursprünglichen Informationen wiederherzustellen. <br>
-                Das liegt daran, dass die mathematische Formel, die SHA256 verwendet, sehr komplex ist. Es ist sehr schwierig, diese Formel zu knacken. <br><br>
-
-                <b>Wo wird SHA256 eingesetzt?</b> <br>
-                SHA256 wird in vielen Bereichen eingesetzt, zum Beispiel:
+                <b>Wo wird SHA eingesetzt?</b> <br>
+                Hashfunktionen, wie SHA werden überall eingesetzt. Hier sind ein paar Beispiele:
                 <ul>
-                  <li>In der Computersicherheit wird SHA256 verwendet, um Passwörter zu speichern. So können die Passwörter selbst nicht von Unbefugten gelesen werden, sondern nur der Hashwert.</li>
-                  <li>In der Datenspeicherung wird SHA256 verwendet, um Dateien zu identifizieren. So können Dateien schnell und einfach gefunden werden.</li>
-                  <li>In der Datenintegrität wird SHA256 verwendet, um sicherzustellen, dass Daten nicht verändert wurden. So kann zum Beispiel überprüft werden, ob eine heruntergeladene Datei unverändert ist.</li>
+                  <li>In der Computersicherheit wird SHA-256 verwendet, um Passwörter zu speichern. Der Vorteil von SHA-256? Alle Hashwerte sind gleich lang, das erleichtert das Speichern in der Datenbank.</li>
+                  <li>Für das Internet wird SHA genutzt, um eine sichere Verbindung zwischen dem dir und dem Server herzustellen.</li>
+                  <li>SHA-256 wird verwendet, um zu überprüfen, dass Daten nicht verändert wurden. So kann geschaut werden, ob eine Datei noch das Original ist.
+                    Andersherum kann auch geschaut werden, ob sich unter den Informationen etwas befindet, was dort definitv nicht hineingehört, wie z.B. Viren!</li>
+                  <li>SHA-256 wird auch für Blockchains genutzt, dazu aber im anderen Kapitel mehr...</li>
                 </ul>
-
-                <b>Ein Beispiel</b> <br>
-                Sagen wir, wir haben den Text "Hallo Welt!". Wir können diesen Text mit SHA256 in einen Hashwert umwandeln. Der Hashwert könnte zum Beispiel <b>"2cf24dba5fb0a30e26e83b2ac5b9e29e1abbe56e057f20fce3b1b82b32f327b3"</b> sein. <br>
-                Wenn wir den Text ändern, ändert sich auch der Hashwert. So können wir sicherstellen, dass der Text nicht verändert wurde. <br><br>
-
               </div>
             </div>
           </div>
