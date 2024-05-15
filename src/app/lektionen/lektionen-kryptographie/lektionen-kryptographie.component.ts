@@ -1,5 +1,4 @@
 import { Component, HostListener } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { SupabaseService } from 'src/app/services/supabase.service';
 
 @Component({
@@ -13,27 +12,40 @@ export class LektionenKryptographieComponent {
   elapsedTime: number;
   userId;
   timer: any;
+  isPageVisible: boolean = true;
 
-  constructor(private supabaseService: SupabaseService) {}
+  constructor(private supabaseService: SupabaseService) {
+    // Überprüfen, ob die Seite sichtbar ist
+    document.addEventListener("visibilitychange", () => {
+      this.isPageVisible = !document.hidden;
+      if (this.isPageVisible) {
+        this.startTime = Date.now() - this.elapsedTime * 1000; // Neustart des Timers mit der verstrichenen Zeit
+        this.startTimer();
+      } else {
+        this.stopTimer();
+      }
+    });
+  }
 
   async ngOnInit() {
     this.userId = await this.supabaseService.getUserId();
     this.initialTime = await this.supabaseService.getTime('lektion', 'kryptographie', this.userId) || 0;
-    this.startTime = Date.now() - this.initialTime; // Startzeit des Timers inkl. bereits verstrichener Zeit
+    this.startTime = Date.now() - this.initialTime * 1000; // Startzeit des Timers inkl. bereits verstrichener Zeit
+    this.startTimer();
+  }
 
-    // Starte den Timer, um die Zeit zu aktualisieren und in die Datenbank zu schreiben
+  ngOnDestroy() {
+    // Stoppe den Timer, wenn die Komponente zerstört wird
+    this.stopTimer();
+  }
+
+  startTimer() {
     this.timer = setInterval(() => {
       this.updateTimeAndSaveToDatabase();
     }, 1000); // Timer wird jede Sekunde aktualisiert
   }
 
-  ngOnDestroy() {
-    // Stoppe den Timer, wenn die Komponente zerstört wird
-    clearInterval(this.timer);
-  }
-
-  @HostListener('window:beforeunload', ['$event'])
-  onBeforeUnload(event) {
+  stopTimer() {
     clearInterval(this.timer);
   }
 
@@ -43,4 +55,3 @@ export class LektionenKryptographieComponent {
     this.supabaseService.setTime('lektion', 'kryptographie', this.initialTime + this.elapsedTime, this.userId);
   }
 }
-
