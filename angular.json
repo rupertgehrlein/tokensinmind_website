@@ -17,6 +17,10 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "allowedCommonJsDependencies": [
+               "crypto-js/sha256",
+               "ws"
+            ],
             "outputPath": "dist/tokensinmind",
             "index": "src/index.html",
             "main": "src/main.ts",
