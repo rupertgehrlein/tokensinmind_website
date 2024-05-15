@@ -1,10 +1,11 @@
 import { Component, HostListener } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { SupabaseService } from 'src/app/services/supabase.service';
 
 @Component({
   selector: 'app-lektionen-kryptographie',
   templateUrl: './lektionen-kryptographie.component.html',
-  styleUrl: './lektionen-kryptographie.component.scss'
+  styleUrls: ['./lektionen-kryptographie.component.scss']
 })
 export class LektionenKryptographieComponent {
   startTime: number;
@@ -12,45 +13,44 @@ export class LektionenKryptographieComponent {
   elapsedTime: number;
   userId;
   timer: any;
-  isPageVisible: boolean = true;
+  isVisible: boolean = true;
+  visibilityChangeListenerAdded: boolean = false;
 
-  constructor(private supabaseService: SupabaseService) {
-    // Überprüfen, ob die Seite sichtbar ist
-    document.addEventListener("visibilitychange", () => {
-      this.isPageVisible = !document.hidden;
-      if (this.isPageVisible) {
-        this.startTime = Date.now() - this.elapsedTime * 1000; // Neustart des Timers mit der verstrichenen Zeit
-        this.startTimer();
-      } else {
-        this.stopTimer();
-      }
-    });
-  }
+  constructor(private supabaseService: SupabaseService) {}
 
   async ngOnInit() {
     this.userId = await this.supabaseService.getUserId();
     this.initialTime = await this.supabaseService.getTime('lektion', 'kryptographie', this.userId) || 0;
-    this.startTime = Date.now() - this.initialTime * 1000; // Startzeit des Timers inkl. bereits verstrichener Zeit
-    this.startTimer();
+    this.startTime = Date.now() - this.initialTime;
+
+    // Only add the visibility change listener once
+    if (!this.visibilityChangeListenerAdded) {
+      this.visibilityChangeListenerAdded = true;
+      document.addEventListener('visibilitychange', () => {
+        this.isVisible = document.visibilityState === 'visible';
+        if (!this.isVisible) {
+          clearInterval(this.timer);
+        }
+      });
+    }
+
+    // Starte den Timer, um die Zeit zu aktualisieren und in die Datenbank zu schreiben
+    this.timer = setInterval(() => {
+      this.updateTimeAndSaveToDatabase();
+    }, 1000);
   }
 
   ngOnDestroy() {
     // Stoppe den Timer, wenn die Komponente zerstört wird
-    this.stopTimer();
+    clearInterval(this.timer);
   }
 
-  startTimer() {
-    this.timer = setInterval(() => {
-      this.updateTimeAndSaveToDatabase();
-    }, 1000); // Timer wird jede Sekunde aktualisiert
-  }
-
-  stopTimer() {
+  @HostListener('window:beforeunload', ['$event'])
+  onBeforeUnload(event) {
     clearInterval(this.timer);
   }
 
   updateTimeAndSaveToDatabase() {
-    // Aktualisiere die verstrichene Zeit in Sekunden
     this.elapsedTime = Math.floor((Date.now() - this.startTime) / 1000);
     this.supabaseService.setTime('lektion', 'kryptographie', this.initialTime + this.elapsedTime, this.userId);
   }
