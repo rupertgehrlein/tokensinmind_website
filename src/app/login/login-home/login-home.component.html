@@ -1,10 +1,11 @@
 <div class="container">
-  <h1 class="display-4 text">Regsitrieren und Anmelden</h1>
+  <h1 class="display-4 text">Anmelden</h1>
 </div>
 
 <div class="container">
   <p class="text">
-    Speichere dir dein Passwort und deinen Nutzernamen gut ab oder schreibe dir die Daten auf. <br> Es gibt keine Möglichkeit deine Daten zurückzusetzen.
+    Speichere dir dein Passwort und deinen Nutzernamen gut ab oder schreibe dir die Daten auf. <br> Es gibt keine
+    Möglichkeit deine Daten zurückzusetzen.
   </p>
   <div class="row align-items-center">
     <div class="col text">
@@ -22,7 +23,8 @@
             <label class="text">Passwort</label>
           </div>
           <div class="col">
-            <input [type]="passwordVisible ? 'text' : 'password'" class="input" id="password" formControlName="password">
+            <input [type]="passwordVisible ? 'text' : 'password'" class="input" id="password"
+              formControlName="password">
             <button class="btn btn-link text" type="button" (click)="togglePasswordVisibility()">
               <i class="material-icons" style="font-size: 18px;">{{passwordVisible ? 'visibility_off' :
                 'visibility'}}</i>
@@ -31,10 +33,7 @@
         </div>
         <div class="row g-2">
           <div class="col-2">
-            <button class="btn btn-primary" type="submit" (click)="signUp()">Registrieren</button>
-          </div>
-          <div class="col-2">
-            <button class="btn btn-primary" type="submit" (click)="login()">Anmelden</button>
+            <button class="btn btn-primary" type="submit" (click)="signUpOrLogin()">Anmelden</button>
           </div>
         </div>
       </form>

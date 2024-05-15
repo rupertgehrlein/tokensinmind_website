@@ -60,6 +60,7 @@ export class NavbarComponent {
       this.router.navigate(['']);
       this.cdr.detectChanges();
       this.closeNavbar();
+      location.reload();
     });
   }
 

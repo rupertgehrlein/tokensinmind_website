@@ -8,6 +8,10 @@ const routes: Routes = [
     component: HomeComponent,
   },
   {
+    path: 'home',
+    component: HomeComponent,
+  },
+  {
     path: 'lektionen',
     loadChildren: () => import('./lektionen/lektionen.module').then(m => m.LektionenModule)
   },
