@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { SupabaseClient, createClient } from '@supabase/supabase-js';
 import { environment } from '../../environments/environment';
-import * as sha256 from 'crypto-js/sha256';
 
 
 @Injectable({
@@ -16,25 +15,48 @@ export class SupabaseService {
     return this.client;
   }
 
-  async registerNewUser(username, password) {
-    const hashedPassword = sha256(password).toString();
+  async getUsername() {
+    // Benutzer-Session abrufen
+    const { data: user, error: sessionError } = await this.client.auth.getSession();
 
-    const { data, error: insertError } = await this.client
-      .from('users')
-      .insert([{ email: username, password: hashedPassword }])
-
-    if (insertError) {
-      console.error('Error inserting new user:', insertError);
-    } else {
-      console.log('New user inserted:', data);
+    if (sessionError) {
+      console.error(sessionError);
+      return null;
     }
-  }
 
-  async passwordSignIn(username, hashedPassword) {
-    const { data, error } = await this.client.auth.signInWithPassword({
-      email: `${username}`,
-      password: `${hashedPassword}`
-    })
-  }
+    if (!user) {
+      console.error('Benutzer ist nicht eingeloggt');
+      return null;
+    }
 
+    const email = user.session.user.email;
+    const username = email.split('@')[0]; // Teile die E-Mail-Adresse am "@"-Symbol und nimm den ersten Teil
+    const capitalizedUsername = username.charAt(0).toUpperCase() + username.slice(1); // erster Buchstabe groß
+
+    return capitalizedUsername;
+
+  }
 }
+
+/* async registerNewUser(username, password) {
+  const hashedPassword = sha256(password).toString();
+
+  const { data, error: insertError } = await this.client
+    .from('usernames')
+    .insert([{ email: username, password: hashedPassword }])
+
+  if (insertError) {
+    console.error('Error inserting new user:', insertError);
+  } else {
+    console.log('New user inserted:', data);
+  }
+} */
+
+/* async passwordSignIn(username, hashedPassword) {
+  const { data, error } = await this.client.auth.signInWithPassword({
+    email: `${username}`,
+    password: `${hashedPassword}`
+  })
+} */
+
+
