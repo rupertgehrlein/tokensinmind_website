@@ -1,11 +1,14 @@
 <div class="container">
-  <h1 class="display-4 text">Login</h1>
+  <h1 class="display-4 text">Regsitrieren und Anmelden</h1>
 </div>
 
 <div class="container">
+  <p class="text">
+    Speichere dir dein Passwort und deinen Nutzernamen gut ab oder schreibe dir die Daten auf. <br> Es gibt keine Möglichkeit deine Daten zurückzusetzen.
+  </p>
   <div class="row align-items-center">
     <div class="col text">
-      <form (ngSubmit)="signUp()" [formGroup]="signInForm">
+      <form [formGroup]="signInForm">
         <div class="row g-2">
           <div class="col-2">
             <label class="text">Nutzername</label>
@@ -28,7 +31,10 @@
         </div>
         <div class="row g-2">
           <div class="col-2">
-            <button class="btn btn-primary" type="submit">Login</button>
+            <button class="btn btn-primary" type="submit" (click)="signUp()">Registrieren</button>
+          </div>
+          <div class="col-2">
+            <button class="btn btn-primary" type="submit" (click)="login()">Anmelden</button>
           </div>
         </div>
       </form>
