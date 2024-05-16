@@ -19,9 +19,9 @@
       <li class="nav-item" routerLinkActive="active">
         <a class="nav-link text" routerLink="/uebungen" (click)="closeNavbar()">Übungen</a>
       </li>
-      <li class="nav-item" routerLinkActive="active">
+      <!-- <li class="nav-item" routerLinkActive="active">
         <a class="nav-link text" routerLink="/downloads" (click)="closeNavbar()">Downloads</a>
-      </li>
+      </li> -->
       <li class="nav-item" routerLinkActive="active" *ngIf="!isLoggedIn">
         <a class="nav-link text" routerLink="/login" (click)="closeNavbar()">Anmelden</a>
       </li>
@@ -33,8 +33,8 @@
 </nav>
 
 
-<!--
-<nav class="navbar navbar-expand-lg">
+
+<!-- <nav class="navbar navbar-expand-lg">
   <a class="navbar-brand" href="#">
     <img src="./assets/Logo.png" alt="Logo" width="200px">
   </a>
@@ -52,7 +52,13 @@
         <a class="nav-link text" routerLink="/uebungen">Übungen</a>
       </li>
       <li class="nav-item" routerLinkActive="active">
-        <a class="nav-link text" routerLink="/">Downloads</a>
+        <a class="nav-link text" routerLink="/downloads">Downloads</a>
+      </li>
+      <li class="nav-item" routerLinkActive="active" *ngIf="!isLoggedIn">
+        <a class="nav-link text" routerLink="/login" (click)="closeNavbar()">Anmelden</a>
+      </li>
+      <li class="nav-item" *ngIf="isLoggedIn">
+        <a class="nav-link text" (click)="logout()" routerLink="/">Abmelden</a>
       </li>
     </ul>
   </div>
