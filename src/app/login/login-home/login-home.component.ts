@@ -3,11 +3,12 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { SupabaseClient } from '@supabase/supabase-js';
 import { SupabaseService } from 'src/app/services/supabase.service';
 import { Router } from '@angular/router';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-login-home',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, CommonModule],
   templateUrl: './login-home.component.html',
   styleUrl: './login-home.component.scss'
 })
@@ -17,8 +18,8 @@ export class LoginHomeComponent {
   passwordVisible = false;
 
   signInForm = this.formBuilder.group({
-    username: ['', [Validators.required]],
-    password: ['', [Validators.required]],
+    username: ['', [Validators.required, Validators.minLength(3)]],
+    password: ['', [Validators.required, Validators.minLength(8)]],
   });
 
   constructor(private router: Router, private supabaseService: SupabaseService, private readonly formBuilder: FormBuilder) {
@@ -29,43 +30,6 @@ export class LoginHomeComponent {
   togglePasswordVisibility() {
     this.passwordVisible = !this.passwordVisible;
   }
-
-  /* async signUp() {
-
-    const username = this.signInForm.value.username;
-    const email = username + '@fake.com';
-    const password = this.signInForm.value.password;
-
-    const { data, error } = await this.supabase.auth.signUp({
-      email,
-      password
-    });
-
-    if (error) {
-      console.error(error);
-      return
-    }
-
-    await this.supabase
-      .from("usernames")
-      .insert([{ username, userid: data.user.id }]);
-
-    this.signInForm.reset();
-    this.router.navigate(['/']);
-  }
-
-  async login() {
-    const username = this.signInForm.value.username + '@fake.com';
-    const password = this.signInForm.value.password;
-
-    const { data, error } = await this.supabase.auth.signInWithPassword({
-      email: username,
-      password: password
-    })
-
-    this.signInForm.reset();
-    this.router.navigate(['/']);
-  } */
 
   async signUpOrLogin() {
     const username = this.signInForm.value.username;
@@ -84,10 +48,16 @@ export class LoginHomeComponent {
       if (signUpError && signUpError.message.includes('already registered')) {
         // Wenn der Benutzer bereits existiert, versuche ihn anzumelden
         try {
-          await this.supabase.auth.signInWithPassword({
+          const {data: loginData, error: loginError} = await this.supabase.auth.signInWithPassword({
             email,
             password
           });
+
+          console.log('loginError:', loginError);
+          if(loginError && loginError.message.includes('Invalid login credentials')){
+            alert('Dieser Nutzername ist bereits registriert. Wenn du der Nutzer bist, dann gib bitte das korrekte Passwort ein.');
+            return;
+          }
         } catch (loginError) {
           // Wenn die Anmeldung fehlschlägt, zeige einen entsprechenden Alert
           console.error("Fehler bei der Anmeldung:", loginError);
