@@ -69,7 +69,7 @@ a.active {
   border-color: var(--accent_color);
 }
 
-.btn-primary:hover {
+.btn-primary:hover, .btn-primary:disabled {
   background-color: #672424;
   border-color: #672424;
 }
@@ -118,3 +118,8 @@ button.nav-link, button.nav-link:hover {
 .btn-link:hover {
   color: var(--accent_color);
 }
+
+.danger {
+  color: var(--secondary_color);
+}
+

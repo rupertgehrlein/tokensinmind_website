@@ -9,13 +9,17 @@
   </p>
   <div class="row align-items-center">
     <div class="col text">
-      <form [formGroup]="signInForm">
+      <form (ngSubmit)="signUpOrLogin()" [formGroup]="signInForm">
         <div class="row g-2">
           <div class="col-2">
             <label class="text">Nutzername</label>
           </div>
           <div class="col">
             <input type="text" class="input" id="username" formControlName="username">
+            <div *ngIf="signInForm.get('username').errors && (signInForm.get('username').dirty || signInForm.get('username').touched)">
+              <div *ngIf="signInForm.get('username').hasError('required')" class="danger">Nutzername ist erforderlich.</div>
+              <div *ngIf="signInForm.get('username').hasError('minlength')" class="danger">Nutzername muss mindestens 3 Zeichen lang sein.</div>
+            </div>
           </div>
         </div>
         <div class="row g-2">
@@ -23,17 +27,19 @@
             <label class="text">Passwort</label>
           </div>
           <div class="col">
-            <input [type]="passwordVisible ? 'text' : 'password'" class="input" id="password"
-              formControlName="password">
+            <input [type]="passwordVisible ? 'text' : 'password'" class="input" id="password" formControlName="password">
             <button class="btn btn-link text" type="button" (click)="togglePasswordVisibility()">
-              <i class="material-icons" style="font-size: 18px;">{{passwordVisible ? 'visibility_off' :
-                'visibility'}}</i>
+              <i class="material-icons" style="font-size: 18px;">{{passwordVisible ? 'visibility_off' : 'visibility'}}</i>
             </button>
+            <div *ngIf="signInForm.get('password').errors && (signInForm.get('password').dirty || signInForm.get('password').touched)">
+              <div *ngIf="signInForm.get('password').hasError('required')" class="danger">Passwort ist erforderlich.</div>
+              <div *ngIf="signInForm.get('password').hasError('minlength')" class="danger">Passwort muss mindestens 8 Zeichen lang sein.</div>
+            </div>
           </div>
         </div>
         <div class="row g-2">
           <div class="col-2">
-            <button class="btn btn-primary" type="submit" (click)="signUpOrLogin()">Anmelden</button>
+            <button class="btn btn-primary" type="submit" [disabled]="!signInForm.valid">Anmelden</button>
           </div>
         </div>
       </form>
