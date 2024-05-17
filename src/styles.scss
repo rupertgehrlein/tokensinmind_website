@@ -107,7 +107,7 @@ a.active {
 }
 
 .card:hover {
-  transform:scale(1.02); 
+  transform:scale(1.02);
 }
 
 .display-4 {
@@ -137,3 +137,7 @@ button.nav-link, button.nav-link:hover {
   color: var(--secondary_color);
 }
 
+input:disabled {
+  background-color: white;
+  color: black;
+}
