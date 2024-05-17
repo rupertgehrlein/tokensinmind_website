@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SupabaseService } from 'src/app/services/supabase.service';
+import * as sha256 from 'crypto-js/sha256';
 
 @Component({
   selector: 'app-uebungen-kryptographie',
@@ -10,15 +11,6 @@ import { SupabaseService } from 'src/app/services/supabase.service';
   styleUrl: './uebungen-kryptographie.component.scss'
 })
 export class UebungenKryptographieComponent {
-  alphabet: string = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-
-  textEncode = '';
-  textDecode = '';
-  selectEncode;
-  selectDecode;
-  encoded;
-  decoded;
-
   startTime: number;
   initialTime: number;
   elapsedTime: number;
@@ -64,6 +56,17 @@ export class UebungenKryptographieComponent {
       this.startTimer();
     }
   };
+
+  //Übung Caesar
+
+  alphabet: string = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+
+  textEncode = '';
+  textDecode = '';
+  selectEncode;
+  selectDecode;
+  encoded;
+  decoded;
 
   encode(){
 
@@ -153,6 +156,17 @@ export class UebungenKryptographieComponent {
 
   getTextDecode(event) {
     this.textDecode = event.target.value;
+  }
+
+  //Übung Hashing
+
+  data1 = '';
+  hash1 = '';
+
+  computeHash(event) {
+    this.data1 = event;
+    const combinedData = `${this.data1}`;
+    this.hash1 = sha256(combinedData).toString();
   }
 
 }
