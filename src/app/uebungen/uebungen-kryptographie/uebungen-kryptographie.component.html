@@ -25,6 +25,8 @@
         </li>
       </ul>
       <div class="tab-content" id="myTabContent">
+
+
         <div class="tab-pane fade show active" id="uebung1-tab-pane" role="tabpanel" aria-labelledby="uebung1-tab"
           tabindex="0">
           <div class="container tabs">
@@ -144,13 +146,65 @@
             </form>
           </div>
         </div>
-        <div class="tab-pane fade" id="uebung2-tab-pane" role="tabpanel" aria-labelledby="uebung2-tab" tabindex="0">...
+
+
+        <div class="tab-pane fade" id="uebung2-tab-pane" role="tabpanel" aria-labelledby="uebung2-tab" tabindex="0">
+          <div class="row">
+            <p>RSA ist eine Methode zur sicheren Übertragung von Nachrichten. Es verwendet zwei Schlüssel: einen
+              öffentlichen Schlüssel zum Verschlüsseln und einen privaten Schlüssel zum Entschlüsseln. Stell dir vor,
+              der öffentliche Schlüssel ist ein Schloss, das jeder benutzen kann, um eine Nachricht zu verschließen,
+              aber nur derjenige mit dem privaten Schlüssel kann das Schloss wieder öffnen.</p>
+          </div>
+          <div class="row g-2">
+            <h4>Generiere deine Schlüssel</h4>
+            <div class="col-3">
+              <button class="btn btn-primary" type="button" (click)="generateKeys()">Schlüssel generieren</button>
+            </div>
+            <div class="col">
+              <div *ngIf="publicKey && privateKey">
+                <p>Öffentlicher Schlüssel: {{publicKey}}</p>
+                <p>Privater Schlüssel: {{privateKey}}</p>
+              </div>
+            </div>
+          </div>
+          <div class="row g-2">
+            <h4>Nachricht verschlüsseln</h4>
+            <div class="col-3">
+              <label for="plainText" class="label">Nachricht:</label>
+            </div>
+            <div class="col">
+              <input type="text" id="plainText" class="input" (input)="getPlainText($event)"
+                [disabled]="!keysGenerated">
+            </div>
+          </div>
+          <div class="row g-2">
+            <div class="col-3">
+              <button class="btn btn-primary" type="button" (click)="encrypt()"
+                [disabled]="!keysGenerated || !plainText">Verschlüsseln</button>
+            </div>
+            <div class="col" *ngIf="encryptedMessage">
+              Verschlüsselte Nachricht: {{encryptedMessage}}
+            </div>
+          </div>
         </div>
+        <div class="row g-2">
+          <h4>Nachricht entschlüsseln</h4>
+          <div class="col-3">
+            <button class="btn btn-primary" type="button" (click)="decrypt()"
+              [disabled]="!encryptedMessage">Entschlüsseln</button>
+          </div>
+          <div class="col" *ngIf="decryptedMessage">
+            Entschlüsselte Nachricht: {{decryptedMessage}}
+          </div>
+        </div>
+
+
         <div class="tab-pane fade" id="uebung3-tab-pane" role="tabpanel" aria-labelledby="uebung3-tab" tabindex="0">
           <div class="row">
             <div class="col">
               <div class="text">
-                In diesem Beispiel lassen wir deine Daten einfach nur durch den Hash-Algorithmus (SHA 256) laufen. Wie du siehst
+                In diesem Beispiel lassen wir deine Daten einfach nur durch den Hash-Algorithmus (SHA 256) laufen. Wie
+                du siehst
                 geht das Hashen super schnell. Gleichzeitig solltest du auch erkennen können, dass bereits die kleinsten
                 Änderungen in deiner Eingabe einen riesigen Unterschied haben können.
               </div>
@@ -189,8 +243,12 @@
               </div>
             </div>
           </div>
+        </div>
+
+
+        <div class="tab-pane fade" id="uebung4-tab-pane" role="tabpanel" aria-labelledby="uebung4-tab" tabindex="0">...
+        </div>
+
+
       </div>
-    <div class="tab-pane fade" id="uebung4-tab-pane" role="tabpanel" aria-labelledby="uebung4-tab" tabindex="0">...
     </div>
-  </div>
-</div>
