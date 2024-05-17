@@ -27,6 +27,9 @@ body {
   background-color: var(--primary_color);
   color: var(--text-color);
 }
+.primary-color:hover {
+ color: aliceblue;
+}
 
 .secondary-color {
   background-color: var(--secondary_color);
@@ -79,6 +82,11 @@ a.active {
   border-color: var(--secondary_color);
 }
 
+.btn_link:hover{
+  background-color: #70b1b1;
+  border-color: #70b1b1;
+}
+
 .navbar-toggler {
   background-color: transparent !important;
   border: none !important;
@@ -92,8 +100,14 @@ a.active {
 
 .card {
   box-shadow: 10px 10px 2px 1px rgba(0, 0, 0, 0.3);
-  border: none;/*
+  border: none;
+  transition: transform .4s;
+  /*
   margin: 20px 20px 20px 20px; */
+}
+
+.card:hover {
+  transform:scale(1.02); 
 }
 
 .display-4 {
