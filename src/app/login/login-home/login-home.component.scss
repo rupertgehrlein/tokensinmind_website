@@ -1,3 +1,11 @@
 .row {
   padding: 10px 0;
 }
+
+.input {
+  min-width: 40%; // Standard für größere Bildschirme
+
+  @media (max-width: 810px) {
+    min-width: 80%; // Für vertikale Tablets und Smartphones
+  }
+}

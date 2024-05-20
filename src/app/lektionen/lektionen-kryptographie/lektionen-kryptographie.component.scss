@@ -4,3 +4,11 @@
     width:auto;
     margin:auto;
 }
+
+.img {
+  max-width: 120%; // Standard für größere Bildschirme
+
+  @media (max-width: 810px) {
+    max-width: 100%; // Für vertikale Tablets und Smartphones
+  }
+}
