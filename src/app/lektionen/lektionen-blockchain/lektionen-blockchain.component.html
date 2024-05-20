@@ -21,6 +21,11 @@
           <button class="nav-link" id="lektion3-tab" data-bs-toggle="tab" data-bs-target="#lektion3-tab-pane"
             type="button" role="tab" aria-controls="lektion3-tab-pane" aria-selected="false">NONCE</button>
         </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link" id="lektion4-tab" data-bs-toggle="tab" data-bs-target="#lektion4-tab-pane"
+            type="button" role="tab" aria-controls="lektion4-tab-pane" aria-selected="false">Sicherheit &
+            Umwelt</button>
+        </li>
       </ul>
 
       <div class="tab-content" id="myTabContent">
@@ -33,21 +38,24 @@
             <div class="row row-cols-1 row-cols-lg-2">
               <div class="col">
                 <b>Was ist eine Blockchain?</b><br>
-                Eine Blockchain ist eine Sammlung von riesigen Mengen an Daten. Man kann dabei auch von einer Art Datenbank sprechen.
-                Die Daten werden in einen einzelnen Block gepackt und es wird dazugeschrieben an welchen anderen Block die Daten angekettet werden sollen.
-                Unser Block wird dann sicher verschlossen und er wird in ein Netzwerk aus Computern gespeichert. So entsteht eine Kette von Blöcken - die Blockchain. <br><br>
+                Eine Blockchain ist eine Sammlung von riesigen Mengen an Daten. Man kann dabei auch von einer Art
+                Datenbank sprechen.
+                Die Daten werden in einen einzelnen Block gepackt und es wird dazugeschrieben an welchen anderen Block
+                die Daten angekettet werden sollen.
+                Unser Block wird dann sicher verschlossen und er wird in ein Netzwerk aus Computern gespeichert. So
+                entsteht eine Kette von Blöcken - die Blockchain. <br><br>
 
                 <b>Was ist so besonders an der Blockchain?</b><br>
                 Die Informationen in einer Blockchain bleibt für die Ewigkeit.
                 Ist ein Block einmal an der Kette angehängt, kann er nicht mehr so leicht geändert werden.
-                Das liegt Erstens an der Hashfunktion, die die Daten im Block unlesbar und vor allem Einzigartig macht.
-                Zweitens ist die Informationen an ganz vielen verschiedenen Stellen gespeichert.
+                Das liegt Erstens an der Hashfunktion, die die Daten im Block unlesbar und vor allem einzigartig macht.
+                Zweitens sind die Informationen an ganz vielen verschiedenen Stellen gespeichert.
                 Es müsste der Block überall geändert werden, wo es eine Kopie von ihm gibt.
                 So kann ein Block nicht verändert werden, wenn er einmal im Netzwerk ist.<br><br>
 
 
               </div>
-              <div class="col">Video</div>
+              <div class="col"></div>
             </div>
             <div class="row">
               <div class="col">
@@ -85,14 +93,14 @@
                 In einem Block sind folgende Informationen enthalten:
                 <ul>
                   <li>Der Hashwert des vorherigen Blocks. Dieser Hashwert ist eine Art Fingerabdruck, der den vorherigen
-                    Block identifiziert.</li>
+                    Block ausmacht.</li>
                   <li>Die Transaktionen. Dies sind die Informationen, die in diesem Block gespeichert werden.</li>
                   <li>Der Zeitstempel. Dieser Zeitstempel zeigt an, wann der Block erstellt wurde.</li>
                   <li>Der Hash des Blocks. Dieser Hash ist eine Art Fingerabdruck, der den aktuellen Block
                     identifiziert.</li>
                 </ul>
               </div>
-              <div class="col">Video</div>
+              <div class="col"></div>
             </div>
             <div class="row">
               <div class="col">
@@ -123,9 +131,10 @@
                 neuen Block erstellen möchte.<br><br>
 
                 <b>Wofür wird die NONCE verwendet?</b><br>
-                Die NONCE wird verwendet, um den Hash des Blocks zu generieren. Also um dem Block einen einzigartigen Fingerabdruck zu geben.<br><br>
+                Die NONCE wird verwendet, um den Hash des Blocks zu generieren. Also um dem Block einen einzigartigen
+                Fingerabdruck zu geben.<br><br>
               </div>
-              <div class="col">Video</div>
+              <div class="col"></div>
             </div>
             <div class="row">
               <div class="col">
@@ -133,27 +142,60 @@
                 Die NONCE wird zusammen mit den anderen Informationen in einem Block verwendet, um einen Hash zu
                 generieren. Der Hash muss eine bestimmte Anzahl von Nullen am Anfang haben. Der Computer, der den neuen
                 Block erstellen möchte, muss also die NONCE so lange ändern, bis der Hash die gewünschte Anzahl von
-                Nullen hat.<br><br>
-
-                <b>Warum ist die NONCE wichtig?</b><br>
-                Die NONCE ist wichtig, um die Sicherheit der Blockchain zu gewährleisten. Wenn jemand versuchen würde,
-                einen Block zu ändern, müsste er auch die NONCE ändern. Da die NONCE nur einmal verwendet wird, wäre das
-                sehr schwierig.<br><br>
+                Nullen hat. Dies ist dafür da, damit die Berechnung eines Blocks etwas schwieriger wird. Du kannst das
+                gut bei uns auf der Webseite bei den Übungen ausprobieren.<br><br>
               </div>
             </div>
           </div>
         </div>
 
-        <!-- SHA 256 -->
+        <!-- Sicherheit & Umwelt -->
 
         <div class="tab-pane fade" id="lektion4-tab-pane" role="tabpanel" aria-labelledby="lektion4-tab" tabindex="0">
           <div class="container tabs">
             <div class="row">
-              <div class="col">Text</div>
-              <div class="col">Video</div>
+              <div class="col">
+                <b>Wieso ist die Blockchain so sicher?</b><br>
+                Die Blockchain verbindet verschiedene informatische Prinzipien, damit die Daten in ihr sicher und
+                unveränderlich bleiben. Du hast bereits bei den Lektionen über Kryptographie etwas über das Hashing
+                gelernt. Vielleicht hast du auch schon bei den Übungen das Hashing selbst einmal ausprobiert. Dann hast
+                du bestimmt gemerkt, dass die kleinste Änderung auf einmal einen ganz anderen Hashwert ergibt. Da alle
+                Blöcke miteinander verbunden sind über eben diesen Hashwert kann sofort bemerkt werden, wenn jemand
+                versucht hat Daten zu ändern. Auch das kannst du einmal bei unseren Übungen ausprobieren. <br><br>
+
+                <b>Aber was hindert denn jemanden daran trotzdem etwas in einem Block zu ändern?</b> <br>
+                Hier kommt die nächste Stufe der Sicherheit bei der Blockchain ins Spiel. Wenn das schwierige
+                mathematische Rätsel von einem Computer in der Blockchain gelöst wird und dadurch ein neuer Block
+                entsteht, schauen alle anderen Computer in dem Computer-Netzwerk erst einmal ob auch alles richtig ist.
+                Erst wenn geprüft wurde, dass alles richtig ist, wird der neue Block mit den anderen verbunden. Genau
+                das verhindert nun auch, dass etwas falsches errechnet werden kann oder das ein Computer absichtlich
+                falsche Daten in die Blockchain schreibt. Schließlich muss erst einmal die Mehrheit aller Computer davon
+                überzeugt werden, dass das was in die Blockchain eingefügt wird auch richtig ist. Die allermeisten
+                Teilnehmer bei einer Blockchain wollen aber natürlich, dass da nichts falsches steht. Deswegen ist das
+                Ganze so sicher. Wenn nun also jemand etwas böses machen möchte, muss er die Mehrheit davon überzeugen
+                mitzumachen. Das ist zwar theoretisch möglich, in der echten Welt aber sehr sehr unwahrscheinlich.
+                <br><br>
+              </div>
+              <div class="col"></div>
             </div>
             <div class="row">
-              <div class="col">Text</div>
+              <div class="col">
+                <b>Ist das nicht schädlich für unsere Umwelt?</b><br>
+                Hier streiten sich die Menschen und vergleichen die Vor- und die Nachteile. Insgesamt lässt sich aber
+                sagen, dass viele Varianten der Blockchain-Technologie sehr viel Strom verbrauchen. Hier gibt es
+                verschiedene Arten und Weisen wie eine Blockchain arbeitet und dafür sorgt, dass alle Daten in ihr auch
+                richtig sind. Die häufigste Art heißt "Proof-Of-Work". Das ist englisch und heißt übersetzt sowas wie
+                "Arbeitsnachweis". Hier rechnen ganz viele Computer um die Wette und am Ende hat nur einer von ihnen das
+                richtige Ergebnis gefunden und erhält dafür eine Belohnung. Das kostet natürlich ganz viel Energie.
+                Nicht nur weil der Computer der die Lösung gefunden hat so viel arbeiten musste, sondern auch weil alle
+                anderen Computer, die die Lösung nicht gefunden haben, quasi umsonst gearbeitet haben. Gerade wenn der
+                Strom nicht aus erneuerbaren Energien wie Windkraft oder Solaranlagen stammt, dann ist das natürlich ein
+                großes Problem. Zusätzlich entsteht hierbei deutlich mehr Elektromüll, als wenn es die Technologie der
+                Blockchain nicht geben würde. Wenn ein Computer ständig schwer arbeitet, dann geht auch häufiger mal ein
+                Teil kaputt. Das Teil wird dann weggeworfen und durch ein Neues ersetzt. Gerade durch die harte Arbeit
+                dieser Computer in einem Blockchain-Netzwerk passiert das deutlich öfter als bei unseren Computern
+                daheim.
+              </div>
             </div>
           </div>
         </div>

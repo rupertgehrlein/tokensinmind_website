@@ -19,10 +19,10 @@
           <button class="nav-link" id="uebung3-tab" data-bs-toggle="tab" data-bs-target="#uebung3-tab-pane"
             type="button" role="tab" aria-controls="uebung3-tab-pane" aria-selected="false">Hashing</button>
         </li>
-        <li class="nav-item" role="presentation">
+        <!-- <li class="nav-item" role="presentation">
           <button class="nav-link" id="uebung4-tab" data-bs-toggle="tab" data-bs-target="#uebung4-tab-pane"
             type="button" role="tab" aria-controls="uebung4-tab-pane" aria-selected="false">SHA 256</button>
-        </li>
+        </li> -->
       </ul>
       <div class="tab-content" id="myTabContent">
 
@@ -30,7 +30,6 @@
         <div class="tab-pane fade show active" id="uebung1-tab-pane" role="tabpanel" aria-labelledby="uebung1-tab"
           tabindex="0">
           <div class="container tabs">
-
             <form action="">
               <h4 class="text">Nachricht verschlüsseln:</h4>
               <div class="row g-2 row-cols-1 row-cols-lg-2">
@@ -153,11 +152,12 @@
             <p>RSA ist eine Methode zur sicheren Übertragung von Nachrichten. Es verwendet zwei Schlüssel: einen
               öffentlichen Schlüssel zum Verschlüsseln und einen privaten Schlüssel zum Entschlüsseln. Stell dir vor,
               der öffentliche Schlüssel ist ein Schloss, das jeder benutzen kann, um eine Nachricht zu verschließen,
-              aber nur derjenige mit dem privaten Schlüssel kann das Schloss wieder öffnen.</p>
+              aber nur derjenige mit dem privaten Schlüssel kann das Schloss wieder öffnen.</p> <br>
+            <p>Sollte es zu Problemen kommen, dann lass dir einfach ein neues Schlüsselpaar generieren</p>
           </div>
-          <div class="row g-2">
-            <h4>Generiere deine Schlüssel</h4>
-            <div class="col-3">
+          <div class="row row-cols-1 row-cols-lg-2">
+            <h4>Generiere dein Schlüsselpaar</h4>
+            <div class="col">
               <button class="btn btn-primary" type="button" (click)="generateKeys()">Schlüssel generieren</button>
             </div>
             <div class="col">
@@ -167,8 +167,9 @@
               </div>
             </div>
           </div>
-          <div class="row g-2">
-            <h4>Nachricht verschlüsseln</h4>
+          <div class="row row-cols-1 row-cols-lg-2">
+            <h4>Nachricht verschlüsseln</h4><br>
+            <p>Hier wird nun dein Text mit dem öffentlichen Schlüssel verschlüsselt:</p><br>
             <div class="col-3">
               <label for="plainText" class="label">Nachricht:</label>
             </div>
@@ -177,7 +178,7 @@
                 [disabled]="!keysGenerated">
             </div>
           </div>
-          <div class="row g-2">
+          <div class="row row-cols-1 row-cols-lg-2">
             <div class="col-3">
               <button class="btn btn-primary" type="button" (click)="encrypt()"
                 [disabled]="!keysGenerated || !plainText">Verschlüsseln</button>
@@ -186,15 +187,17 @@
               Verschlüsselte Nachricht: {{encryptedMessage}}
             </div>
           </div>
-        </div>
-        <div class="row g-2">
-          <h4>Nachricht entschlüsseln</h4>
-          <div class="col-3">
-            <button class="btn btn-primary" type="button" (click)="decrypt()"
-              [disabled]="!encryptedMessage">Entschlüsseln</button>
-          </div>
-          <div class="col" *ngIf="decryptedMessage">
-            Entschlüsselte Nachricht: {{decryptedMessage}}
+          <div class="row row-cols-1 row-cols-lg-2">
+            <h4>Nachricht entschlüsseln</h4><br>
+            <p>Und hier wird die verschlüsselte Nachricht genommen und mit deinem privaten Schlüssel wieder
+              entschlüsselt:</p><br>
+            <div class="col-3">
+              <button class="btn btn-primary" type="button" (click)="decrypt()"
+                [disabled]="!encryptedMessage">Entschlüsseln</button>
+            </div>
+            <div class="col" *ngIf="decryptedMessage">
+              Entschlüsselte Nachricht: {{decryptedMessage}}
+            </div>
           </div>
         </div>
 
@@ -205,7 +208,8 @@
               <div class="text">
                 In diesem Beispiel lassen wir deine Daten einfach nur durch den Hash-Algorithmus (SHA 256) laufen. Wie
                 du siehst
-                geht das Hashen super schnell. Gleichzeitig solltest du auch erkennen können, dass bereits die kleinsten
+                geht das Hashen super schnell. Gleichzeitig solltest du auch erkennen können, dass bereits die
+                kleinsten
                 Änderungen in deiner Eingabe einen riesigen Unterschied haben können.
               </div>
             </div>
@@ -246,7 +250,8 @@
         </div>
 
 
-        <div class="tab-pane fade" id="uebung4-tab-pane" role="tabpanel" aria-labelledby="uebung4-tab" tabindex="0">...
+        <div class="tab-pane fade" id="uebung4-tab-pane" role="tabpanel" aria-labelledby="uebung4-tab" tabindex="0">
+          ...
         </div>
 
 
