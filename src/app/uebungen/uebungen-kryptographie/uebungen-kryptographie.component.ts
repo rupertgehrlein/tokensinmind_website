@@ -158,7 +158,7 @@ export class UebungenKryptographieComponent {
     this.textDecode = event.target.value;
   }
 
-  //Übung RSA -- läuft noch nicht sonderlich rund
+  //Übung RSA
   publicKey: string;
   privateKey: string;
   plainText: string;
@@ -169,7 +169,7 @@ export class UebungenKryptographieComponent {
 
   generateKeys() {
     const getRandomPrime = () => {
-      const primes = [43, 47, 53, 59, 61, 67, 71, 73, 79];
+      const primes = [11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53];
       return primes[Math.floor(Math.random() * primes.length)];
     };
 
@@ -185,7 +185,7 @@ export class UebungenKryptographieComponent {
 
     let d = 2;
     while ((d * e) % phi !== 1) {
-      d += 1;
+      d++;
     }
 
     this.publicKey = `(${e}, ${n})`;
