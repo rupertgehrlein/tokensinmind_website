@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
+import { authGuardFactory } from './auth.guard';
 
 const routes: Routes = [
   {
@@ -17,11 +18,13 @@ const routes: Routes = [
   },
   {
     path: 'uebungen',
-    loadChildren: () => import('./uebungen/uebungen.module').then(m => m.UebungenModule)
+    loadChildren: () => import('./uebungen/uebungen.module').then(m => m.UebungenModule),
+    canActivate: [authGuardFactory]
   },
   {
     path: 'downloads',
-    loadChildren: () => import('./downloads/downloads.module').then(m => m.DownloadsModule)
+    loadChildren: () => import('./downloads/downloads.module').then(m => m.DownloadsModule),
+    canActivate: [authGuardFactory]
   },
   {
     path: 'login',
