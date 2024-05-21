@@ -1,27 +1,28 @@
-import { Component } from '@angular/core';
+// home.component.ts
+import { Component, OnInit } from '@angular/core';
 import { SupabaseClient } from '@supabase/supabase-js';
 import { SupabaseService } from '../services/supabase.service';
-import { NavbarComponent } from '../navbar/navbar.component';
+import { IsLoggedInService } from '../shared/is-logged-in.service';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrl: './home.component.scss'
+  styleUrls: ['./home.component.scss']
 })
-export class HomeComponent {
+export class HomeComponent implements OnInit {
   supabase: SupabaseClient;
   username;
-  loggedIn;
+  loggedIn = false;
 
-  constructor(private supabaseService: SupabaseService, private navbar: NavbarComponent) {
+  constructor(private supabaseService: SupabaseService, private authService: IsLoggedInService) {
     this.supabase = supabaseService.getClient();
   }
 
   async ngOnInit() {
     this.username = await this.supabaseService.getUsername();
-    console.log(this.navbar.isLoggedIn);
-    this.loggedIn = this.navbar.isLoggedIn;
+    this.authService.loggedIn$.subscribe(loggedIn => {
+      this.loggedIn = loggedIn;
+    });
+    console.log(this.loggedIn);
   }
-
-
 }
