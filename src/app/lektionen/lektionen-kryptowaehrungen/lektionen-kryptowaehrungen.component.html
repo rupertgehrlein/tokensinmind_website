@@ -9,16 +9,20 @@
       <ul class="nav nav-tabs" id="myTab" role="tablist">
         <li class="nav-item" role="presentation">
           <button class="nav-link active" id="lektion1-tab" data-bs-toggle="tab" data-bs-target="#lektion1-tab-pane"
-            type="button" role="tab" aria-controls="lektion1-tab-pane" aria-selected="true">Was ist das?</button>
+            type="button" role="tab" aria-controls="lektion1-tab-pane" aria-selected="true" (click)="setVisited('lektionen', 'currency', 'currency')">Was ist das?</button>
         </li>
         <li class="nav-item" role="presentation">
           <button class="nav-link" id="lektion2-tab" data-bs-toggle="tab" data-bs-target="#lektion2-tab-pane"
-            type="button" role="tab" aria-controls="lektion2-tab-pane" aria-selected="false">Was kann das Wert
+            type="button" role="tab" aria-controls="lektion2-tab-pane" aria-selected="false" (click)="setVisited('lektionen', 'currency', 'value')">Was kann das Wert
             sein?</button>
         </li>
         <li class="nav-item" role="presentation">
           <button class="nav-link" id="lektion3-tab" data-bs-toggle="tab" data-bs-target="#lektion3-tab-pane"
-            type="button" role="tab" aria-controls="lektion3-tab-pane" aria-selected="false">Lektion 3</button>
+            type="button" role="tab" aria-controls="lektion3-tab-pane" aria-selected="false" (click)="setVisited('lektionen', 'currency', 'differences')">Gibt es mehr als eine Kryptowährung?</button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link" id="lektion4-tab" data-bs-toggle="tab" data-bs-target="#lektion4-tab-pane"
+            type="button" role="tab" aria-controls="lektion4-tab-pane" aria-selected="false" (click)="setVisited('lektionen', 'currency', 'dangers')">Gibt es da Gefahren?</button>
         </li>
       </ul>
 
