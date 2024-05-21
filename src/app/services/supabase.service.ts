@@ -99,6 +99,38 @@ export class SupabaseService {
     }
   }
 
+  async setVisited(format: string, type: string, topic: string, userid: string) {
+    // Zuerst das aktuelle JSON abrufen
+    const { data: userData, error: fetchError } = await this.client
+      .from('usernames')
+      .select('already_visited')
+      .eq('userid', userid)
+      .single();
+
+    if (fetchError) {
+      console.error('Error fetching user data:', fetchError);
+      return;
+    }
+
+    // JSON Objekt aktualisieren
+    const updatedVisited = { ...userData.already_visited };
+    if (!updatedVisited[format]) updatedVisited[format] = {};
+    if (!updatedVisited[format][type]) updatedVisited[format][type] = {};
+    updatedVisited[format][type][topic] = true;
+
+    // JSON Objekt in der Datenbank aktualisieren
+    const { data, error: updateError } = await this.client
+      .from('usernames')
+      .update({ already_visited: updatedVisited })
+      .eq('userid', userid);
+
+    if (updateError) {
+      console.error('Error updating visit status:', updateError);
+    } else {
+      console.log('Visit status updated successfully:', data);
+    }
+  }
+
 }
 
 /* async registerNewUser(username, password) {
