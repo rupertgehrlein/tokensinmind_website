@@ -2,14 +2,16 @@
   <div class="row align-items-center">
     <div class="col">
       <h1 class="display-1 text"><b>Herzlich Willkommen {{this.username}} </b></h1>
-      <h4 class="welcome_text text">Willkommen auf unserer Website, dem Tor zur aufregenden Welt der Kryptografie,
-        Blockchain, Kryptowährungen und NFTs! <br>
-        Bereit, den Code hinter der Zukunft zu knacken? Dann starte deine Entdeckungsreise hier!</h4>
+      <h4 class="welcome_text text">auf unserer Website, dem Tor zur aufregenden Welt der Kryptographie,
+        Blockchain, Kryptowährungen und NFTs! Bereit, den Code hinter der Zukunft zu knacken? Dann starte deine
+        Entdeckungsreise hier!</h4>
 
       <h4 class="welcome_text text">
-        Zu jeder Lektion gibt es auch eine passende Übung oder was zum ausprobieren. Am besten schaust du dir immer erst
-        die Lektion an und machst danach die passende Übung, damit du das neu gelernte besser verstehst. Die Seiten der
-        Lektionen und der Übungen sind identisch aufgebaut, damit du dich besser zurechtfinden kannst.
+        Die Lektionen sind in Kapitel unterteilt und die kannst du dir auch ohne dich anzumelden durchlesen. Wenn du
+        dich aber anmeldest, dann erhälst du Zugriff auf spannende Übungen, Sachen zum ausprobieren, knifflige Tests und
+        kannst sehen was du schon gemacht hast und was du dir noch nicht angeschaut hast. Klicke im Menü einfach auf
+        "Anmelden", denke dir einen Nutzernamen und ein Passwort aus und schon geht's los! Wir wünschen dir ganz viel
+        Spaß!
       </h4>
     </div>
   </div>
@@ -23,10 +25,17 @@
           </div>
         </a>
       </div>
-      <div class="col">
+      <div class="col" *ngIf="this.loggedIn">
         <a routerLink="/uebungen" routerLinkActive="router-link-active">
           <div class="btn_link card secondary-color">
             <h1 class="btn_link">Zu den Übungen</h1>
+          </div>
+        </a>
+      </div>
+      <div class="col" *ngIf="!this.loggedIn">
+        <a routerLink="/login" routerLinkActive="router-link-active">
+          <div class="card btn-primary text">
+            <h1 class="btn-primary">Jetzt anmelden!</h1>
           </div>
         </a>
       </div>
