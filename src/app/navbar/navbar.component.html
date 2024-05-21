@@ -17,7 +17,7 @@
         <a class="nav-link text" routerLink="/lektionen" routerLinkActive="active" (click)="closeNavbar()">Lektionen</a>
       </li>
       <li class="nav-item" routerLinkActive="active">
-        <a class="nav-link text" routerLink="/uebungen" (click)="closeNavbar()">Übungen</a>
+        <a class="nav-link text" routerLink="/uebungen" (click)="closeNavbar()" *ngIf="isLoggedIn">Übungen</a>
       </li>
       <!-- <li class="nav-item" routerLinkActive="active">
         <a class="nav-link text" routerLink="/downloads" (click)="closeNavbar()">Downloads</a>
