@@ -8,13 +8,24 @@
 
       <ul class="nav nav-tabs" id="myTab" role="tablist">
         <li class="nav-item" role="presentation">
-          <button class="nav-link active" id="lektion1-tab" data-bs-toggle="tab" data-bs-target="#lektion1-tab-pane" type="button" role="tab" aria-controls="lektion1-tab-pane" aria-selected="true">Lektion 1</button>
+          <button class="nav-link active" id="lektion1-tab" data-bs-toggle="tab" data-bs-target="#lektion1-tab-pane"
+            type="button" role="tab" aria-controls="lektion1-tab-pane" aria-selected="true"
+            (click)="setVisited('lektionen', 'nfts', 'nft')">Was ist ein Non-Fungible Token?</button>
         </li>
         <li class="nav-item" role="presentation">
-          <button class="nav-link" id="lektion2-tab" data-bs-toggle="tab" data-bs-target="#lektion2-tab-pane" type="button" role="tab" aria-controls="lektion2-tab-pane" aria-selected="false">Lektion 2</button>
+          <button class="nav-link" id="lektion2-tab" data-bs-toggle="tab" data-bs-target="#lektion2-tab-pane"
+            type="button" role="tab" aria-controls="lektion2-tab-pane" aria-selected="false"
+            (click)="setVisited('lektionen', 'nfts', 'usage')">Wofür kann man das gebrauchen?</button>
         </li>
         <li class="nav-item" role="presentation">
-          <button class="nav-link" id="lektion3-tab" data-bs-toggle="tab" data-bs-target="#lektion3-tab-pane" type="button" role="tab" aria-controls="lektion3-tab-pane" aria-selected="false">Lektion 3</button>
+          <button class="nav-link" id="lektion3-tab" data-bs-toggle="tab" data-bs-target="#lektion3-tab-pane"
+            type="button" role="tab" aria-controls="lektion3-tab-pane" aria-selected="false"
+            (click)="setVisited('lektionen', 'nfts', 'value')">Ist das was wert?</button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link" id="lektion4-tab" data-bs-toggle="tab" data-bs-target="#lektion4-tab-pane"
+            type="button" role="tab" aria-controls="lektion4-tab-pane" aria-selected="false"
+            (click)="setVisited('lektionen', 'nfts', 'dangers')">Wo liegen die Gefahren?</button>
         </li>
       </ul>
 
@@ -22,7 +33,8 @@
 
         <!-- Ceasar-Chiffre -->
 
-        <div class="tab-pane fade show active" id="lektion1-tab-pane" role="tabpanel" aria-labelledby="lektion1-tab" tabindex="0">
+        <div class="tab-pane fade show active" id="lektion1-tab-pane" role="tabpanel" aria-labelledby="lektion1-tab"
+          tabindex="0">
           <div class="container tabs">
             <div class="row row-cols-1 row-cols-lg-2">
               <div class="col">Text</div>
@@ -78,5 +90,5 @@
 
       </div>
 
+    </div>
   </div>
-</div>

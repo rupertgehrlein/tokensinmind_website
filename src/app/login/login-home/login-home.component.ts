@@ -43,18 +43,16 @@ export class LoginHomeComponent {
         password
       });
 
-      console.log('signUpErrorMessage: ', signUpError.message);
-
       if (signUpError && signUpError.message.includes('already registered')) {
         // Wenn der Benutzer bereits existiert, versuche ihn anzumelden
         try {
-          const {data: loginData, error: loginError} = await this.supabase.auth.signInWithPassword({
+          const { data: loginData, error: loginError } = await this.supabase.auth.signInWithPassword({
             email,
             password
           });
 
           console.log('loginError:', loginError);
-          if(loginError && loginError.message.includes('Invalid login credentials')){
+          if (loginError && loginError.message.includes('Invalid login credentials')) {
             alert('Dieser Nutzername ist bereits registriert. Wenn du der Nutzer bist, dann gib bitte das korrekte Passwort ein.');
             return;
           }
@@ -66,7 +64,7 @@ export class LoginHomeComponent {
         }
       } else {
         // Wenn die Registrierung erfolgreich ist, füge den Benutzer in die Tabelle "usernames" ein
-        await this.supabase
+        const { data: insertedData, error: insertError } = await this.supabase
           .from("usernames")
           .insert([{ username, userid: signUpData.user.id }]);
       }
@@ -77,7 +75,6 @@ export class LoginHomeComponent {
     } catch (error) {
       // Zeige einen Alert, wenn ein unbekannter Fehler auftritt
       console.error("Unbekannter Fehler:", error);
-      alert('Ein unbekannter Fehler ist aufgetreten.');
     }
   }
 

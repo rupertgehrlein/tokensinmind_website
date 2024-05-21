@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { SupabaseService } from 'src/app/services/supabase.service';
 
 @Component({
   selector: 'app-lektionen-home',
@@ -7,5 +8,18 @@ import { CommonModule } from '@angular/common';
   styleUrl: './lektionen-home.component.scss'
 })
 export class LektionenHomeComponent {
+  userId;
+  alreadyVisited;
+
+  constructor(private supabaseService: SupabaseService) {}
+
+  async ngOnInit(){
+    this.userId = await this.supabaseService.getUserId();
+    this.alreadyVisited = await this.supabaseService.getVisited(this.userId);
+    console.log('Already Visited:', this.alreadyVisited); // Log the entire structure
+    if (this.alreadyVisited?.lektionen?.kryptographie?.ceasar !== undefined) {
+      console.log('Caesar:', this.alreadyVisited.lektionen.kryptographie.ceasar);
+    }
+  }
 
 }
