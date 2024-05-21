@@ -24,6 +24,7 @@ export class LektionenBlockchainComponent {
     this.initialTime = await this.supabaseService.getTime('lektion', 'blockchain', this.userId) || 0;
     this.startTime = Date.now() - this.initialTime;
     this.startTimer();
+    this.setVisited('lektionen', 'blockchain', 'blockchain')
 
     document.addEventListener('visibilitychange', this.handleVisibilityChange);
   }

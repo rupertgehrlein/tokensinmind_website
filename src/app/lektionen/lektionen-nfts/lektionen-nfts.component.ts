@@ -24,6 +24,7 @@ export class LektionenNftsComponent {
     this.initialTime = await this.supabaseService.getTime('lektion', 'nft', this.userId) || 0;
     this.startTime = Date.now() - this.initialTime;
     this.startTimer();
+    this.setVisited('lektionen', 'nfts', 'nft')
 
     document.addEventListener('visibilitychange', this.handleVisibilityChange);
   }
@@ -55,6 +56,7 @@ export class LektionenNftsComponent {
       this.startTimer();
     }
   }
+
   setVisited(format, type, topic) {
     this.supabaseService.setVisited(format, type, topic, this.userId);
   }

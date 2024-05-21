@@ -24,6 +24,7 @@ export class LektionenKryptowaehrungenComponent {
     this.initialTime = await this.supabaseService.getTime('lektion', 'waehrung', this.userId) || 0;
     this.startTime = Date.now() - this.initialTime;
     this.startTimer();
+    this.setVisited('lektionen', 'currency', 'currency')
 
     document.addEventListener('visibilitychange', this.handleVisibilityChange);
   }

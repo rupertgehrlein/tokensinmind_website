@@ -55,7 +55,11 @@ export class UebungenKryptographieComponent {
       this.startTime = Date.now() - this.elapsedTime * 1000;
       this.startTimer();
     }
-  };
+  }
+
+  setVisited(format, type, topic) {
+    this.supabaseService.setVisited(format, type, topic, this.userId);
+  }
 
   //Übung Caesar
 

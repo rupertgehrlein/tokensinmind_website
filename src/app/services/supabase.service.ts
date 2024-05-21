@@ -131,6 +131,21 @@ export class SupabaseService {
     }
   }
 
+  async getVisited(userid: string) {
+    const { data, error: fetchError } = await this.client
+      .from('usernames')
+      .select('already_visited')
+      .eq('userid', userid)
+      .single();
+
+    if (fetchError) {
+      console.error('Error fetching user data:', fetchError);
+      return false;
+    }
+
+    return data.already_visited;
+  }
+
 }
 
 /* async registerNewUser(username, password) {
