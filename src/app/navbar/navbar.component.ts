@@ -12,7 +12,7 @@ import { IsLoggedInService } from '../shared/is-logged-in.service';
 })
 export class NavbarComponent {
   supabase: SupabaseClient;
-  isLoggedIn = false;
+  isLoggedIn;
 
   constructor(private router: Router, private supabaseService: SupabaseService, private cdr: ChangeDetectorRef, private authService: IsLoggedInService) {
     this.supabase = supabaseService.getClient();

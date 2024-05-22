@@ -16,10 +16,6 @@ export class LektionenHomeComponent {
   async ngOnInit(){
     this.userId = await this.supabaseService.getUserId();
     this.alreadyVisited = await this.supabaseService.getVisited(this.userId);
-    console.log('Already Visited:', this.alreadyVisited); // Log the entire structure
-    if (this.alreadyVisited?.lektionen?.kryptographie?.ceasar !== undefined) {
-      console.log('Caesar:', this.alreadyVisited.lektionen.kryptographie.ceasar);
-    }
   }
 
 }
