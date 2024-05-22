@@ -12,7 +12,7 @@ import { IsLoggedInService } from '../shared/is-logged-in.service';
 export class HomeComponent implements OnInit {
   supabase: SupabaseClient;
   username;
-  loggedIn = false;
+  loggedIn;
 
   constructor(private supabaseService: SupabaseService, private authService: IsLoggedInService) {
     this.supabase = supabaseService.getClient();
@@ -23,6 +23,5 @@ export class HomeComponent implements OnInit {
     this.authService.loggedIn$.subscribe(loggedIn => {
       this.loggedIn = loggedIn;
     });
-    console.log(this.loggedIn);
   }
 }
