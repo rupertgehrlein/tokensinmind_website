@@ -13,6 +13,9 @@
   <!-- Menüpunkte -->
   <div class="collapse navbar-collapse" id="navbarNav">
     <ul class="navbar-nav ms-auto">
+      <li class="nav-item" routerLinkActive="active" *ngIf="isLoggedIn">
+        <p class="nav-link text">{{currentCoins}} <img class="coin" src="../../assets/coin.png" alt="Coins" width="26"></p>
+      </li>
       <li class="nav-item">
         <a class="nav-link text" routerLink="/lektionen" routerLinkActive="active" (click)="closeNavbar()">Lektionen</a>
       </li>

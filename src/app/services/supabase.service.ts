@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { SupabaseClient, createClient } from '@supabase/supabase-js';
 import { environment } from '../../environments/environment';
+import { BehaviorSubject } from 'rxjs';
 
 
 @Injectable({
@@ -8,11 +9,22 @@ import { environment } from '../../environments/environment';
 })
 export class SupabaseService {
   private client: SupabaseClient;
+  private coinsSubject = new BehaviorSubject<number>(0);
+  coins$ = this.coinsSubject.asObservable();
+  userId;
 
-  constructor() { this.client = createClient(environment.supabaseUrl, environment.supabaseKey) }
+  constructor() {
+    this.client = createClient(environment.supabaseUrl, environment.supabaseKey);
+    this.initializeCoins();
+  }
 
   getClient(): SupabaseClient {
     return this.client;
+  }
+
+  private async initializeCoins() {
+    const coins = await this.getCurrentCoins();
+    this.coinsSubject.next(coins);
   }
 
   async getUsername() {
@@ -55,6 +67,50 @@ export class SupabaseService {
 
     return userid;
 
+  }
+
+  async getCurrentCoins(): Promise<number> {
+    const userId = await this.getUserId();
+
+    try {
+      const { data, error } = await this.client
+        .from('usernames')
+        .select('current_coins')
+        .eq('userid', userId)
+        .single();
+
+      if (error) {
+        console.error("Fehler beim Abrufen der Coins:", error);
+        return 0;
+      }
+
+      return data.current_coins;
+    } catch (error) {
+      console.error("Unbekannter Fehler:", error);
+      return 0;
+    }
+  }
+
+  async setCurrentCoins(coins: number): Promise<void> {
+    const userId = await this.getUserId();
+    const currentCoins = await this.getCurrentCoins();
+    const newCoins = coins + currentCoins;
+
+    try {
+      const { error } = await this.client
+        .from('usernames')
+        .update({ current_coins: newCoins })
+        .eq('userid', userId);
+
+      if (error) {
+        console.error("Fehler beim Schreiben der Coins:", error);
+        return;
+      }
+
+      this.coinsSubject.next(newCoins);
+    } catch (error) {
+      console.error("Unbekannter Fehler:", error);
+    }
   }
 
 
@@ -144,6 +200,47 @@ export class SupabaseService {
     }
 
     return data.already_visited;
+  }
+
+  async getBestTime(userid: string) {
+    const column = 'best_time';
+
+    try {
+      const { data, error } = await this.client
+        .from('usernames')
+        .select(column)
+        .eq('userid', userid);
+
+      if (error) {
+        console.error("Fehler beim Abrufen der Zeitdaten:", error);
+        return null;
+      }
+      const time = data[0][column];
+      return time;
+    } catch (error) {
+      console.error("Unbekannter Fehler:", error);
+      return null;
+    }
+  }
+
+  async setBestTime(userid: string, time) {
+    const column = 'best_time';
+    const setTime = time;
+
+    try {
+      const { data: time, error } = await this.client
+        .from('usernames')
+        .update({ [column]: setTime })
+        .eq('userid', userid);
+
+      if (error) {
+        console.error("Fehler beim Schreiben der Zeitdaten:", error);
+        return null;
+      }
+    } catch (error) {
+      console.error("Unbekannter Fehler:", error);
+      return null;
+    }
   }
 
 }

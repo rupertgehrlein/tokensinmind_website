@@ -4,6 +4,7 @@ import { Router, NavigationEnd } from '@angular/router';
 import { SupabaseService } from '../services/supabase.service';
 import { SupabaseClient } from '@supabase/supabase-js';
 import { IsLoggedInService } from '../shared/is-logged-in.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-navbar',
@@ -12,13 +13,16 @@ import { IsLoggedInService } from '../shared/is-logged-in.service';
 })
 export class NavbarComponent {
   supabase: SupabaseClient;
-  isLoggedIn;
+  isLoggedIn: boolean;
+  currentCoins: number;
+  userid: string;
+  private coinsSubscription: Subscription;
 
   constructor(private router: Router, private supabaseService: SupabaseService, private cdr: ChangeDetectorRef, private authService: IsLoggedInService) {
     this.supabase = supabaseService.getClient();
   }
 
-  ngOnInit() {
+  async ngOnInit() {
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
         // Close the Bootstrap menu
@@ -41,6 +45,13 @@ export class NavbarComponent {
         this.cdr.detectChanges();
       }
     });
+
+    this.userid = await this.supabaseService.getUserId();
+
+    this.coinsSubscription = this.supabaseService.coins$.subscribe(coins => {
+      this.currentCoins = coins;
+      this.cdr.detectChanges();
+    });
   }
 
   logout() {
@@ -61,6 +72,12 @@ export class NavbarComponent {
     if (navbarToggler && navbarNav) {
       navbarToggler.setAttribute('aria-expanded', 'false');
       navbarNav.classList.remove('show');
+    }
+  }
+
+  ngOnDestroy() {
+    if (this.coinsSubscription) {
+      this.coinsSubscription.unsubscribe();
     }
   }
 }

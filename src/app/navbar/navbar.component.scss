@@ -10,11 +10,16 @@
   transform: scale(1.02);
 }
 
-a {
+a,
+p {
   margin: 0 20px;
 }
 
 img.resize {
   height: 40%;
   width: 40%;
+}
+
+img.coin {
+  margin-bottom: 4px;
 }

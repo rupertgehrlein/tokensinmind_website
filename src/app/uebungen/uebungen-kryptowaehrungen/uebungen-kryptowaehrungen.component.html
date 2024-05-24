@@ -5,7 +5,6 @@
 <div class="container">
   <div class="row align-items-center">
     <div class="col text">
-
       <ul class="nav nav-tabs" id="myTab" role="tablist">
         <li class="nav-item" role="presentation">
           <button class="nav-link active" id="uebung1-tab" data-bs-toggle="tab" data-bs-target="#uebung1-tab-pane" type="button" role="tab" aria-controls="uebung1-tab-pane" aria-selected="true">Übung 1</button>
@@ -18,10 +17,31 @@
         </li>
       </ul>
       <div class="tab-content" id="myTabContent">
-        <div class="tab-pane fade show active" id="uebung1-tab-pane" role="tabpanel" aria-labelledby="uebung1-tab" tabindex="0">...</div>
+        <div class="tab-pane fade show active" id="uebung1-tab-pane" role="tabpanel" aria-labelledby="uebung1-tab" tabindex="0">
+          <h2>Mining-Simulation</h2>
+          <div *ngIf="!gameInProgress && !gameCompleted">
+            <p>Willkommen zur Mining-Simulation! Du wirst gleich 10 Matheaufgaben lösen. Drücke auf "Start", wenn du bereit bist.</p>
+            <button (click)="startGame()" class="btn btn-primary">Start</button>
+          </div>
+          <div *ngIf="gameInProgress">
+            <p><strong>Matheaufgabe:</strong></p>
+            <h3>{{ mathProblem }}</h3>
+            <input type="text" [(ngModel)]="userAnswer" placeholder="Antwort" (input)="checkAnswer()" class="form-control">
+            <p *ngIf="answerFeedback">{{ answerFeedback }}</p>
+          </div>
+          <div *ngIf="gameCompleted">
+            <p>Du hast alle Aufgaben gelöst!</p>
+            <div *ngIf="gameTime < currentBestTime">
+              <p><strong>Eine neue Bestzeit!</strong></p>
+            </div>
+            <p><strong>Deine Zeit:</strong> {{ gameTime }} Sekunden</p>
+            <p>Herzlichen Glückwunsch! Du warst sehr schnell und erhältst eine Belohnung auf dein Konto!</p>
+            <button (click)="restartGame()" class="btn btn-primary">Von vorne starten</button>
+          </div>
+        </div>
         <div class="tab-pane fade" id="uebung2-tab-pane" role="tabpanel" aria-labelledby="uebung2-tab" tabindex="0">...</div>
         <div class="tab-pane fade" id="uebung3-tab-pane" role="tabpanel" aria-labelledby="uebung3-tab" tabindex="0">...</div>
       </div>
-
+    </div>
   </div>
 </div>
