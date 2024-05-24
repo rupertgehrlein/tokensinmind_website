@@ -172,6 +172,9 @@ export class SupabaseService {
     const updatedVisited = { ...userData.already_visited };
     if (!updatedVisited[format]) updatedVisited[format] = {};
     if (!updatedVisited[format][type]) updatedVisited[format][type] = {};
+    if(updatedVisited[format][type][topic] == false){
+      await this.setCurrentCoins(10);
+    }
     updatedVisited[format][type][topic] = true;
 
     // JSON Objekt in der Datenbank aktualisieren
