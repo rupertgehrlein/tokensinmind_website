@@ -24,16 +24,27 @@ export class NavbarComponent {
   async ngOnInit() {
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
-        // Close the Bootstrap menu
         this.closeNavbar();
       }
     });
 
-    this.loggedInSubscription = this.supabaseService.loggedIn$.subscribe(loggedIn => {
+    this.loggedInSubscription = this.supabaseService.loggedIn$.subscribe(async loggedIn => {
       this.isLoggedIn = loggedIn;
+      if (loggedIn) {
+        this.currentCoins = await this.supabaseService.getCurrentCoins(); // Manually update coins
+      } else {
+        this.currentCoins = 0; // Reset coins if not logged in
+      }
       this.cdr.detectChanges();
     });
 
+    this.coinsSubscription = this.supabaseService.coins$.subscribe(coins => {
+      this.currentCoins = coins;
+      this.cdr.detectChanges();
+    });
+  }
+
+  ngOnChanges() {
     this.coinsSubscription = this.supabaseService.coins$.subscribe(coins => {
       this.currentCoins = coins;
       this.cdr.detectChanges();

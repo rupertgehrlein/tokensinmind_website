@@ -30,6 +30,10 @@ export class SupabaseService {
     const userStatus = await this.getCurrentUserStatus();
     this.loggedInSubject.next(userStatus);
 
+    if (userStatus) {
+      await this.initializeCoins();
+    }
+
     this.client.auth.onAuthStateChange((event, session) => {
       if (event === 'SIGNED_IN') {
         this.loggedInSubject.next(true);
