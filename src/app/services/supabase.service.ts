@@ -13,7 +13,7 @@ export class SupabaseService {
   private loggedInSubject = new BehaviorSubject<boolean>(false);
   coins$ = this.coinsSubject.asObservable();
   loggedIn$ = this.loggedInSubject.asObservable();
-  userId;
+  userId: string;
 
   constructor() {
     this.client = createClient(environment.supabaseUrl, environment.supabaseKey);
@@ -25,11 +25,11 @@ export class SupabaseService {
     return this.client;
   }
 
+  //alles rund um den User
   private async initializeUserStatus() {
     const userStatus = await this.getCurrentUserStatus();
     this.loggedInSubject.next(userStatus);
 
-    // Set up a listener for auth state changes
     this.client.auth.onAuthStateChange((event, session) => {
       if (event === 'SIGNED_IN') {
         this.loggedInSubject.next(true);
@@ -54,7 +54,6 @@ export class SupabaseService {
     }
   }
 
-  //alles rund um den User
   async getUsername() {
     const { data: user, error: sessionError } = await this.client.auth.getSession();
 
