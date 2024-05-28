@@ -3,7 +3,6 @@ import { ChangeDetectorRef, Component } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { SupabaseService } from '../services/supabase.service';
 import { SupabaseClient } from '@supabase/supabase-js';
-import { IsLoggedInService } from '../shared/is-logged-in.service';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -15,10 +14,10 @@ export class NavbarComponent {
   supabase: SupabaseClient;
   isLoggedIn: boolean;
   currentCoins: number;
-  userid: string;
   private coinsSubscription: Subscription;
+  private loggedInSubscription: Subscription;
 
-  constructor(private router: Router, private supabaseService: SupabaseService, private cdr: ChangeDetectorRef, private authService: IsLoggedInService) {
+  constructor(private router: Router, private supabaseService: SupabaseService, private cdr: ChangeDetectorRef) {
     this.supabase = supabaseService.getClient();
   }
 
@@ -30,23 +29,10 @@ export class NavbarComponent {
       }
     });
 
-    this.supabase.auth.onAuthStateChange((event, session) => {
-      if (event === 'SIGNED_IN') {
-        this.supabase.auth.getUser().then(user => {
-          if (user && user.data && user.data.user) {
-            this.isLoggedIn = true;
-            this.authService.setLoggedIn(true);
-            this.cdr.detectChanges();
-          }
-        });
-      } else if (event === 'SIGNED_OUT') {
-        this.isLoggedIn = false;
-        this.authService.setLoggedIn(false);
-        this.cdr.detectChanges();
-      }
+    this.loggedInSubscription = this.supabaseService.loggedIn$.subscribe(loggedIn => {
+      this.isLoggedIn = loggedIn;
+      this.cdr.detectChanges();
     });
-
-    this.userid = await this.supabaseService.getUserId();
 
     this.coinsSubscription = this.supabaseService.coins$.subscribe(coins => {
       this.currentCoins = coins;
@@ -56,8 +42,6 @@ export class NavbarComponent {
 
   logout() {
     this.supabase.auth.signOut().then(() => {
-      this.isLoggedIn = false;
-      this.authService.setLoggedIn(false);
       this.router.navigate(['']);
       this.cdr.detectChanges();
       this.closeNavbar();
@@ -76,6 +60,9 @@ export class NavbarComponent {
   }
 
   ngOnDestroy() {
+    if (this.loggedInSubscription) {
+      this.loggedInSubscription.unsubscribe();
+    }
     if (this.coinsSubscription) {
       this.coinsSubscription.unsubscribe();
     }

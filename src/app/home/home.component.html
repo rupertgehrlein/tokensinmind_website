@@ -25,26 +25,26 @@
           </div>
         </a>
       </div>
-      <div class="col">
+      <div class="col" *ngIf="this.isLoggedIn">
         <a routerLink="/uebungen" routerLinkActive="router-link-active">
           <div class="btn_link card secondary-color">
             <h1 class="btn_link">Zu den Übungen</h1>
           </div>
         </a>
       </div>
-      <!-- <div class="col" *ngIf="!this.loggedIn">
+      <div class="col" *ngIf="!this.isLoggedIn">
         <a routerLink="/login" routerLinkActive="router-link-active">
           <div class="card btn-primary text">
             <h1 class="btn-primary">Jetzt anmelden!</h1>
           </div>
         </a>
-      </div> -->
+      </div>
     </div>
   </div>
 
   <!-- später für den Rollout das unten dann wieder hinmachen -->
 
-  <!-- <div *ngIf="loggedIn">
+  <!-- <div *ngIf="this.isLoggedIn">
     <div class=" container">
       <hr>
     </div>
