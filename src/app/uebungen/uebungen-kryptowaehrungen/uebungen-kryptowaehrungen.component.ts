@@ -19,7 +19,9 @@ export class UebungenKryptowaehrungenComponent {
   timer: any;
   isVisible: boolean = true;
 
-  constructor(private supabaseService: SupabaseService) {}
+  constructor(private supabaseService: SupabaseService) {
+    this.addGenerals();
+  }
 
   async ngOnInit() {
     this.userId = await this.supabaseService.getUserId();
@@ -130,6 +132,69 @@ export class UebungenKryptowaehrungenComponent {
 
   restartGame() {
     this.startGame();
+  }
+
+  //Generäle
+  generals: { id: number, name: string, honest: boolean, message: string }[] = [];
+  messages: string[] = ['Angreifen', 'Zurückziehen'];
+  simulationStep: number = 0;
+  consensusResult: string = '';
+
+  addGenerals() {
+    const names = ['General A', 'General B', 'General C', 'General D'];
+    names.forEach((name, index) => {
+      this.generals.push({ id: index + 1, name: name, honest: true, message: '' });
+    });
+  }
+
+  startSimulation() {
+    this.simulationStep = 1;
+    this.generals[0].message = this.messages[Math.floor(Math.random() * this.messages.length)];
+    this.passMessage(1);
+  }
+
+  passMessage(index: number) {
+    if (index >= this.generals.length) {
+      this.simulationStep = 2;
+      return;
+    }
+
+    const previousGeneral = this.generals[index - 1];
+    const currentGeneral = this.generals[index];
+
+    if (currentGeneral.honest) {
+      currentGeneral.message = previousGeneral.message;
+    } else {
+      currentGeneral.message = previousGeneral.message === 'Angreifen' ? 'Zurückziehen' : 'Angreifen';
+    }
+
+    this.passMessage(index + 1);
+  }
+
+  checkConsensus() {
+    const honestMessages = this.generals.filter(g => g.honest).map(g => g.message);
+    const attackCount = honestMessages.filter(msg => msg === 'Angreifen').length;
+    const retreatCount = honestMessages.filter(msg => msg === 'Zurückziehen').length;
+
+    if (attackCount >= 3) {
+      this.consensusResult = 'Die Generäle haben sich auf einen Angriff geeinigt. Der Angriff war erfolgreich!';
+    } else if (retreatCount >= 3) {
+      this.consensusResult = 'Die Generäle haben sich auf einen Rückzug geeinigt. Der Angriff wurde abgebrochen.';
+    } else {
+      this.consensusResult = 'Die Generäle konnten sich nicht auf eine einheitliche Strategie einigen. Der Angriff scheiterte mit großen Verlusten.';
+    }
+
+    this.simulationStep = 3;
+  }
+
+  toggleHonesty(general) {
+    general.honest = !general.honest;
+  }
+
+  restartSimulation() {
+    this.simulationStep = 0;
+    this.consensusResult = '';
+    this.generals.forEach(g => g.message = '');
   }
 
 }
