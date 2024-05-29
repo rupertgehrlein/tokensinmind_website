@@ -229,7 +229,6 @@ export class SupabaseService {
   }
 
   async setVisited(format: string, type: string, topic: string, userid: string) {
-    // Zuerst das aktuelle JSON abrufen
     const { data: userData, error: fetchError } = await this.client
       .from('usernames')
       .select('already_visited')
@@ -240,8 +239,6 @@ export class SupabaseService {
       console.error('Error fetching user data:', fetchError);
       return;
     }
-
-    // JSON Objekt aktualisieren
     const updatedVisited = { ...userData.already_visited };
     if (!updatedVisited[format]) updatedVisited[format] = {};
     if (!updatedVisited[format][type]) updatedVisited[format][type] = {};
@@ -250,7 +247,6 @@ export class SupabaseService {
     }
     updatedVisited[format][type][topic] = true;
 
-    // JSON Objekt in der Datenbank aktualisieren
     const { data, error: updateError } = await this.client
       .from('usernames')
       .update({ already_visited: updatedVisited })
@@ -285,26 +281,5 @@ export class SupabaseService {
   }
 
 }
-
-/* async registerNewUser(username, password) {
-  const hashedPassword = sha256(password).toString();
-
-  const { data, error: insertError } = await this.client
-    .from('usernames')
-    .insert([{ email: username, password: hashedPassword }])
-
-  if (insertError) {
-    console.error('Error inserting new user:', insertError);
-  } else {
-    console.log('New user inserted:', data);
-  }
-} */
-
-/* async passwordSignIn(username, hashedPassword) {
-  const { data, error } = await this.client.auth.signInWithPassword({
-    email: `${username}`,
-    password: `${hashedPassword}`
-  })
-} */
 
 
