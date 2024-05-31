@@ -2,11 +2,12 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SupabaseService } from 'src/app/services/supabase.service';
 import { FormsModule } from '@angular/forms';
+import { NgxChartsModule, Color } from '@swimlane/ngx-charts';
 
 @Component({
   selector: 'app-uebungen-kryptowaehrungen',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, NgxChartsModule],
   templateUrl: './uebungen-kryptowaehrungen.component.html',
   styleUrl: './uebungen-kryptowaehrungen.component.scss'
 })
@@ -21,6 +22,7 @@ export class UebungenKryptowaehrungenComponent {
 
   constructor(private supabaseService: SupabaseService) {
     this.addGenerals();
+    //this.calculateEnergy();
   }
 
   async ngOnInit() {
@@ -38,7 +40,7 @@ export class UebungenKryptowaehrungenComponent {
     document.removeEventListener('visibilitychange', this.handleVisibilityChange);
   }
 
-  startTimer(){
+  startTimer() {
     this.timer = setInterval(() => {
       if (this.isVisible) {
         this.updateTimeAndSaveToDatabase();
@@ -195,6 +197,72 @@ export class UebungenKryptowaehrungenComponent {
     this.simulationStep = 0;
     this.consensusResult = '';
     this.generals.forEach(g => g.message = '');
+  }
+
+  //Kryptowährungen Energie
+  blocksToMine: number = 5;
+  networkSize: number = 1000;
+  kWhCost: number = 0.30; // Beispielwert in EUR
+  powEnergyPerBlockPerNode: number = 100; // Durchschnittlicher Verbrauch in kWh
+  posEnergyPerBlockPerNode: number = 100; // Beispielwert in kWh
+
+  energyPoW: number;
+  energyPoS: number;
+  costPoW: number;
+  costPoS: number;
+
+  chartData: any[];
+  view: any[] = [700, 400];
+  chartOptions: any = {
+    showXAxis: true,
+    showYAxis: true,
+    xAxisLabel: 'Konsensmethoden',
+    yAxisLabel: 'Werte',
+  };
+
+  colorScheme = {
+    domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']
+  };
+
+  calculateEnergy() {
+    this.energyPoW = this.blocksToMine * this.networkSize * this.powEnergyPerBlockPerNode / 1000; // in MWh
+    this.energyPoS = this.blocksToMine * this.posEnergyPerBlockPerNode / 1000; // in MWh
+    this.costPoW = this.energyPoW * this.kWhCost;
+    this.costPoS = this.energyPoS * this.kWhCost;
+
+    console.log('POW:', this.energyPoW, this.costPoW)
+    console.log('POS:', this.energyPoS, this.costPoS)
+
+    this.updateChartData();
+  }
+
+  updateChartData() {
+    this.chartData = [
+      {
+        "name": "Proof-of-Work",
+        "series": [
+          { "name": "Energieverbrauch (MWh)", "value": this.energyPoW },
+          { "name": "Kosten (EUR)", "value": this.costPoW }
+        ]
+      },
+      {
+        "name": "Proof-of-Stake",
+        "series": [
+          { "name": "Energieverbrauch (MWh)", "value": this.energyPoS },
+          { "name": "Kosten (EUR)", "value": this.costPoS }
+        ]
+      }
+    ];
+  }
+
+  onBlocksToMineChange() {
+    this.calculateEnergy();
+  }
+
+  onNetworkSizeChange(event: any) {
+    const value = event.target.value;
+    this.networkSize = value;
+    this.calculateEnergy();
   }
 
 }
