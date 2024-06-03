@@ -126,13 +126,14 @@
             <div class="row row-cols-1 row-cols-lg-2">
               <div class="col">
                 <b>Was ist die NONCE in einem Block?</b><br>
-                Die NONCE ist eine Abkürzung für "number used once" und bedeutet "Zahl, die nur einmal verwendet wird".
-                In einem Block der Blockchain ist die NONCE eine Zahl, die von einem Computer generiert wird, der einen
+                Die NONCE ist eine Abkürzung für "number used once", also eine "Zahl, die nur einmal verwendet wird".
+                Jeder Block einer Blockchain hat eine NONCE. Sie wird von dem Computer generiert, der einen
                 neuen Block erstellen möchte.<br><br>
 
-                <b>Wofür wird die NONCE verwendet?</b><br>
-                Die NONCE wird verwendet, um den Hash des Blocks zu generieren. Also um dem Block einen einzigartigen
-                Fingerabdruck zu geben.<br><br>
+                <b>Wofür gibt es die NONCE?</b><br>
+                Die NONCE wird verwendet, um den Hash des Blocks zu generieren.
+                Man verändert sie also so lange, bis der Hash so aussieht, wie er eben aussehen soll.
+                Der Hash an sich ist meistens schon sicher genug, aber manchmal muss man wichtige Informationen doch noch ein bisschen besser schützen.<br><br>
               </div>
               <div class="col"></div>
             </div>
@@ -140,10 +141,9 @@
               <div class="col">
                 <b>Wie funktioniert die NONCE?</b><br>
                 Die NONCE wird zusammen mit den anderen Informationen in einem Block verwendet, um einen Hash zu
-                generieren. Der Hash muss eine bestimmte Anzahl von Nullen am Anfang haben. Der Computer, der den neuen
+                generieren. Um die Sicherheit zu erhöhen kann man vorbestimmen wie der Hash aussehen soll, z.B. soll der Hash mit 4 Nullen am Anfang starten. Der Computer, der den neuen
                 Block erstellen möchte, muss also die NONCE so lange ändern, bis der Hash die gewünschte Anzahl von
-                Nullen hat. Dies ist dafür da, damit die Berechnung eines Blocks etwas schwieriger wird. Du kannst das
-                gut bei uns auf der Webseite bei den Übungen ausprobieren.<br><br>
+                Nullen hat. Dadurch wird das knacken des Hashs noch schwieriger. Das ganze kannst du in den Übungen mal ausprobieren.<br><br>
               </div>
             </div>
           </div>

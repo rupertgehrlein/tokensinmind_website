@@ -8,20 +8,252 @@
 
       <ul class="nav nav-tabs" id="myTab" role="tablist">
         <li class="nav-item" role="presentation">
-          <button class="nav-link active" id="uebung1-tab" data-bs-toggle="tab" data-bs-target="#uebung1-tab-pane" type="button" role="tab" aria-controls="uebung1-tab-pane" aria-selected="true">Übung 1</button>
+          <button class="nav-link active" id="uebung1-tab" data-bs-toggle="tab" data-bs-target="#uebung1-tab-pane"
+            type="button" role="tab" aria-controls="uebung1-tab-pane" aria-selected="true">Ein einzelner Block</button>
         </li>
         <li class="nav-item" role="presentation">
-          <button class="nav-link" id="uebung2-tab" data-bs-toggle="tab" data-bs-target="#uebung2-tab-pane" type="button" role="tab" aria-controls="uebung2-tab-pane" aria-selected="false">Übung 2</button>
+          <button class="nav-link" id="uebung2-tab" data-bs-toggle="tab" data-bs-target="#uebung2-tab-pane"
+            type="button" role="tab" aria-controls="uebung2-tab-pane" aria-selected="false">Eine Reihe von
+            Blöcken</button>
         </li>
         <li class="nav-item" role="presentation">
-          <button class="nav-link" id="uebung3-tab" data-bs-toggle="tab" data-bs-target="#uebung3-tab-pane" type="button" role="tab" aria-controls="uebung3-tab-pane" aria-selected="false">Übung 3</button>
+          <button class="nav-link" id="uebung3-tab" data-bs-toggle="tab" data-bs-target="#uebung3-tab-pane"
+            type="button" role="tab" aria-controls="uebung3-tab-pane" aria-selected="false">Übung 3</button>
         </li>
       </ul>
-      <div class="tab-content" id="myTabContent">
-        <div class="tab-pane fade show active" id="uebung1-tab-pane" role="tabpanel" aria-labelledby="uebung1-tab" tabindex="0">...</div>
-        <div class="tab-pane fade" id="uebung2-tab-pane" role="tabpanel" aria-labelledby="uebung2-tab" tabindex="0">...</div>
-        <div class="tab-pane fade" id="uebung3-tab-pane" role="tabpanel" aria-labelledby="uebung3-tab" tabindex="0">...</div>
-      </div>
 
+
+
+
+
+
+      <!-- Übung 1: Ein Block-->
+
+      <div class="tab-content" id="myTabContent">
+        <div class="tab-pane fade show active" id="uebung1-tab-pane" role="tabpanel" aria-labelledby="uebung1-tab"
+          tabindex="0">
+          <div class="container tabs">
+            <form>
+              <div class="box boxBlockChain"
+                [ngClass]="{'has-background-success-light': hashCorrect, 'has-background-danger-light': !hashCorrect}">
+                <div class="col">
+                  <label class="label">Das ist ein einzelner Block:
+                    <span class="tooltip"
+                      data-tooltip="Noch kümmern wir uns also nicht um eine Blockchain,
+                      sondern nur um einen einzigen Block. Deswegen kannst du hier rechts nichts eintragen."></span><br>Block #</label>
+                </div>
+                <div class="col">
+                  <input disabled type="text" class="input" value="1">
+                </div>
+                <div class="col">
+                  <label class="label">Nonce</label>
+                </div>
+                <div class="col">
+                  <input disabled type="text" class="input" value="{{newNonce}}">
+                </div>
+                <div class="col">
+                  <label class="label">Daten:</label>
+                </div>
+                <div class="col">
+                  <textarea class="textarea" (input)="onInput($event.target['value'])"></textarea>
+                </div>
+                <div class="col">
+                  <label class="label">Vorgänger</label>
+                </div>
+                <div class="col">
+                  <input disabled type="text" class="input" value="{{ prevHash }}">
+                </div>
+                <div class="col">
+                  <label class="label">Hash</label>
+                </div>
+                <div class="col">
+                  <input disabled type="text" class="input" value="{{newHash}}">
+                </div>
+                <div class="col">
+                  <button (click)="computeHash()" class="btn btn-primary button accent-color"
+                    type="button">Berechne</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+
+
+
+        <!-- Übung 2: Mehrere Blöcke-->
+
+        <div class="tab-pane fade" id="uebung2-tab-pane" role="tabpanel" aria-labelledby="uebung2-tab" tabindex="0">
+          <div class="container tabs">
+            <form id="boxes">
+              <div class="box boxBlockChain"
+                [ngClass]="{'has-background-success-light': hashCorrectBlockOne, 'has-background-danger-light': !hashCorrectBlockOne}">
+                <div class="col">
+                  <label class="label">Block #</label>
+                </div>
+                <div class="col">
+                  <input disabled type="text" class="input" value="{{blockchainBlocks[0].index}}">
+                </div>
+                <div class="col">
+                  <label class="label">Nonce</label>
+                </div>
+                <div class="col">
+                  <input disabled type="text" class="input" value="{{ blockchainBlocks[0].nonce }}">
+                </div>
+                <div class="col">
+                  <label class="label">Daten</label>
+                </div>
+                <div class="col">
+                  <textarea class="textarea" (input)="onInputBlockOne($event.target['value'])"></textarea>
+                </div>
+                <div class="col">
+                  <label class="label">Vorgänger</label>
+                </div>
+                <div class="col">
+                  <input disabled type="text" class="input" value="{{ blockchainBlocks[0].prevHash }}">
+                </div>
+                <div class="col">
+                  <label class="label">Hash</label>
+                </div>
+                <div class="col">
+                  <input disabled type="text" class="input" value="{{ blockchainBlocks[0].hash }}">
+                </div>
+                <div class="control">
+                  <button (click)="computeNonceBlockOne()" class="btn btn-primary accent-color"
+                    type="button">Berechne</button>
+                </div>
+              </div>
+
+              <div class="box boxBlockChain"
+                [ngClass]="{'has-background-success-light': hashCorrectBlockTwo, 'has-background-danger-light': !hashCorrectBlockTwo}">
+                <div class="col">
+                  <label class="label">Block #</label>
+                </div>
+                <div class="col">
+                  <input disabled type="text" class="input" value="{{blockchainBlocks[1].index}}">
+                </div>
+                <div class="col">
+                  <label class="label">Nonce</label>
+                </div>
+                <div class="col">
+                  <input disabled type="text" class="input" value="{{ blockchainBlocks[1].nonce }}">
+                </div>
+                <div class="col">
+                  <label class="label">Daten</label>
+                </div>
+                <div class="col">
+                  <textarea class="textarea" (input)="onInputBlockTwo($event.target['value'])"></textarea>
+                </div>
+                <div class="col">
+                  <label class="label">Vorgänger</label>
+                </div>
+                <div class="col">
+                  <input disabled type="text" class="input" value="{{ blockchainBlocks[1].prevHash }}">
+                </div>
+                <div class="col">
+                  <label class="label">Hash</label>
+                </div>
+                <div class="col">
+                  <input disabled type="text" class="input" value="{{ blockchainBlocks[1].hash }}">
+                </div>
+                <div class="control">
+                  <button [disabled]="disableButtonTwo" (click)="computeNonceBlockTwo()"
+                    class="btn btn-primary accent-color" type="button">Berechne</button>
+                </div>
+              </div>
+
+              <div class="box boxBlockChain"
+                [ngClass]="{'has-background-success-light': hashCorrectBlockThree, 'has-background-danger-light': !hashCorrectBlockThree}">
+                <div class="col">
+                  <label class="label">Block #</label>
+                </div>
+                <div class="col">
+                  <input disabled type="text" class="input" value="{{blockchainBlocks[2].index}}">
+                </div>
+                <div class="col">
+                  <label class="label">Nonce</label>
+                </div>
+                <div class="col">
+                  <input disabled type="text" class="input" value="{{ blockchainBlocks[2].nonce }}">
+                </div>
+                <div class="col">
+                  <label class="label">Daten</label>
+                </div>
+                <div class="col">
+                  <textarea class="textarea" (input)="onInputBlockThree($event.target['value'])"></textarea>
+                </div>
+                <div class="col">
+                  <label class="label">Vorgänger</label>
+                </div>
+                <div class="col">
+                  <input disabled type="text" class="input" value="{{ blockchainBlocks[2].prevHash }}">
+                </div>
+                <div class="col">
+                  <label class="label">Hash</label>
+                </div>
+                <div class="col">
+                  <input disabled type="text" class="input" value="{{ blockchainBlocks[2].hash }}">
+                </div>
+                <div class="control">
+                  <button [disabled]="disableButtonThree" (click)="computeNonceBlockThree()"
+                    class="btn btn-primary accent-color" type="button">Berechne</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <!-- Übung 3: NONCE Suche-->
+
+        <div class="tab-pane fade" id="uebung3-tab-pane" role="tabpanel" aria-labelledby="uebung3-tab" tabindex="0">
+          <div class="container tabs">
+            <div class="boxBlockChain">
+              <div class="label">Schwierigkeit</div>
+              <input (change)="getSliderValue($event)" id="sliderWithValue" class="slider" min="1" max="6" value="4"
+                step="1" type="range">
+              <output for="sliderWithValue">{{nonceComplexity}}</output>
+            </div>
+
+            <form>
+              <div class="box boxBlockChain"
+                [ngClass]="{'has-background-success-light': hashCorrect, 'has-background-danger-light': !hashCorrect}">
+                <label class="label">Block #</label>
+                <div class="col">
+                  <input disabled type="text" class="input" value="1">
+                </div>
+                <div class="col">
+                  <label class="label">Nonce</label>
+                </div>
+                <input disabled type="text" class="input" value="{{newNonce}}">
+                <div class="col">
+                  <label class="label">Daten</label>
+                </div>
+                <textarea class="textarea" (input)="onInput($event.target['value'])"></textarea>
+                <div class="col">
+                  <label class="label">Vorgänger</label>
+                </div>
+                <div class="col">
+                  <input disabled type="text" class="input" value="{{ prevHash }}">
+                </div>
+                <div class="col">
+                  <label class="label">Hash</label>
+                </div>
+                <div class="col">
+                  <input disabled type="text" class="input" value="{{newHash}}">
+                </div>
+                <div class="row">
+                  <div class="col">
+                    <button (click)="compute()" class="btn btn-primary accent-color" type="button">Berechne</button>
+                  </div>
+                  <div class="col">
+                    <p>Dauer:</p>
+                    <p>{{ elapsed }}ms // {{ elapsed / 1000}}s</p>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
