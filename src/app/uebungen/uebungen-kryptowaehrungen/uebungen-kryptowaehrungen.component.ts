@@ -76,7 +76,7 @@ export class UebungenKryptowaehrungenComponent {
   disableButtonTwo = true;
   disableButtonThree = true;
   disableButtonFour = true;
-  
+
 
   blockchainBlocks = [
     {
@@ -143,7 +143,7 @@ export class UebungenKryptowaehrungenComponent {
     this.blockchainBlocks[0].hash = sha256(combinedData).toString();
   }
 
-  
+
   computeNonceBlockOne() {
     while (this.blockchainBlocks[0].hash.substring(0, 4) !== '0000') {
       this.blockchainBlocks[0].nonce++;
@@ -157,7 +157,7 @@ export class UebungenKryptowaehrungenComponent {
       this.hash = '';
       this.changeBackground();
     }
-    
+
   }
 
   // Block 2
@@ -273,7 +273,7 @@ export class UebungenKryptowaehrungenComponent {
     if(this.data != this.newData){this.hashCorrect = false}else {this.hashCorrect = true}
   }
 
-  
+
 
   computeBlockOne() {
     this.start = new Date().getTime();
@@ -338,6 +338,7 @@ opponentSlider() {
       }
     }
   }
+}
 
   //Mining-Competition
   balance: number = 0;
@@ -555,6 +556,3 @@ opponentSlider() {
 
     this.percentage = percentage + "%";
   */
-
-  
-}
