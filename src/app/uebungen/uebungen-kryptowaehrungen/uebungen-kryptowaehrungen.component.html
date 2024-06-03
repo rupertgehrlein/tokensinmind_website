@@ -5,19 +5,24 @@
 <div class="container">
   <div class="row align-items-center">
     <div class="col text">
-
       <ul class="nav nav-tabs" id="myTab" role="tablist">
         <li class="nav-item" role="presentation">
-          <button class="nav-link active" id="uebung1-tab" data-bs-toggle="tab" data-bs-target="#uebung1-tab-pane" type="button" role="tab" aria-controls="uebung1-tab-pane" aria-selected="true">Übung 1</button>
+          <button class="nav-link active" id="uebung1-tab" data-bs-toggle="tab" data-bs-target="#uebung1-tab-pane"
+            type="button" role="tab" aria-controls="uebung1-tab-pane" aria-selected="true">Mining</button>
         </li>
         <li class="nav-item" role="presentation">
-          <button class="nav-link" id="uebung2-tab" data-bs-toggle="tab" data-bs-target="#uebung2-tab-pane" type="button" role="tab" aria-controls="uebung2-tab-pane" aria-selected="false">Übung 2</button>
+          <button class="nav-link" id="uebung2-tab" data-bs-toggle="tab" data-bs-target="#uebung2-tab-pane"
+            type="button" role="tab" aria-controls="uebung2-tab-pane" aria-selected="false">Byzantinischer
+            Fehler</button>
         </li>
         <li class="nav-item" role="presentation">
-          <button class="nav-link" id="uebung3-tab" data-bs-toggle="tab" data-bs-target="#uebung3-tab-pane" type="button" role="tab" aria-controls="uebung3-tab-pane" aria-selected="false">Übung 3</button>
+          <button class="nav-link" id="uebung3-tab" data-bs-toggle="tab" data-bs-target="#uebung3-tab-pane"
+            type="button" role="tab" aria-controls="uebung3-tab-pane" aria-selected="false">Energieverbrauch</button>
         </li>
       </ul>
+
       <div class="tab-content" id="myTabContent">
+<!-- joran
         <div class="tab-pane fade show active" id="uebung1-tab-pane" role="tabpanel" aria-labelledby="uebung1-tab" tabindex="0">
         <div class="container tabs">
           <div class="row textbox">
@@ -53,7 +58,6 @@
           </div>
               <div class="container tabs">
                 <form id="boxes">
-                 <!-- Block 1 --> 
                   <div class="box boxBlockChain"
                     [ngClass]="{'boxBlockChainGreen': hashCorrectBlockOne, 'boxBlockChainRed': !hashCorrectBlockOne}">
                     <div class="col">
@@ -95,7 +99,6 @@
                       <p>{{ elapsedOne }}ms // {{ elapsedOne / 1000}}s</p>
                     </div>
                   </div>
-                <!-- Block 2 -->
                   <div id="Block2" class="box boxBlockChain"
                     [ngClass]="{'box boxBlockChainGreen': hashCorrectBlockTwo, 'box boxBlockChainRed': !hashCorrectBlockTwo}">
                     <div class="col">
@@ -137,7 +140,6 @@
                       <p>{{ elapsedTwo }}ms // {{ elapsedTwo / 1000}}s</p>
                     </div>
                   </div>
-                <!-- Block 3 -->
                   <div class="box boxBlockChain"
                     [ngClass]="{'boxBlockChainGreen': hashCorrectBlockThree, 'boxBlockChainRed': !hashCorrectBlockThree}">
                     <div class="col">
@@ -179,7 +181,6 @@
                       <p>{{ elapsedThree }}ms // {{ elapsedThree / 1000}}s</p>
                     </div>
                   </div>
-                <!-- Block 4 -->
                   <div id="Block4" class="box boxBlockChain"
                     [ngClass]="{'boxBlockChainGreen': hashCorrectBlockFour, 'boxBlockChainRed': !hashCorrectBlockFour,}">
                     <div class="col">
@@ -233,6 +234,119 @@
               <div class="tab-pane fade" id="uebung2-tab-pane" role="tabpanel" aria-labelledby="uebung2-tab" tabindex="0">
                 ...
       
+              </div> -->
+
+        <div class="tab-pane fade show active" id="uebung1-tab-pane" role="tabpanel" aria-labelledby="uebung1-tab"
+          tabindex="0">
+          <div class="container tabs">
+            <h4 class="text">Mining-Simulation</h4>
+            <div class="row">
+              <div class="col">
+                <div *ngIf="!gameInProgress && !gameCompleted">
+                  <p>Willkommen zur Mining-Simulation! Du wirst gleich 10 Matheaufgaben lösen. Drücke auf "Start", wenn
+                    du
+                    bereit bist.</p>
+                  <button (click)="startGame()" class="btn btn-primary">Start</button>
+                </div>
+                <div *ngIf="gameInProgress">
+                  <p><strong>Matheaufgabe:</strong></p>
+                  <h3>{{ mathProblem }}</h3>
+                  <input type="text" [(ngModel)]="userAnswer" placeholder="Antwort" (input)="checkAnswer()"
+                    class="form-control">
+                  <p *ngIf="answerFeedback">{{ answerFeedback }}</p>
+                </div>
+                <div *ngIf="gameCompleted">
+                  <p>Du hast alle Aufgaben gelöst!</p>
+                  <div *ngIf="gameTime < currentBestTime">
+                    <p><strong>Eine neue Bestzeit!</strong></p>
+                  </div>
+                  <p><strong>Deine Zeit:</strong> {{ gameTime }} Sekunden</p>
+                  <p>Herzlichen Glückwunsch! Du warst sehr schnell und erhältst eine Belohnung auf dein Konto!</p>
+                  <button (click)="restartGame()" class="btn btn-primary">Von vorne starten</button>
+                </div>
               </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="tab-pane fade" id="uebung2-tab-pane" role="tabpanel" aria-labelledby="uebung2-tab" tabindex="0">
+          <div class="container tabs">
+            <h4>Das Problem der byzantinischen Generäle</h4>
+            <div class="row">
+              <div class="col">
+                <div *ngIf="simulationStep === 0">
+                  <p>Willkommen zur Simulation des Problems der byzantinischen Generäle. Hier siehst du, wie die Blockchain-Technologie dieses Problem löst. Drücke auf "Start", um zu beginnen.</p>
+                  <div *ngFor="let general of generals">
+                    <p>
+                      {{general.name}} ({{general.honest ? 'Ehrlich' : 'Böswillig'}})
+                      <button (click)="toggleHonesty(general)" class="btn btn-secondary btn-sm">Ehrlichkeit umschalten</button>
+                    </p>
+                  </div>
+                  <button (click)="startSimulation()" class="btn btn-primary">Start</button>
+                </div>
+                <div *ngIf="simulationStep >= 1">
+                  <h3>Generäle und ihre Nachrichten</h3>
+                  <div *ngFor="let general of generals">
+                    <p>{{general.name}}: {{general.message || 'Wartet...'}}</p>
+                  </div>
+                  <div *ngIf="simulationStep === 2">
+                    <button (click)="checkConsensus()" class="btn btn-primary">Konsens überprüfen</button>
+                  </div>
+                </div>
+                <div *ngIf="simulationStep === 3">
+                  <h3>{{consensusResult}}</h3>
+                  <button (click)="restartSimulation()" class="btn btn-primary">Von vorne starten</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="tab-pane fade" id="uebung3-tab-pane" role="tabpanel" aria-labelledby="uebung3-tab" tabindex="0">
+
+          <div class="container tabs">
+            <h4>Energieverbrauch von Proof-of-Work vs. Proof-of-Stake</h4>
+            <div class="row align-items-center">
+              <div class="col text">
+
+                <label for="blocks">Anzahl der neuen Blöcke:</label>
+                <input type="range" id="blocks" name="blocks" min="1" max="10" [(ngModel)]="blocksToMine" (input)="onBlocksToMineChange()">
+                <span>{{ blocksToMine }}</span>
+
+                <br>
+
+                <label for="participants">Teilnehmer im Netzwerk:  </label>
+                <select id="participants" name="participants" [(ngModel)]="networkSize" (change)="onNetworkSizeChange($event)">
+                  <option value="1000">1000</option>
+                  <option value="10000">10000</option>
+                  <option value="1000000">1000000</option>
+                  <option value="10000000">10000000</option>
+                </select>
+
+                <br>
+
+                <label for="costPerKWh">Kosten pro kWh: </label>
+                <span> {{ kWhCost }} €</span>
+
+                <ngx-charts-bar-vertical
+                  [results]="chartData"
+                  [view]="[600, 400]"
+                  [scheme]="'forest'"
+                  [xAxis]="chartOptions.showXAxis"
+                  [yAxis]="chartOptions.showYAxis"
+                  [legend]="true"
+                  [showXAxisLabel]="true"
+                  [showYAxisLabel]="true"
+                  [xAxisLabel]="chartOptions.xAxisLabel"
+                  [yAxisLabel]="chartOptions.yAxisLabel">
+                </ngx-charts-bar-vertical>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
   </div>
 </div>

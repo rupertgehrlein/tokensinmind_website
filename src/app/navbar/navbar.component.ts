@@ -3,7 +3,7 @@ import { ChangeDetectorRef, Component } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { SupabaseService } from '../services/supabase.service';
 import { SupabaseClient } from '@supabase/supabase-js';
-import { IsLoggedInService } from '../shared/is-logged-in.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-navbar',
@@ -12,41 +12,47 @@ import { IsLoggedInService } from '../shared/is-logged-in.service';
 })
 export class NavbarComponent {
   supabase: SupabaseClient;
-  isLoggedIn;
+  isLoggedIn: boolean;
+  currentCoins: number;
+  private coinsSubscription: Subscription;
+  private loggedInSubscription: Subscription;
 
-  constructor(private router: Router, private supabaseService: SupabaseService, private cdr: ChangeDetectorRef, private authService: IsLoggedInService) {
+  constructor(private router: Router, private supabaseService: SupabaseService, private cdr: ChangeDetectorRef) {
     this.supabase = supabaseService.getClient();
   }
 
-  ngOnInit() {
+  async ngOnInit() {
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
-        // Close the Bootstrap menu
         this.closeNavbar();
       }
     });
 
-    this.supabase.auth.onAuthStateChange((event, session) => {
-      if (event === 'SIGNED_IN') {
-        this.supabase.auth.getUser().then(user => {
-          if (user && user.data && user.data.user) {
-            this.isLoggedIn = true;
-            this.authService.setLoggedIn(true);
-            this.cdr.detectChanges();
-          }
-        });
-      } else if (event === 'SIGNED_OUT') {
-        this.isLoggedIn = false;
-        this.authService.setLoggedIn(false);
-        this.cdr.detectChanges();
+    this.loggedInSubscription = this.supabaseService.loggedIn$.subscribe(async loggedIn => {
+      this.isLoggedIn = loggedIn;
+      if (loggedIn) {
+        this.currentCoins = await this.supabaseService.getCurrentCoins(); // Manually update coins
+      } else {
+        this.currentCoins = 0; // Reset coins if not logged in
       }
+      this.cdr.detectChanges();
+    });
+
+    this.coinsSubscription = this.supabaseService.coins$.subscribe(coins => {
+      this.currentCoins = coins;
+      this.cdr.detectChanges();
+    });
+  }
+
+  ngOnChanges() {
+    this.coinsSubscription = this.supabaseService.coins$.subscribe(coins => {
+      this.currentCoins = coins;
+      this.cdr.detectChanges();
     });
   }
 
   logout() {
     this.supabase.auth.signOut().then(() => {
-      this.isLoggedIn = false;
-      this.authService.setLoggedIn(false);
       this.router.navigate(['']);
       this.cdr.detectChanges();
       this.closeNavbar();
@@ -61,6 +67,15 @@ export class NavbarComponent {
     if (navbarToggler && navbarNav) {
       navbarToggler.setAttribute('aria-expanded', 'false');
       navbarNav.classList.remove('show');
+    }
+  }
+
+  ngOnDestroy() {
+    if (this.loggedInSubscription) {
+      this.loggedInSubscription.unsubscribe();
+    }
+    if (this.coinsSubscription) {
+      this.coinsSubscription.unsubscribe();
     }
   }
 }
