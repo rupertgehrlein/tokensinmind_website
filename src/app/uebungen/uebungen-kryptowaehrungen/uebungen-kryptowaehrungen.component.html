@@ -18,10 +18,221 @@
         </li>
       </ul>
       <div class="tab-content" id="myTabContent">
-        <div class="tab-pane fade show active" id="uebung1-tab-pane" role="tabpanel" aria-labelledby="uebung1-tab" tabindex="0">...</div>
-        <div class="tab-pane fade" id="uebung2-tab-pane" role="tabpanel" aria-labelledby="uebung2-tab" tabindex="0">...</div>
-        <div class="tab-pane fade" id="uebung3-tab-pane" role="tabpanel" aria-labelledby="uebung3-tab" tabindex="0">...</div>
-      </div>
+        <div class="tab-pane fade show active" id="uebung1-tab-pane" role="tabpanel" aria-labelledby="uebung1-tab" tabindex="0">
+        <div class="container tabs">
+          <div class="row textbox">
+            <div class="label">In dieser Übung kannst du ausprobieren wie das System "Proof of Work" funktioniert.<br><br>
+              Nochmal zur Info:<br>
+              Bei "Proof of Work" wird immer der längsten Blockchain geglaubt, also da wo mehr dran gearbeitet wurde.
+              Das verhindert, dass jemand falsche Informationen in der Blockchain speichern kann. <br><br>
+              Hier möchte sich gerade jemand Tokens dazumogeln. Verhindere das, indem du die richtige Information speicherst.
+              Trage dazu unten die richtige Folge an Daten ein und berechne die NONCE.<br><br>
+              Die Blockchain soll folgende Information speichern:<br>
+              <ul>
+              <li>Block 1: Alice hat 25 Tokens</li>
+                <li>Block 2: Alice gibt Bob 15 Tokens</li>
+                <li>Block 3: Bob kauft sich Schuhe für 10 Tokens</li>
+                <li>Block 4: Bob gibt Alice 5 Tokens zurück</li>
+              </ul>
+              Die Zeit startet, sobald du beginnst die Daten in den ersten Block zu schreiben!
+            </div>
+          </div>
+          <div class="boxBlockChain">
+            <div class="label">Schwierigkeit:</div>
+          <div class="control">
+            <button (click)="setEasy()" class="btn btn-primary accent-color"
+              type="button">Einfach</button>
+            <button (click)="setHard()" class="btn btn-primary accent-color"
+              type="button">Schwer</button>
+          </div>
+              <br>
+              <div class="label">Progress:</div>
+              <br>
+            <div id="myBar" [style.width]="percentage">{{percentage}}</div>
+            <div id="opponentBar"></div>
+          </div>
+              <div class="container tabs">
+                <form id="boxes">
+                 <!-- Block 1 --> 
+                  <div class="box boxBlockChain"
+                    [ngClass]="{'boxBlockChainGreen': hashCorrectBlockOne, 'boxBlockChainRed': !hashCorrectBlockOne}">
+                    <div class="col">
+                      <label class="label">Block #</label>
+                    </div>
+                    <div class="col">
+                      <input disabled type="text" class="input" value="{{blockchainBlocks[0].index}}">
+                    </div>
+                    <div class="col">
+                      <label class="label">Nonce</label>
+                    </div>
+                    <div class="col">
+                      <input disabled type="text" class="input" value="{{ blockchainBlocks[0].nonce }}">
+                    </div>
+                    <div class="col">
+                      <label class="label">Daten</label>
+                    </div>
+                    <div class="col">
+                      <textarea id="inputOne" class="textarea" (input)="onInputBlockOne($event.target['value']); opponentSlider()"></textarea>
+                    </div>
+                    <div class="col">
+                      <label class="label">Vorgänger</label>
+                    </div>
+                    <div class="col">
+                      <input disabled type="text" class="input" value="{{ blockchainBlocks[0].prevHash }}">
+                    </div>
+                    <div class="col">
+                      <label class="label">Hash</label>
+                    </div>
+                    <div class="col">
+                      <input disabled type="text" class="input" value="{{ blockchainBlocks[0].hash }}">
+                    </div>
+                    <div class="control">
+                      <button [disabled]="disableButtonOne" (click)="computeBlockOne(); updateSlider($event)" id="firstBlock" class="btn btn-primary accent-color"
+                        type="button">Berechne</button>
+                    </div>
+                    <div class="col">
+                      <p>Dauer</p>
+                      <p>{{ elapsedOne }}ms // {{ elapsedOne / 1000}}s</p>
+                    </div>
+                  </div>
+                <!-- Block 2 -->
+                  <div id="Block2" class="box boxBlockChain"
+                    [ngClass]="{'box boxBlockChainGreen': hashCorrectBlockTwo, 'box boxBlockChainRed': !hashCorrectBlockTwo}">
+                    <div class="col">
+                      <label class="label">Block #</label>
+                    </div>
+                    <div class="col">
+                      <input disabled type="text" class="input" value="{{blockchainBlocks[1].index}}">
+                    </div>
+                    <div class="col">
+                      <label class="label">Nonce</label>
+                    </div>
+                    <div class="col">
+                      <input disabled type="text" class="input" value="{{ blockchainBlocks[1].nonce }}">
+                    </div>
+                    <div class="col">
+                      <label class="label">Daten</label>
+                    </div>
+                    <div class="col">
+                      <textarea id="inputTwo" class="textarea" (input)="onInputBlockTwo($event.target['value'])">Marie erhält 15 Tokens von Max</textarea>
+                    </div>
+                    <div class="col">
+                      <label class="label">Vorgänger</label>
+                    </div>
+                    <div class="col">
+                      <input disabled type="text" class="input" value="{{ blockchainBlocks[1].prevHash }}">
+                    </div>
+                    <div class="col">
+                      <label class="label">Hash</label>
+                    </div>
+                    <div class="col">
+                      <input disabled type="text" class="input" value="{{ blockchainBlocks[1].hash }}">
+                    </div>
+                    <div class="control">
+                      <button [disabled]="disableButtonTwo" (click)="computeBlockTwo()"
+                        class="btn btn-primary accent-color" type="button">Berechne</button>
+                    </div>
+                    <div class="col">
+                      <p>Dauer</p>
+                      <p>{{ elapsedTwo }}ms // {{ elapsedTwo / 1000}}s</p>
+                    </div>
+                  </div>
+                <!-- Block 3 -->
+                  <div class="box boxBlockChain"
+                    [ngClass]="{'boxBlockChainGreen': hashCorrectBlockThree, 'boxBlockChainRed': !hashCorrectBlockThree}">
+                    <div class="col">
+                      <label class="label">Block #</label>
+                    </div>
+                    <div class="col">
+                      <input disabled type="text" class="input" value="{{blockchainBlocks[2].index}}">
+                    </div>
+                    <div class="col">
+                      <label class="label">Nonce</label>
+                    </div>
+                    <div class="col">
+                      <input disabled type="text" class="input" value="{{ blockchainBlocks[2].nonce }}">
+                    </div>
+                    <div class="col">
+                      <label class="label">Daten</label>
+                    </div>
+                    <div class="col">
+                      <textarea id="inputThree" class="textarea" (input)="onInputBlockThree($event.target['value'])">Marie kauft sich Schuhe für 10 Tokens</textarea>
+                    </div>
+                    <div class="col">
+                      <label class="label">Vorgänger</label>
+                    </div>
+                    <div class="col">
+                      <input disabled type="text" class="input" value="{{ blockchainBlocks[2].prevHash }}">
+                    </div>
+                    <div class="col">
+                      <label class="label">Hash</label>
+                    </div>
+                    <div class="col">
+                      <input disabled type="text" class="input" value="{{ blockchainBlocks[2].hash }}">
+                    </div>
+                    <div class="control">
+                      <button [disabled]="disableButtonThree" (click)="computeBlockThree()"
+                        class="btn btn-primary accent-color" type="button">Berechne</button>
+                    </div>
+                    <div class="col">
+                      <p>Dauer</p>
+                      <p>{{ elapsedThree }}ms // {{ elapsedThree / 1000}}s</p>
+                    </div>
+                  </div>
+                <!-- Block 4 -->
+                  <div id="Block4" class="box boxBlockChain"
+                    [ngClass]="{'boxBlockChainGreen': hashCorrectBlockFour, 'boxBlockChainRed': !hashCorrectBlockFour,}">
+                    <div class="col">
+                      <label class="label">Block #</label>
+                    </div>
+                    <div class="col">
+                      <input disabled type="text" class="input" value="{{blockchainBlocks[3].index}}">
+                    </div>
+                    <div class="col">
+                      <label class="label">Nonce</label>
+                    </div>
+                    <div class="col">
+                      <input disabled type="text" class="input" value="{{ blockchainBlocks[3].nonce }}">
+                    </div>
+                    <div class="col">
+                      <label class="label">Daten</label>
+                    </div>
+                    <div class="col">
+                      <textarea id="inputFour" class="textarea" (input)="onInputBlockFour($event.target['value'])">Marie gibt 5 Tokens zurück an Max</textarea>
+                    </div>
+                    <div class="col">
+                      <label class="label">Vorgänger</label>
+                    </div>
+                    <div class="col">
+                      <input disabled type="text" class="input" value="{{ blockchainBlocks[3].prevHash }}">
+                    </div>
+                    <div class="col">
+                      <label class="label">Hash</label>
+                    </div>
+                    <div class="col">
+                      <input disabled type="text" class="input" value="{{ blockchainBlocks[3].hash }}">
+                    </div>
+                    <div class="control">
+                      <button [disabled]="disableButtonFour" (click)="computeBlockFour()"
+                        class="btn btn-primary accent-color" type="button">Berechne</button>
+                    </div>
+                    <div class="col">
+                      <p>Dauer</p>
+                      <p>{{ elapsedFour }}ms // {{ elapsedFour / 1000}}s</p>
+                    </div>
+                  </div>
+                </form>
+              </div>
 
+              <div class="tab-pane fade" id="uebung3-tab-pane" role="tabpanel" aria-labelledby="uebung3-tab" tabindex="0">
+                ...
+      
+              </div>
+      
+      
+              <div class="tab-pane fade" id="uebung2-tab-pane" role="tabpanel" aria-labelledby="uebung2-tab" tabindex="0">
+                ...
+      
+              </div>
   </div>
 </div>

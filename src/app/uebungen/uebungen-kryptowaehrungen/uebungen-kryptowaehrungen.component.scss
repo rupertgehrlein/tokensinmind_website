@@ -1,0 +1,138 @@
+#boxes {
+    white-space: nowrap;
+    overflow-x: auto;
+    margin: auto;
+  }
+  
+  .label {
+    color:antiquewhite;
+  }
+
+  .btn-primary {
+    margin: 8px;
+  }
+
+  .boxBlockChain {
+    width: 240px;
+    margin: 1rem;
+    margin-left:2rem;
+    margin-right:2rem;
+    display: inline-block;
+    background-color: black;
+    border: solid;
+    border-color: var(--primary_color);
+    border-width: 1px;
+    border-radius: 16px;
+    padding: 16px;
+    background-image: linear-gradient(-150deg, #311e68, #12092b);
+    box-shadow: 5px 5px 1px 1px rgba(0, 0, 0, 0.2);
+  }
+
+  .boxBlockChainGreen {
+    width: 240px;
+    margin: 1rem;
+    margin-left:2rem;
+    margin-right:2rem;
+    display: inline-block;
+    background-color: black;
+    border: solid;
+    border-color: var(--primary_color);
+    border-width: 1px;
+    border-radius: 16px;
+    padding: 16px;
+    background-image: linear-gradient(-150deg, #1e682e, #092b10);
+    box-shadow: 5px 5px 1px 1px rgba(0, 0, 0, 0.2);
+  }
+
+  .boxBlockChainYellow {
+    width: 240px;
+    margin: 1rem;
+    margin-left:2rem;
+    margin-right:2rem;
+    display: inline-block;
+    background-color: black;
+    border: solid;
+    border-color: var(--primary_color);
+    border-width: 1px;
+    border-radius: 16px;
+    padding: 16px;
+    background-image: linear-gradient(-150deg, #8f8d27, #2b2809);
+    box-shadow: 5px 5px 1px 1px rgba(0, 0, 0, 0.2);
+  }
+
+  .boxBlockChainRed {
+    width: 240px;
+    margin: 1rem;
+    margin-left:2rem;
+    margin-right:2rem;
+    display: inline-block;
+    background-color: black;
+    border: solid;
+    border-color: var(--primary_color);
+    border-width: 1px;
+    border-radius: 16px;
+    padding: 16px;
+    background-image: linear-gradient(-150deg, #681e1e, #2b0909);
+    box-shadow: 5px 5px 1px 1px rgba(0, 0, 0, 0.2);
+  }
+
+  
+  .is-mobile {
+    margin-top: 0.5rem;
+  }
+  
+  @media screen and (min-width: 0px) and (max-width: 1023px) {
+    .boxBlockChain {
+      width: 80%;
+      margin-left: 0.75rem;
+      margin-right: 0.75rem;
+      display: inline-block;
+    }
+  }
+
+.slider {
+  width: 260px;
+}
+
+
+#myProgress {
+  width: 100%;
+  background-color: grey;
+}
+
+#myBar {
+  width: 10%;
+  height: 30px;
+  background-color: rgb(0, 128 , 0);
+  text-align: center; /* To center it horizontally (if you want) */
+  line-height: 30px; /* To center it vertically */
+  color: white;
+  border-width: 1px;
+  border-radius: 16px;
+}
+
+#opponentBar {
+  width: 10%;
+  height: 30px;
+  background-color: rgb(128, 0 , 0);
+  text-align: center; /* To center it horizontally (if you want) */
+  line-height: 30px; /* To center it vertically */
+  color: white;
+  border-width: 1px;
+  border-radius: 16px;
+  margin-top: 4px;
+}
+
+#EnemyProgress {
+  width: 100%;
+  background-color: grey;
+}
+
+#EnemyBar {
+  width: 10%;
+  height: 30px;
+  background-color: rgb(128, 0, 0);
+  text-align: center; /* To center it horizontally (if you want) */
+  line-height: 30px; /* To center it vertically */
+  color: white;
+}
