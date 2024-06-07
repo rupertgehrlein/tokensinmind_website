@@ -13,20 +13,24 @@
         </li>
         <li class="nav-item" role="presentation">
           <button class="nav-link" id="lektion1-tab" data-bs-toggle="tab" data-bs-target="#lektion1-tab-pane"
-            type="button" role="tab" aria-controls="lektion1-tab-pane" aria-selected="false" (click)="setVisited('lektionen', 'kryptographie', 'ceasar')">Caesar-Chiffre</button>
+            type="button" role="tab" aria-controls="lektion1-tab-pane" aria-selected="false"
+            (click)="setVisited('lektionen', 'kryptographie', 'ceasar')">Caesar-Chiffre</button>
         </li>
         <li class="nav-item" role="presentation">
           <button class="nav-link" id="lektion2-tab" data-bs-toggle="tab" data-bs-target="#lektion2-tab-pane"
-            type="button" role="tab" aria-controls="lektion2-tab-pane" aria-selected="false" (click)="setVisited('lektionen', 'kryptographie', 'rsa')">RSA
+            type="button" role="tab" aria-controls="lektion2-tab-pane" aria-selected="false"
+            (click)="setVisited('lektionen', 'kryptographie', 'rsa')">RSA
             Verschlüsselung</button>
         </li>
         <li class="nav-item" role="presentation">
           <button class="nav-link" id="lektion3-tab" data-bs-toggle="tab" data-bs-target="#lektion3-tab-pane"
-            type="button" role="tab" aria-controls="lektion3-tab-pane" aria-selected="false" (click)="setVisited('lektionen', 'kryptographie', 'hashing')">Hashing</button>
+            type="button" role="tab" aria-controls="lektion3-tab-pane" aria-selected="false"
+            (click)="setVisited('lektionen', 'kryptographie', 'hashing')">Hashing</button>
         </li>
         <li class="nav-item" role="presentation">
           <button class="nav-link" id="lektion4-tab" data-bs-toggle="tab" data-bs-target="#lektion4-tab-pane"
-            type="button" role="tab" aria-controls="lektion4-tab-pane" aria-selected="false" (click)="setVisited('lektionen', 'kryptographie', 'sha256')">SHA-256</button>
+            type="button" role="tab" aria-controls="lektion4-tab-pane" aria-selected="false"
+            (click)="setVisited('lektionen', 'kryptographie', 'sha256')">SHA-256</button>
         </li>
       </ul>
 
@@ -97,12 +101,12 @@
                   <li>Ist der Schlüssel 5, wird das A durch ein F ersetzt, das B
                     durch ein G usw.</li>
                 </ul> <br>
-              
+              </div>
+
               <div class="col">
                 <div class="img">
                   <img class="img" src="../assets/Caesar-Verschluesselung.png"> <br><br>
                   <!-- Image Source:https://wiki.opencaching.de/index.php/Datei:Caesar-Verschluesselung.svg -->
-                </div>
                 </div>
               </div>
             </div>
@@ -114,14 +118,15 @@
                 Der verschlüsselte Text sieht dann wie folgt aus: <b>"Kdoor Zhow!"</b> <br>
                 Nehmen wir nun 5 als unseren Schlüssel, wird aus unserem Text <b>"Hallo Welt!"</b> die verschlüsselte
                 Nachricht:<b>"Mfqqt bjqy"</b>. <br>
-                Wenn du willst, kannst du mit deinem Sitznachbarn das Ganze einmal ausprobieren. Schau einfach einmal in unsere Übungen.
+                Wenn du willst, kannst du mit deinem Sitznachbarn das Ganze einmal ausprobieren. Schau einfach einmal in
+                unsere Übungen.
                 <br><br>
 
                 <b>Wie kann man die Caesar-Chiffre entschlüsseln?</b> <br>
                 Um die Caesar-Chiffre zu entschlüsseln, muss man den Schlüssel kennen bzw. wissen, um wieviele Stellen
                 der Text verschoben wurde. Wenn man den Schlüssel
                 kennt, kann man jeden Buchstaben im verschlüsselten Text durch den ursprünglichen Buchstaben ersetzen.
-                Ist der Schlüssel, wie im Beispiel 3, so müssen wir jeden Buchstaben der verschlüsselten Nachricht um 3
+                Ist der Schlüssel wie im Beispiel 3, so müssen wir jeden Buchstaben der verschlüsselten Nachricht um 3
                 Stellen zurück verschieben und erhalten den Originaltext. <br><br>
 
                 <b>Ist die Caesar-Chiffre sicher?</b> <br>
@@ -147,7 +152,7 @@
             <div class="row row-cols-1 row-cols-lg-2">
               <div class="col">
                 <b>Was ist RSA Verschlüsselung?</b> <br>
-                RSA ist eine Methode, um Informationen so zu verschlüsseln. Das Ziel? Nur der richtige Empfänger soll
+                RSA ist eine Methode, um Informationen zu verschlüsseln. Das Ziel? Nur der richtige Empfänger soll
                 sie lesen können.
                 Die RSA-Verschlüsselung ist sehr sicher und wird in vielen Bereichen eingesetzt, zum Beispiel im
                 Internet. <br><br>
@@ -174,7 +179,7 @@
                 Dieses System zweier Schlüssel wird z.B. auch bei Messengern wie Whatsapp oder Signal verwendet.<br><br>
 
                 <b>Ist RSA Verschlüsselung sicher?</b> <br>
-                RSA ist sehr sicher. Selbst mit den modernsten Computern ist sehr schwierig, den privaten Schlüssel zu
+                RSA ist sehr sicher. Selbst mit den modernsten Computern ist es sehr schwierig, die Nachricht ohne den privaten Schlüssel zu
                 knacken. <br><br>
               </div>
             </div>
@@ -197,8 +202,8 @@
                 Als Ergebnis erhält man den Hashwert: Eine wirre Kombination aus Buchstaben, Zahlen usw.
                 Anders als bei der RSA-Verschlüsselung, ist es nicht möglich nach dem Hashing wieder an die
                 Informationen zu kommen. <br>
-                Der Hashwert ist aber einzigartig. Das heißt das auch nur durch die kleinsten Änderungen einen ganz
-                anderen Hashwert entsteht.
+                Der Hashwert ist außerdem einzigartig. Das heißt das auch nur durch die kleinsten Änderungen ein ganz
+                anderer Hashwert entsteht.
                 Deshalb kann er zur Identifizierung der Information genutzt werden, also wie eine Unterschrift, oder ein
                 Fingerabdruck! <br><br>
               </div>
@@ -253,7 +258,7 @@
                 <ul>
                   <li>In der Computersicherheit wird SHA-256 verwendet, um Passwörter zu speichern. Der Vorteil von
                     SHA-256? Alle Hashwerte sind gleich lang, das erleichtert das Speichern in der Datenbank.</li>
-                  <li>Für das Internet wird SHA genutzt, um eine sichere Verbindung zwischen dem dir und dem Server
+                  <li>Für das Internet wird SHA genutzt, um eine sichere Verbindung zwischen dir und dem Server
                     herzustellen.</li>
                   <li>SHA-256 wird verwendet, um zu überprüfen, dass Daten nicht verändert wurden. So kann geschaut
                     werden, ob eine Datei noch das Original ist.
