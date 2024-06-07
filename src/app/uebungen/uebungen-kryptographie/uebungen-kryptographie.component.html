@@ -142,6 +142,31 @@
                   {{decoded}}
                 </div>
               </div>
+              <h4>Quiz:</h4>
+              <div class="row">
+                <div class="col">
+                  <p>Erinnerst du dich noch an unsere Lektion zur Caesar-Chiffre? Wenn ja, kannst du unsere geheime Nachricht auch ohne den Schlüssel zu kennen entschlüsseln?</p>
+                </div>
+              </div>
+              <div class="row g-2 row-cols-1 row-cols-lg-2">
+                <div class="col-3">
+                  RYRSNAGRA RFFRA TREAR YRPXRER ORRERA
+                </div>
+                <div class="col">
+                  <input type="text" class="input" (change)="getSolution($event)">
+                </div>
+              </div>
+              <div class="row g-2 row-cols-1 row-cols-lg-2">
+                <div class="col-3">
+                  <button class="btn btn-primary" type="button" (click)="riddle()">
+                    Lösung testen
+                  </button>
+                </div>
+                <div class="col">
+                  <p *ngIf="!riddleSolved">Das ist nicht richtig</p>
+                  <p *ngIf="riddleSolved">Super gelöst!</p>
+                </div>
+              </div>
             </form>
           </div>
         </div>

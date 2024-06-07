@@ -71,6 +71,9 @@ export class UebungenKryptographieComponent {
   selectDecode;
   encoded;
   decoded;
+  riddleGuess;
+  riddleSolution = 'ELEFANTEN ESSEN GERNE LECKERE BEEREN';
+  riddleSolved;
 
   encode() {
 
@@ -160,6 +163,18 @@ export class UebungenKryptographieComponent {
 
   getTextDecode(event) {
     this.textDecode = event.target.value;
+  }
+
+  getSolution(event){
+    this.riddleGuess = event.target.value.toUpperCase();
+  }
+
+  riddle(){
+    if(this.riddleGuess == this.riddleSolution){
+      this.riddleSolved = true;
+    } else {
+      this.riddleSolved = false;
+    }
   }
 
   //Übung RSA
