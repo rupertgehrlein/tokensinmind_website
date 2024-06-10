@@ -68,6 +68,7 @@ export class UebungenKryptowaehrungenComponent {
     this.supabaseService.setVisited(format, type, topic, this.userId);
   }
 
+  
   hashCorrectBlockOne = false;
   hashCorrectBlockTwo = false;
   hashCorrectBlockThree = false;
@@ -76,7 +77,6 @@ export class UebungenKryptowaehrungenComponent {
   disableButtonTwo = true;
   disableButtonThree = true;
   disableButtonFour = true;
-
 
   blockchainBlocks = [
     {
@@ -121,16 +121,35 @@ export class UebungenKryptowaehrungenComponent {
     this.updateHashBlockFour();
   }
 
+  text_presets = [
+    "<li>Block 1: Alice hat 25 Tokens</li> <li>Block 2: Alice gibt Bob 15 Tokens</li> <li>Block 3: Bob kauft sich Schuhe für 10 Tokens</li> <li>Block 4: Bob gibt Alice 5 Tokens zurück</li>",
+    "<li>Block 1: Sam braucht 150 Tokens</li> <li>Block 2: Max schenkt Sam 100 Tokens zum Geburtstag</li> <li>Block 3: Sam verkauft alte Bücher für 50 Tokens</li> <li>Block 4: Sam kauft für die Tokens ein Muttertagsgeschenk</li>",
+    "<li>Block 1: Maja kauft sich einen Pulli für 20 Coins</li> <li>Block 2: Der Pulli ist ihr aber leider zu groß</li> <li>Block 3: Maja schickt den Pulli zurück</li> <li>Block 4: Sie bekommt die 20 Coins zum Glück zurück</li>"
+  ];
+  text_presets_id = Math.floor(Math.random() * this.text_presets.length);
+  
+  answers_presets = [
+    ["Alice hat 25 Tokens", "Alice gibt Bob 15 Tokens", "Bob kauft sich Schuhe für 10 Tokens ", "Bob gibt Alice 5 Tokens zurück"],
+    ["Sam braucht 150 Tokens", "Max schenkt Sam 100 Tokens zum Geburtstag", "Sam verkauft alte Bücher für 50 Tokens", "Sam kauft für die Tokens ein Muttertagsgeschenk"],
+    ["Maja kauft sich einen Pulli für 20 Coins", "Der Pulli ist ihr aber leider zu groß", "Maja schickt den Pulli zurück", "Sie bekommt die 20 Coins zum Glück zurück"]
+  ];
+
   // Block 1
   onInputBlockOne(event) {
+    console.log(this.answers_presets[0][0]);
+
     this.blockchainBlocks[0].data = event;
     this.updateHashBlockOne();
     this.blockchainBlocks[1].prevHash = this.blockchainBlocks[0].hash;
     this.blockchainBlocks[2].prevHash = this.blockchainBlocks[1].hash;
     this.blockchainBlocks[3].prevHash = this.blockchainBlocks[2].hash;
-    var inputOne = (<HTMLInputElement>document.getElementById('inputOne')).value;
-    if (inputOne === 'Alice hat 25 Tokens') {
+    var textfieldOne = (<HTMLInputElement>document.getElementById('inputOne'));
+    var inputOne = textfieldOne.value;
+    if (inputOne === this.answers_presets[this.text_presets_id][0]) {
       this.disableButtonOne = false;
+      textfieldOne.disabled = true;
+      this.updateHashBlockOne();
+      this.changeColor();
     }
     else {
         this.hashCorrectBlockOne = false;
@@ -165,10 +184,13 @@ export class UebungenKryptowaehrungenComponent {
     this.blockchainBlocks[1].data = event;
     this.updateHashBlockTwo();
     this.updateHashBlockThree();
-    var inputThree = (<HTMLInputElement>document.getElementById('inputTwo')).value;
-    if (inputThree === 'Alice gibt Bob 15 Tokens') {
+    var textfieldTwo = (<HTMLInputElement>document.getElementById('inputTwo'))
+    var inputTwo = textfieldTwo.value;
+    if (inputTwo === this.answers_presets[this.text_presets_id][1] && this.hashCorrectBlockOne === true)  {
       this.disableButtonTwo = false;
+      textfieldTwo.disabled = true;
       this.blockchainBlocks[2].prevHash = this.blockchainBlocks[1].hash;
+      this.changeColor();
     }
     else {
       this.disableButtonTwo = true;
@@ -195,10 +217,13 @@ export class UebungenKryptowaehrungenComponent {
     this.blockchainBlocks[2].data = event;
     this.updateHashBlockThree();
     this.hashCorrectBlockThree = false;
-    var inputThree = (<HTMLInputElement>document.getElementById('inputThree')).value;
-    if (inputThree === 'Bob kauft sich Schuhe für 10 Tokens') {
+    var textfieldThree = (<HTMLInputElement>document.getElementById('inputThree'));
+    var inputThree = textfieldThree.value;
+    if (inputThree === this.answers_presets[this.text_presets_id][2] && this.hashCorrectBlockTwo === true) {
       this.disableButtonThree = false;
+      textfieldThree.disabled = true;
       this.blockchainBlocks[3].prevHash = this.blockchainBlocks[2].hash;
+      this.changeColor();
     }
     else {
       this.disableButtonFour = true;
@@ -224,9 +249,12 @@ export class UebungenKryptowaehrungenComponent {
     this.blockchainBlocks[3].data = event;
     this.updateHashBlockFour();
     this.hashCorrectBlockFour = false;
-    var inputFour = (<HTMLInputElement>document.getElementById('inputFour')).value;
-    if (inputFour === 'Bob gibt Alice 5 Tokens zurück') {
+    var textfieldFour = (<HTMLInputElement>document.getElementById('inputFour'));
+    var inputFour = textfieldFour.value;
+    if (inputFour === this.answers_presets[this.text_presets_id][3] && this.hashCorrectBlockThree === true) {
       this.disableButtonFour = false;
+      textfieldFour.disabled = true;
+      this.changeColor();
     }
     else {
       this.disableButtonFour = true;
@@ -273,8 +301,6 @@ export class UebungenKryptowaehrungenComponent {
     if(this.data != this.newData){this.hashCorrect = false}else {this.hashCorrect = true}
   }
 
-
-
   computeBlockOne() {
     this.start = new Date().getTime();
     this.computeNonceBlockOne();
@@ -310,35 +336,47 @@ export class UebungenKryptowaehrungenComponent {
     );
   }
 
-  pace = 400;
+  pace = 700;
 
   setEasy() {
-    this.pace = 300
+    this.pace = 700;
+    document.getElementById('PoW_text').innerHTML = this.text_presets[this.text_presets_id];
+
   }
 
   setHard() {
-    this.pace = 150
+    this.pace = 550;
   }
 
   i = 0;
-opponentSlider() {
-  if (this.i == 0) {
-    this.i = 1;
-    var elem = document.getElementById("opponentBar");
-    var width = 0;
-    var id = setInterval(frame, this.pace);
-    function frame() {
-      if (width >= 100) {
-        clearInterval(id);
-        this.i = 0;
-      } else {
-        width++;
-        elem.style.width = width + "%";
-        elem.innerHTML = width + "%";
+  opponentSlider() {
+    if (this.i == 0) {
+      this.i = 1;
+      var elem = document.getElementById("opponentBar");
+      var width = 0;
+      var id = setInterval(frame, this.pace);
+      function frame() {
+        if (width >= 100) {
+          clearInterval(id);
+          this.i = 0;
+        } else {
+          width++;
+          elem.style.width = width + "%";
+          elem.innerHTML = width + "%";
+        }
       }
     }
   }
-}
+  blockCount = 1;
+  changeColor() {
+    document.getElementById("Block" + this.blockCount).style.backgroundImage = "linear-gradient(-150deg, #8f8d27, #2b2809)";
+    this.blockCount += 1;
+  }
+
+  victory() {
+    var popup = document.getElementById("myPopup");
+    popup.classList.toggle("show");
+  }
 
   //Mining-Competition
   balance: number = 0;
