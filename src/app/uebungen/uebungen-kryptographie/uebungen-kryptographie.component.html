@@ -162,7 +162,7 @@
                     Lösung testen
                   </button>
                 </div>
-                <div class="col">
+                <div class="col" *ngIf="riddleSolved != null">
                   <p *ngIf="!riddleSolved">Das ist nicht richtig</p>
                   <p *ngIf="riddleSolved">Super gelöst!</p>
                 </div>
