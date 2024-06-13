@@ -159,3 +159,26 @@ input:disabled {
 .card.accent-color {
   background-color: var(--accent-color);
 }
+
+.boxBlockChainGreen {
+  background-image: linear-gradient(-150deg, #1e682e, #092b10) !important;
+}
+
+.boxBlockChainRed {
+  background-image: linear-gradient(-150deg, #681e1e, #2b0909);
+}
+
+.boxBlockChain {
+  width: 400px;
+  margin: 1rem;
+  margin-left:2rem;
+  margin-right:2rem;
+  display: inline-block;
+  background-color: black;
+  border: solid;
+  border-color: var(--primary_color);
+  border-width: 1px;
+  border-radius: 16px;
+  padding: 16px;
+  box-shadow: 5px 5px 1px 1px rgba(0, 0, 0, 0.2);
+}
