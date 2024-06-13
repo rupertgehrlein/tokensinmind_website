@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SupabaseService } from 'src/app/services/supabase.service';
 import * as sha256 from 'crypto-js/sha256';
-//import { LanguageService } from 'src/app/language.service';
 
 
 @Component({
@@ -20,14 +19,9 @@ export class UebungenBlockchainComponent {
   userId;
   timer: any;
   isVisible: boolean = true;
-  static NonceTestComponetn = class {}
+  /* static NonceTestComponetn = class {} */
 
-  constructor(private supabaseService: SupabaseService
-    /* ,private languageService: LanguageService*/) {
-   // this.currentLanguage = this.languageService.getLanguage();
-  }
-
-  currentLanguage: string;
+  constructor(private supabaseService: SupabaseService) {}
 
 
   async ngOnInit() {
@@ -35,18 +29,16 @@ export class UebungenBlockchainComponent {
     this.initialTime = await this.supabaseService.getTime('uebung', 'blockchain', this.userId) || 0;
     this.startTime = Date.now() - this.initialTime;
     this.startTimer();
+    document.addEventListener('visibilitychange', this.handleVisibilityChange);
 
     //Übung 1
     this.computeHash();
     //Übung 2
-    this.computeNonceBlockOne();
+    /* this.computeNonceBlockOne();
     this.computeNonceBlockTwo();
-    this.computeNonceBlockThree();
+    this.computeNonceBlockThree(); */
     //Übung 3
-    this.computeHash();
-
-
-    document.addEventListener('visibilitychange', this.handleVisibilityChange);
+    //this.computeHash();
   }
 
   ngOnDestroy() {
@@ -80,8 +72,6 @@ export class UebungenBlockchainComponent {
   setVisited(format, type, topic) {
     this.supabaseService.setVisited(format, type, topic, this.userId);
   }
-
-
 
 
   // Übung 1: Block einer Blockchain erstellen
@@ -125,6 +115,12 @@ export class UebungenBlockchainComponent {
 
 
   // Übung 2: Mehrere Blöcke
+
+  blockChain(){
+    this.computeNonceBlockOne();
+    this.computeNonceBlockTwo();
+    this.computeNonceBlockThree();
+  }
 
 
   hashCorrectBlockOne = true;

@@ -13,7 +13,8 @@
         </li>
         <li class="nav-item" role="presentation">
           <button class="nav-link" id="uebung2-tab" data-bs-toggle="tab" data-bs-target="#uebung2-tab-pane"
-            type="button" role="tab" aria-controls="uebung2-tab-pane" aria-selected="false">Eine Reihe von
+            type="button" role="tab" aria-controls="uebung2-tab-pane" aria-selected="false" (click)="blockChain()">Eine
+            Reihe von
             Blöcken</button>
         </li>
         <li class="nav-item" role="presentation">
@@ -33,41 +34,39 @@
         <div class="tab-pane fade show active" id="uebung1-tab-pane" role="tabpanel" aria-labelledby="uebung1-tab"
           tabindex="0">
           <div class="container tabs">
+            Das ist ein einzelner Block: <br>
             <form>
               <div class="box boxBlockChain"
-                [ngClass]="{'has-background-success-light': hashCorrect, 'has-background-danger-light': !hashCorrect}">
+                [ngClass]="{'boxBlockChainGreen': hashCorrect, 'boxBlockChainRed': !hashCorrect}">
                 <div class="col">
-                  <label class="label">Das ist ein einzelner Block:
-                    <span class="tooltip"
-                      data-tooltip="Noch kümmern wir uns also nicht um eine Blockchain,
-                      sondern nur um einen einzigen Block. Deswegen kannst du hier rechts nichts eintragen."></span><br>Block #</label>
+                  <label class="label">Block #</label>
                 </div>
                 <div class="col">
-                  <input disabled type="text" class="input" value="1">
+                  <input disabled type="text" class="input w-100" value="1">
                 </div>
                 <div class="col">
                   <label class="label">Nonce</label>
                 </div>
                 <div class="col">
-                  <input disabled type="text" class="input" value="{{newNonce}}">
+                  <input disabled type="text" class="input w-100" value="{{newNonce}}">
                 </div>
                 <div class="col">
                   <label class="label">Daten:</label>
                 </div>
                 <div class="col">
-                  <textarea class="textarea" (input)="onInput($event.target['value'])"></textarea>
+                  <textarea class="textarea w-100" (input)="onInput($event.target['value'])"></textarea>
                 </div>
                 <div class="col">
                   <label class="label">Vorgänger</label>
                 </div>
                 <div class="col">
-                  <input disabled type="text" class="input" value="{{ prevHash }}">
+                  <input disabled type="text" class="input w-100" value="{{ prevHash }}">
                 </div>
                 <div class="col">
                   <label class="label">Hash</label>
                 </div>
                 <div class="col">
-                  <input disabled type="text" class="input" value="{{newHash}}">
+                  <input disabled type="text" class="input w-100" value="{{newHash}}">
                 </div>
                 <div class="col">
                   <button (click)="computeHash()" class="btn btn-primary button accent-color"
@@ -86,36 +85,36 @@
           <div class="container tabs">
             <form id="boxes">
               <div class="box boxBlockChain"
-                [ngClass]="{'has-background-success-light': hashCorrectBlockOne, 'has-background-danger-light': !hashCorrectBlockOne}">
+                [ngClass]="{'boxBlockChainGreen': hashCorrectBlockOne, 'boxBlockChainRed': !hashCorrectBlockOne}">
                 <div class="col">
                   <label class="label">Block #</label>
                 </div>
                 <div class="col">
-                  <input disabled type="text" class="input" value="{{blockchainBlocks[0].index}}">
+                  <input disabled type="text" class="input w-100" value="{{blockchainBlocks[0].index}}">
                 </div>
                 <div class="col">
                   <label class="label">Nonce</label>
                 </div>
                 <div class="col">
-                  <input disabled type="text" class="input" value="{{ blockchainBlocks[0].nonce }}">
+                  <input disabled type="text" class="input w-100" value="{{ blockchainBlocks[0].nonce }}">
                 </div>
                 <div class="col">
                   <label class="label">Daten</label>
                 </div>
                 <div class="col">
-                  <textarea class="textarea" (input)="onInputBlockOne($event.target['value'])"></textarea>
+                  <textarea class="textarea w-100" (input)="onInputBlockOne($event.target['value'])"></textarea>
                 </div>
                 <div class="col">
                   <label class="label">Vorgänger</label>
                 </div>
                 <div class="col">
-                  <input disabled type="text" class="input" value="{{ blockchainBlocks[0].prevHash }}">
+                  <input disabled type="text" class="input w-100" value="{{ blockchainBlocks[0].prevHash }}">
                 </div>
                 <div class="col">
                   <label class="label">Hash</label>
                 </div>
                 <div class="col">
-                  <input disabled type="text" class="input" value="{{ blockchainBlocks[0].hash }}">
+                  <input disabled type="text" class="input w-100" value="{{ blockchainBlocks[0].hash }}">
                 </div>
                 <div class="control">
                   <button (click)="computeNonceBlockOne()" class="btn btn-primary accent-color"
@@ -124,36 +123,36 @@
               </div>
 
               <div class="box boxBlockChain"
-                [ngClass]="{'has-background-success-light': hashCorrectBlockTwo, 'has-background-danger-light': !hashCorrectBlockTwo}">
+                [ngClass]="{'boxBlockChainGreen': hashCorrectBlockTwo, 'boxBlockChainRed': !hashCorrectBlockTwo}">
                 <div class="col">
                   <label class="label">Block #</label>
                 </div>
                 <div class="col">
-                  <input disabled type="text" class="input" value="{{blockchainBlocks[1].index}}">
+                  <input disabled type="text" class="input w-100" value="{{blockchainBlocks[1].index}}">
                 </div>
                 <div class="col">
                   <label class="label">Nonce</label>
                 </div>
                 <div class="col">
-                  <input disabled type="text" class="input" value="{{ blockchainBlocks[1].nonce }}">
+                  <input disabled type="text" class="input w-100" value="{{ blockchainBlocks[1].nonce }}">
                 </div>
                 <div class="col">
                   <label class="label">Daten</label>
                 </div>
                 <div class="col">
-                  <textarea class="textarea" (input)="onInputBlockTwo($event.target['value'])"></textarea>
+                  <textarea class="textarea w-100" (input)="onInputBlockTwo($event.target['value'])"></textarea>
                 </div>
                 <div class="col">
                   <label class="label">Vorgänger</label>
                 </div>
                 <div class="col">
-                  <input disabled type="text" class="input" value="{{ blockchainBlocks[1].prevHash }}">
+                  <input disabled type="text" class="input w-100" value="{{ blockchainBlocks[1].prevHash }}">
                 </div>
                 <div class="col">
                   <label class="label">Hash</label>
                 </div>
                 <div class="col">
-                  <input disabled type="text" class="input" value="{{ blockchainBlocks[1].hash }}">
+                  <input disabled type="text" class="input w-100" value="{{ blockchainBlocks[1].hash }}">
                 </div>
                 <div class="control">
                   <button [disabled]="disableButtonTwo" (click)="computeNonceBlockTwo()"
@@ -162,36 +161,36 @@
               </div>
 
               <div class="box boxBlockChain"
-                [ngClass]="{'has-background-success-light': hashCorrectBlockThree, 'has-background-danger-light': !hashCorrectBlockThree}">
+                [ngClass]="{'boxBlockChainGreen': hashCorrectBlockThree, 'boxBlockChainRed': !hashCorrectBlockThree}">
                 <div class="col">
                   <label class="label">Block #</label>
                 </div>
                 <div class="col">
-                  <input disabled type="text" class="input" value="{{blockchainBlocks[2].index}}">
+                  <input disabled type="text" class="input w-100" value="{{blockchainBlocks[2].index}}">
                 </div>
                 <div class="col">
                   <label class="label">Nonce</label>
                 </div>
                 <div class="col">
-                  <input disabled type="text" class="input" value="{{ blockchainBlocks[2].nonce }}">
+                  <input disabled type="text" class="input w-100" value="{{ blockchainBlocks[2].nonce }}">
                 </div>
                 <div class="col">
                   <label class="label">Daten</label>
                 </div>
                 <div class="col">
-                  <textarea class="textarea" (input)="onInputBlockThree($event.target['value'])"></textarea>
+                  <textarea class="textarea w-100" (input)="onInputBlockThree($event.target['value'])"></textarea>
                 </div>
                 <div class="col">
                   <label class="label">Vorgänger</label>
                 </div>
                 <div class="col">
-                  <input disabled type="text" class="input" value="{{ blockchainBlocks[2].prevHash }}">
+                  <input disabled type="text" class="input w-100" value="{{ blockchainBlocks[2].prevHash }}">
                 </div>
                 <div class="col">
                   <label class="label">Hash</label>
                 </div>
                 <div class="col">
-                  <input disabled type="text" class="input" value="{{ blockchainBlocks[2].hash }}">
+                  <input disabled type="text" class="input w-100" value="{{ blockchainBlocks[2].hash }}">
                 </div>
                 <div class="control">
                   <button [disabled]="disableButtonThree" (click)="computeNonceBlockThree()"
@@ -215,30 +214,30 @@
 
             <form>
               <div class="box boxBlockChain"
-                [ngClass]="{'has-background-success-light': hashCorrect, 'has-background-danger-light': !hashCorrect}">
+                [ngClass]="{'boxBlockChainGreen': hashCorrect, 'boxBlockChainRed': !hashCorrect}">
                 <label class="label">Block #</label>
                 <div class="col">
-                  <input disabled type="text" class="input" value="1">
+                  <input disabled type="text" class="input w-100" value="1">
                 </div>
                 <div class="col">
                   <label class="label">Nonce</label>
                 </div>
-                <input disabled type="text" class="input" value="{{newNonce}}">
+                <input disabled type="text" class="input w-100" value="{{newNonce}}">
                 <div class="col">
                   <label class="label">Daten</label>
                 </div>
-                <textarea class="textarea" (input)="onInput($event.target['value'])"></textarea>
+                <textarea class="textarea w-100" (input)="onInput($event.target['value'])"></textarea>
                 <div class="col">
                   <label class="label">Vorgänger</label>
                 </div>
                 <div class="col">
-                  <input disabled type="text" class="input" value="{{ prevHash }}">
+                  <input disabled type="text" class="input w-100" value="{{ prevHash }}">
                 </div>
                 <div class="col">
                   <label class="label">Hash</label>
                 </div>
                 <div class="col">
-                  <input disabled type="text" class="input" value="{{newHash}}">
+                  <input disabled type="text" class="input w-100" value="{{newHash}}">
                 </div>
                 <div class="row">
                   <div class="col">

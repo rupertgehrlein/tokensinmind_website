@@ -4,7 +4,7 @@
     overflow-x: auto;
     margin: auto;
   }
-  
+
   .label {
     color:antiquewhite;
   }
@@ -29,13 +29,13 @@
     box-shadow: 5px 5px 1px 1px rgba(0, 0, 0, 0.2);
   }
 
-  .boxBlockChainGreen {
+  /* .boxBlockChainGreen {
     background-image: linear-gradient(-150deg, #1e682e, #092b10) !important;
   }
 
   .boxBlockChainRed {
     background-image: linear-gradient(-150deg, #681e1e, #2b0909);
-  }
+  } */
 
   /* Popup container - can be anything you want */
 .popup {
@@ -74,7 +74,7 @@
 
 /* Add animation (fade in the popup) */
 @-webkit-keyframes fadeIn {
-  from {opacity: 0;} 
+  from {opacity: 0;}
   to {opacity: 1;}
 }
 
@@ -83,11 +83,11 @@
   to {opacity:1 ;}
 }
 
-  
+
   .is-mobile {
     margin-top: 0.5rem;
   }
-  
+
   @media screen and (min-width: 0px) and (max-width: 1023px) {
     .boxBlockChain {
       width: 80%;
