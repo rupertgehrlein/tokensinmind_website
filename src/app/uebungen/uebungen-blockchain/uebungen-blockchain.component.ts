@@ -243,6 +243,7 @@ export class UebungenBlockchainComponent {
   leadingZerosHash = '0000';
   start;
   elapsed;
+  isComputing = false;
 
   getSliderValue(event) {
     this.nonceComplexity = event.target.value;
@@ -269,9 +270,13 @@ export class UebungenBlockchainComponent {
   }
 
   compute() {
+    this.isComputing = true;
     this.start = new Date().getTime();
-    this.computeHashNONCE();
-    this.elapsed = new Date().getTime() - this.start;
+    setTimeout(() => {
+      this.computeHashNONCE();
+      this.elapsed = new Date().getTime() - this.start;
+      this.isComputing = false;
+    }, 10); // Simuliert die asynchrone Natur der Funktion
   }
 
 }
