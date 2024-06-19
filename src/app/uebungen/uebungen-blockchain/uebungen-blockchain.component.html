@@ -272,7 +272,10 @@
                 </div>
                 <div class="row">
                   <div class="col">
-                    <button (click)="compute()" class="btn btn-primary accent-color" type="button">Berechne</button>
+                    <button (click)="compute()" class="btn btn-primary accent-color" type="button" [disabled]="isComputing">
+                      <span *ngIf="isComputing" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                      <span *ngIf="!isComputing">Berechne</span>
+                    </button>
                   </div>
                   <div class="col">
                     <p>Dauer:</p>
