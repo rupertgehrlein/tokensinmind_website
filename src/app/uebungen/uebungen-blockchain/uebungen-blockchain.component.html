@@ -14,8 +14,7 @@
         <li class="nav-item" role="presentation">
           <button class="nav-link" id="uebung2-tab" data-bs-toggle="tab" data-bs-target="#uebung2-tab-pane"
             type="button" role="tab" aria-controls="uebung2-tab-pane" aria-selected="false" (click)="blockChain()">Eine
-            Reihe von
-            Blöcken</button>
+            Reihe von Blöcken</button>
         </li>
         <li class="nav-item" role="presentation">
           <button class="nav-link" id="uebung3-tab" data-bs-toggle="tab" data-bs-target="#uebung3-tab-pane"
@@ -24,17 +23,21 @@
       </ul>
 
 
-
-
-
-
       <!-- Übung 1: Ein Block-->
 
       <div class="tab-content" id="myTabContent">
         <div class="tab-pane fade show active" id="uebung1-tab-pane" role="tabpanel" aria-labelledby="uebung1-tab"
           tabindex="0">
+          <div class="row">
+            <p>In dieser Übung kannst du mit einem einzelnen Block einer Blockchain experimentieren. Aus der passenden
+              Lektion weißt du ja schon, wie so ein Block aufgebaut ist. Wenn dir die Begriffe NONCE oder Hash noch
+              nichts sagen, dann schau am besten noch einmal in der passenden Lektion nach. <br> Wenn du nun neue Daten
+              in dem Block einträgst, dann ändert sich der Hash. Das siehst du daran, dass sich die das unterste Feld
+              direkt ändert und dass der Block rot wird. Wenn du deine Daten fertig eingegeben hast, dann kannst du den
+              neuen Hash berechnen lassen. <br> Probiere einmal verschiedene Daten aus. Fällt dir beim Hash etwas auf?
+            </p>
+          </div>
           <div class="container tabs">
-            Das ist ein einzelner Block: <br>
             <form>
               <div class="box boxBlockChain"
                 [ngClass]="{'boxBlockChainGreen': hashCorrect, 'boxBlockChainRed': !hashCorrect}">
@@ -82,6 +85,13 @@
         <!-- Übung 2: Mehrere Blöcke-->
 
         <div class="tab-pane fade" id="uebung2-tab-pane" role="tabpanel" aria-labelledby="uebung2-tab" tabindex="0">
+          <div class="row">
+            <p>Hier haben wir nun mehrere Blöcke miteinander verbunden. Das siehst du zum einen an der Nummerierung und
+              zum anderen, dass der nachfolgende Block immer den Hash des Vorgängers in sich notiert hat. Probiere
+              einmal aus, was passiert wenn du die Daten der Blöcke änderst. Probiere auch einmal aus, was passiert wenn
+              du nur den ersten Block, nur den zweiten Block oder nur den dritten Block änderst. Fällt dir da etwas auf?
+            </p>
+          </div>
           <div class="container tabs">
             <form id="boxes">
               <div class="box boxBlockChain"
@@ -204,6 +214,27 @@
         <!-- Übung 3: NONCE Suche-->
 
         <div class="tab-pane fade" id="uebung3-tab-pane" role="tabpanel" aria-labelledby="uebung3-tab" tabindex="0">
+          <div class="row">
+            <p>Vielleicht ist dir in den anderen beiden Übungen in diesem Kapitel schon aufgefallen, dass der Hashwert
+              immer mit mindestens 4 Nullen begonnen hat. Das haben wir ganz gezielt so eingestellt. In echten
+              Blockchains wird das ganz genau so gemacht. Damit die ganzen Computer in einem Blockchain-Netzwerk nicht
+              zu schnell neue Blöcke erstellen, werden gewisse Regeln festgelegt. In unseren Beispielen bislang haben
+              wir festgelegt, dass der Hashwert mit mindestens 4 Nullen starten muss, sonst zählt er nicht. Der Computer
+              nimmt nun also den Hashwert deiner eingetragenen Daten, die Nummer des Blocks und den Hashwert des
+              vorherigen Blocks und fängt an zu rechnen. Wenn der Hashwert der dabei herauskommt nun aber nicht der
+              Regel mit den 4 Nullen am Anfang entspricht, dann muss der Computer etwas tun. Hier kommt die NONCE ins
+              Spiel. Unsere NONCE ist so programmiert, dass sie einfach von 1 hochzählt. Der Computer nimmt also nun
+              alle Daten wie vorher auch und jetzt neu die NONCE, rechnet nochmal den Hashwert aus und schaut ob er
+              diesmal Glück hatte mit den 4 Nullen am Anfang. Wenn nicht, dann probiert er es mit der 2 als NONCE, dann
+              mit der 3, dann mit der 4 und so weiter... <br> Wenn du also bei uns auf der Seite siehst, dass die NONCE
+              zum Beispiel 110309 ist, dann hat der Computer genau so viele Versuche gebraucht, bis er einen Hashwert
+              gefunden hat, der mit 4 Nullen anfängt. <br> Hier kannst du nun einmal ausprobieren und die Regeln ändern.
+              Im Block unten siehst du nach der Berechnung, wie lange der Computer gebraucht hat, um einen Hashwert zu
+              finden, der passt. Probiere nach und nach alles einmal aus und schaue wie sich die NONCE und die Zeit
+              verhalten. Bis zu einer Schwierigkeit von 5 schaffen es die meisten Computer noch innerhalb von Sekunden das
+              auszurechnen. Bei einer Schwierigkeit von 6 kann das jedoch mehrere Minuten dauern, bis der Computer was
+              passendes gefunden hat...</p>
+          </div>
           <div class="container tabs">
             <div class="boxBlockChain">
               <div class="label">Schwierigkeit</div>
