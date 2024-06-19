@@ -165,12 +165,12 @@ export class UebungenKryptographieComponent {
     this.textDecode = event.target.value;
   }
 
-  getSolution(event){
+  getSolution(event) {
     this.riddleGuess = event.target.value.toUpperCase();
   }
 
-  riddle(){
-    if(this.riddleGuess == this.riddleSolution){
+  riddle() {
+    if (this.riddleGuess == this.riddleSolution) {
       this.riddleSolved = true;
     } else {
       this.riddleSolved = false;
@@ -183,6 +183,7 @@ export class UebungenKryptographieComponent {
   plainText: string;
   encryptedMessage: string;
   decryptedMessage: string;
+  wrongDecryptedMessage: string;
   keysGenerated: boolean = false;
   encryptionDone: boolean = false;
 
@@ -213,6 +214,7 @@ export class UebungenKryptographieComponent {
     this.encryptionDone = false;
     this.encryptedMessage = null;
     this.decryptedMessage = null;
+    this.wrongDecryptedMessage = null;
   }
 
   gcd(a, b) {
@@ -244,6 +246,39 @@ export class UebungenKryptographieComponent {
       .join('');
   }
 
+  decryptWithWrongKey() {
+    const wrongPrivateKey = this.generateWrongPrivateKey();
+    const [d, n] = this.parseKey(wrongPrivateKey);
+    this.wrongDecryptedMessage = this.encryptedMessage
+      .split(' ')
+      .map(code => String.fromCharCode(this.modExp(parseInt(code, 10), d, n)))
+      .join('');
+  }
+
+  generateWrongPrivateKey() {
+    const getRandomPrime = () => {
+      const primes = [11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53];
+      return primes[Math.floor(Math.random() * primes.length)];
+    };
+
+    const p = getRandomPrime();
+    const q = getRandomPrime();
+    const n = p * q;
+    const phi = (p - 1) * (q - 1);
+
+    let e = 3;
+    while (e < phi && this.gcd(e, phi) !== 1) {
+      e += 2;
+    }
+
+    let d = 2;
+    while ((d * e) % phi !== 1) {
+      d++;
+    }
+
+    return `(${d}, ${n})`;
+  }
+
   modExp(base, exp, mod) {
     let result = 1;
     base = base % mod;
@@ -261,6 +296,7 @@ export class UebungenKryptographieComponent {
     const match = key.match(/\((\d+), (\d+)\)/);
     return match ? [parseInt(match[1], 10), parseInt(match[2], 10)] : [0, 0];
   }
+
 
   //Übung Hashing
 

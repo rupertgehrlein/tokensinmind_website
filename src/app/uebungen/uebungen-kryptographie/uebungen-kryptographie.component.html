@@ -29,6 +29,15 @@
 
         <div class="tab-pane fade show active" id="uebung1-tab-pane" role="tabpanel" aria-labelledby="uebung1-tab"
           tabindex="0">
+          <div class="row">
+            <p>In dieser Übung kannst du mit dem Caesar-Chiffre Nachrichten verschlüsseln. Mach das am besten mit deinem
+              Sitznachbarn. Gib hierfür zunächst deine Nachricht in das Feld bei "Nachricht verschlüsseln" ein und wähle
+              deine Verschiebung aus. Klicke anschließend auf "Verschlüsseln". Du erhälst nun deine verschlüsselte
+              Nachricht, die du mit deinem Sitznachbarn teilen kannst. Wenn du die geheime Nachricht deines Sitznachbarn
+              bekommen hast, dann brauchst du nur noch die passende Verschiebung. Beides kannst du dann bei der
+              Überschrift "Nachricht entschlüsseln" eingeben und erhälst die ursprüngliche Nachricht. Zusätzlich findest
+              ganz unten ein kleines Rätsel. Kannst du es knacken?</p>
+          </div>
           <div class="container tabs">
             <form action="">
               <h4 class="text">Nachricht verschlüsseln:</h4>
@@ -142,10 +151,11 @@
                   {{decoded}}
                 </div>
               </div>
-              <h4>Quiz:</h4>
+              <h4>Rätsel:</h4>
               <div class="row">
                 <div class="col">
-                  <p>Erinnerst du dich noch an unsere Lektion zur Caesar-Chiffre? Wenn ja, kannst du unsere geheime Nachricht auch ohne den Schlüssel zu kennen entschlüsseln?</p>
+                  <p>Erinnerst du dich noch an unsere Lektion zur Caesar-Chiffre? Wenn ja, kannst du unsere geheime
+                    Nachricht auch ohne den Schlüssel zu kennen entschlüsseln?</p>
                 </div>
               </div>
               <div class="row g-2 row-cols-1 row-cols-lg-2">
@@ -174,11 +184,17 @@
 
         <div class="tab-pane fade" id="uebung2-tab-pane" role="tabpanel" aria-labelledby="uebung2-tab" tabindex="0">
           <div class="row">
-            <p>RSA ist eine Methode zur sicheren Übertragung von Nachrichten. Es verwendet zwei Schlüssel: einen
-              öffentlichen Schlüssel zum Verschlüsseln und einen privaten Schlüssel zum Entschlüsseln. Stell dir vor,
-              der öffentliche Schlüssel ist ein Schloss, das jeder benutzen kann, um eine Nachricht zu verschließen,
-              aber nur derjenige mit dem privaten Schlüssel kann das Schloss wieder öffnen.</p> <br>
-            <p>Sollte es zu Problemen kommen, dann lass dir einfach ein neues Schlüsselpaar generieren</p>
+            <p>Hier kannst du testen wie das mit der RSA Verschlüsselung funktioniert. Lass dir zuerst ein Schlüsselpaar
+              generieren und geben dann eine kurze geheime Nachricht ein. Anschließend kannst du die Nachricht mit dem
+              öffentlichen Schlüssel verschlüsseln. Darunter hast du nun 2 Möglichkeiten: Einmal kannst du die Nachricht
+              mit deinem privaten Schlüssel wieder entschlüsseln und einmal kannst du dir anzeigen lassen, wie deine
+              Nachricht für andere Leute aussieht, die nicht deinen privaten Schlüssel haben. Wie du siehst kann man
+              ohne den richtigen Schlüssel nicht wirklich was mit der Nachricht anfangen. Solange du also deinen
+              privaten Schlüssel nicht mit anderen teilst, kannst du dir sicher sein, dass niemand deine privaten
+              Nachrichten lesen und verstehen kann.</p><br>
+            <p><b><u>Hinweis:</u></b> Es kann vorkommen, dass dir von unserer Webseite falsche private Schlüssel
+              erstellt werden. Dies erkennst du daran, dass dir beim entschlüsseln der Nachricht nicht die richtige
+              Nachricht angezeigt wird. Sollte das passieren klicke einfach noch einmal auf "Schlüssel generieren".</p>
           </div>
           <div class="row row-cols-1 row-cols-lg-2">
             <h4>Generiere dein Schlüsselpaar</h4>
@@ -195,11 +211,11 @@
           <div class="row row-cols-1 row-cols-lg-2">
             <h4>Nachricht verschlüsseln</h4><br>
             <p>Hier wird nun dein Text mit dem öffentlichen Schlüssel verschlüsselt:</p><br>
-            <div class="col-3">
+            <div class="col">
               <label for="plainText" class="label">Nachricht:</label>
             </div>
             <div class="col">
-              <input type="text" id="plainText" class="input" (input)="getPlainText($event)"
+              <input type="text" id="plainText" class="input w-100" (input)="getPlainText($event)"
                 [disabled]="!keysGenerated">
             </div>
           </div>
@@ -216,6 +232,8 @@
             <h4>Nachricht entschlüsseln</h4><br>
             <p>Und hier wird die verschlüsselte Nachricht genommen und mit deinem privaten Schlüssel wieder
               entschlüsselt:</p><br>
+          </div>
+          <div class="row row-cols-1 row-cols-lg-2">
             <div class="col-3">
               <button class="btn btn-primary" type="button" (click)="decrypt()"
                 [disabled]="!encryptedMessage">Entschlüsseln</button>
@@ -224,6 +242,21 @@
               Entschlüsselte Nachricht: {{decryptedMessage}}
             </div>
           </div>
+          <div class="row row-cols-1 row-cols-lg-2">
+            <h4>Entschlüsselung mit falschem privaten Schlüssel</h4><br>
+            <p>Hier wird versucht, die verschlüsselte Nachricht mit einem falschen privaten Schlüssel zu entschlüsseln:
+            </p><br>
+          </div>
+          <div class="row row-cols-1 row-cols-lg-2">
+            <div class="col">
+              <button class="btn btn-primary" type="button" (click)="decryptWithWrongKey()"
+                [disabled]="!encryptedMessage">Mit falschem Schlüssel entschlüsseln</button>
+            </div>
+            <div class="col" *ngIf="wrongDecryptedMessage">
+              Ergebnis mit falschem Schlüssel: {{wrongDecryptedMessage}}
+            </div>
+          </div>
+
         </div>
 
 
@@ -236,6 +269,18 @@
                 geht das Hashen super schnell. Gleichzeitig solltest du auch erkennen können, dass bereits die
                 kleinsten
                 Änderungen in deiner Eingabe einen riesigen Unterschied haben können.
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <div class="text">
+                Das Hashing mit SHA 256 ist eine sogenannte "Einwegfunktion". Das heißt, dass zwar bei der Eingabe des
+                gleichen Textes immer auch das gleiche Ergebnis herauskommt, man anhand des Ergebnisses jedoch niemals
+                herausfinden kann, was der Text war. Probiere das gerne einmal mit deinem Sitznachbarn aus. Erhaltet ihr
+                genau den gleichen Hashwert, wenn ihr genau das gleiche eintippt? Probiert auch einmal aus was passiert,
+                wenn ihr nur eine ganz kleine Änderung macht. Setzt zum Beispiel irgendwo einen Punkt hin oder eine
+                extra Leerzeichen oder schreibt ein Wort groß statt klein. Vergleicht eure Ergebnisse.
               </div>
             </div>
           </div>
@@ -261,15 +306,6 @@
           <div class="row">
             <div class="col">
               <input disabled value="{{hash1}}" type="text" class="input w-100">
-            </div>
-          </div>
-          <div class="row">
-            <div class="col">
-              <div class="text">
-                Das Hashing mit SHA 256 ist eine sogenannte "Einwegfunktion". Das heißt, dass zwar bei der Eingabe des
-                gleichen Textes immer auch das gleiche Ergebnis herauskommt, man anhand des Ergebnisses jedoch niemals
-                herausfinden kann, was der Text war.
-              </div>
             </div>
           </div>
         </div>
