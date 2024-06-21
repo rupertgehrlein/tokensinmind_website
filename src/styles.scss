@@ -72,7 +72,7 @@ a.active {
   border-color: var(--accent_color);
 }
 
-.btn-primary:hover, .btn-primary:disabled {
+.btn-primary:hover, .btn-primary:disabled, .btn-primary.disabled {
   background-color: #672424;
   border-color: #672424;
 }
