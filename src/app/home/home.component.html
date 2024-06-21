@@ -42,10 +42,8 @@
     </div>
   </div>
 
-  <!-- später für den Rollout das unten dann wieder hinmachen -->
-
-  <!-- <div *ngIf="this.isLoggedIn">
-    <div class=" container">
+  <div *ngIf="this.isLoggedIn">
+    <div class="container">
       <hr>
     </div>
 
@@ -56,35 +54,35 @@
     <div class="container text-center">
       <div class="row row-cols-1 row-cols-lg-3 align-items-center">
         <div class="col">
-          <div class="card primary-color card_test" style="padding: 20px; margin: 20px;">
+          <div class="card primary-color card_test" [class.disabled]="!canStartBeginnerQuiz()" style="padding: 20px; margin: 20px;">
             <img src="../assets/level1w.png" class="card-img-top">
             <div class="card-body">
               <h2 class="card-title">Anfänger</h2>
               <p class="card-text"></p>
-              <a href="#" class="btn btn-primary">Starten</a>
+              <a [routerLink]="canStartBeginnerQuiz() ? '/quizzes/beginner' : null" class="btn btn-primary" [class.disabled]="!canStartBeginnerQuiz()">Starten</a>
             </div>
           </div>
         </div>
         <div class="col">
-          <div class="card primary-color card_test" style="padding: 20px; margin: 20px;">
+          <div class="card primary-color card_test" [class.disabled]="!canStartProQuiz()" style="padding: 20px; margin: 20px;">
             <img src="../assets/level2w.png" class="card-img-top">
             <div class="card-body">
               <h2 class="card-title">Profi</h2>
               <p class="card-text"></p>
-              <a href="#" class="btn btn-primary">Starten</a>
+              <a [routerLink]="canStartProQuiz() ? '/quizzes/pro' : null" class="btn btn-primary" [class.disabled]="!canStartProQuiz()">Starten</a>
             </div>
           </div>
         </div>
         <div class="col">
-          <div class="card primary-color card_test" style="padding: 20px; margin: 20px;">
+          <div class="card primary-color card_test" [class.disabled]="!canStartExpertQuiz()" style="padding: 20px; margin: 20px;">
             <img src="../assets/level3w.png" class="card-img-top">
             <div class="card-body">
               <h2 class="card-title">Experte</h2>
               <p class="card-text"></p>
-              <a href="#" class="btn btn-primary">Starten</a>
+              <a [routerLink]="canStartExpertQuiz() ? '/quizzes/expert' : null" class="btn btn-primary" [class.disabled]="!canStartExpertQuiz()">Starten</a>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </div> -->
+  </div>

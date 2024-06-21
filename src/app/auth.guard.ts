@@ -14,7 +14,7 @@ export const authGuardFactory: CanActivateFn = (
 
   return from(supabaseService.getClient().auth.getUser()).pipe(
     //tap(user => console.log('User:', user)), // Log the user object
-    map(user =>!!user.data?.user? true : false), // Simplify the condition for clarity
+    map(user =>!!user.data?.user? true : false),
     catchError(error => {
       console.error('Error getting user:', error);
       router.navigate(['/login']);
