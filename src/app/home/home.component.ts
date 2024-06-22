@@ -40,7 +40,7 @@ export class HomeComponent implements OnInit {
     });
 
     this.quizStatus = await this.supabaseService.getQuizStatus();
-    this.quizStatus = this.quizStatus[0].quiz_status;
+    /* this.quizStatus = this.quizStatus[0].quiz_status; */
   }
 
   ngOnChanges() {
