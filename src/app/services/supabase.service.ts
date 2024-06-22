@@ -280,6 +280,7 @@ export class SupabaseService {
     }
   }
 
+  //alles rund um Quizzes
   async getQuizStatus(){
     const userId = await this.getUserId();
 
@@ -293,7 +294,7 @@ export class SupabaseService {
         console.error("Fehler beim Abrufen der Quizdaten:", error);
         return null;
       }
-      return data;
+      return data[0].quiz_status;
     } catch (error) {
       console.error("Unbekannter Fehler:", error);
       return null;
