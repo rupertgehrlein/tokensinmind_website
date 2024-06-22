@@ -301,6 +301,26 @@ export class SupabaseService {
     }
   }
 
+  async getQuizData(){
+    const userId = await this.getUserId();
+
+    try{
+      const { data, error } = await this.client
+        .from('usernames')
+        .select('quiz_results')
+        .eq('userid', userId);
+
+      if (error) {
+        console.error("Fehler beim Abrufen der Quizdaten:", error);
+        return null;
+      }
+      return data[0].quiz_results;
+    } catch (error) {
+      console.error("Unbekannter Fehler:", error);
+      return null;
+    }
+  }
+
 }
 
 

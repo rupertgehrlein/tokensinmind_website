@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
+import { ReactiveFormsModule } from '@angular/forms';
 import { QuizzesRoutingModule } from './quizzes-routing.module';
 
 
@@ -8,7 +8,8 @@ import { QuizzesRoutingModule } from './quizzes-routing.module';
   declarations: [],
   imports: [
     CommonModule,
-    QuizzesRoutingModule
+    QuizzesRoutingModule,
+    ReactiveFormsModule
   ]
 })
 export class QuizzesModule { }
