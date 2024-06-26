@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, FormArray, Validators, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { SupabaseService } from 'src/app/services/supabase.service';
 
 @Component({
   selector: 'app-beginner-quiz',
@@ -10,6 +11,8 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./beginner-quiz.component.scss']
 })
 export class BeginnerQuizComponent {
+  constructor(private supabaseService: SupabaseService) {}
+
   questions = [
     {
       question: 'Was bedeutet das Wort "Kryptographie"?',
@@ -71,13 +74,20 @@ export class BeginnerQuizComponent {
     this.answers[questionIndex] = optionIndex;
   }
 
-  submitQuiz() {
+  async submitQuiz() {
     let score = 0;
+    let scoreboard = [];
+    let totalTime = await this.supabaseService.getOverallTime();
     this.questions.forEach((question, index) => {
       if (this.answers[index] === question.correctAnswer) {
+        scoreboard.push(1)
         score++;
+      } else {
+        scoreboard.push(0)
       }
     });
+    scoreboard.push(score);
+    scoreboard.push(totalTime);
     this.score = score;
   }
 }

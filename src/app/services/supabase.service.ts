@@ -190,6 +190,43 @@ export class SupabaseService {
     }
   }
 
+  async getOverallTime() {
+    const userId = await this.getUserId();
+
+    if (!userId) {
+      throw new Error('User ID could not be retrieved');
+    }
+
+    // Abfrage zur Ermittlung der Zeitwerte
+    const { data, error } = await this.client
+      .from('usernames')
+      .select(`
+        time_lektion_kryptographie,
+        time_lektion_blockchain,
+        time_lektion_waehrung,
+        time_lektion_nft,
+        time_uebung_kryptographie,
+        time_uebung_blockchain,
+        time_uebung_waehrung,
+        time_uebung_nft
+      `)
+      .eq('userid', userId);
+
+    if (error) {
+      console.error('Error fetching time values:', error);
+      return null;
+    }
+
+    if (data && data.length > 0) {
+      const timeData = data[0];
+      const totalTime = Object.values(timeData).reduce((sum, time) => sum + (time || 0), 0);
+      console.log(totalTime);
+      return totalTime;
+    }
+
+    return 0;
+  }
+
 
   //alles rund um User hat Unterseite bereits besucht
   async getVisited(userid: string) {
@@ -205,27 +242,6 @@ export class SupabaseService {
     }
 
     return data.already_visited;
-  }
-
-  async getBestTime(userid: string) {
-    const column = 'best_time';
-
-    try {
-      const { data, error } = await this.client
-        .from('usernames')
-        .select(column)
-        .eq('userid', userid);
-
-      if (error) {
-        console.error("Fehler beim Abrufen der Zeitdaten:", error);
-        return null;
-      }
-      const time = data[0][column];
-      return time;
-    } catch (error) {
-      console.error("Unbekannter Fehler:", error);
-      return null;
-    }
   }
 
   async setVisited(format: string, type: string, topic: string, userid: string) {
@@ -260,6 +276,27 @@ export class SupabaseService {
   }
 
   //alles rund um Bestzeit bei Mining-Game
+  async getBestTime(userid: string) {
+    const column = 'best_time';
+
+    try {
+      const { data, error } = await this.client
+        .from('usernames')
+        .select(column)
+        .eq('userid', userid);
+
+      if (error) {
+        console.error("Fehler beim Abrufen der Zeitdaten:", error);
+        return null;
+      }
+      const time = data[0][column];
+      return time;
+    } catch (error) {
+      console.error("Unbekannter Fehler:", error);
+      return null;
+    }
+  }
+
   async setBestTime(userid: string, time) {
     const column = 'best_time';
     const setTime = time;
