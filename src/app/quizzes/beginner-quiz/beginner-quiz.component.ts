@@ -89,5 +89,6 @@ export class BeginnerQuizComponent {
     scoreboard.push(score);
     scoreboard.push(totalTime);
     this.score = score;
+    this.supabaseService.setQuizData("beginner", scoreboard);
   }
 }

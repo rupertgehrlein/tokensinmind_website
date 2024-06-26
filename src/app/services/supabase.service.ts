@@ -358,6 +358,57 @@ export class SupabaseService {
     }
   }
 
+  async setQuizData(quizType, scoreboard) {
+    const userId = await this.getUserId();
+
+  if (!userId) {
+    throw new Error('User ID could not be retrieved');
+  }
+
+  // Abfrage zur Ermittlung der aktuellen Quiz-Daten
+  const { data, error } = await this.client
+    .from('usernames')
+    .select('quiz_results')
+    .eq('userid', userId)
+    .single(); // Erwarte einen einzelnen Datensatz
+
+  if (error) {
+    console.error('Error fetching quiz results:', error);
+    return null;
+  }
+
+  if (data) {
+    const quizResults = data.quiz_results;
+
+    // Aktualisiere die Quiz-Daten
+    if (!quizResults[quizType]) {
+      quizResults[quizType] = {};
+    }
+
+    for (let i = 0; i < 10; i++) {
+      quizResults[quizType][i + 1] = scoreboard[i];
+    }
+    quizResults[quizType]['total'] = scoreboard[10];
+    quizResults[quizType]['total_time'] = scoreboard[11];
+
+    // Aktualisiere die Datenbank
+    const { error: updateError } = await this.client
+      .from('usernames')
+      .update({ quiz_results: quizResults })
+      .eq('userid', userId);
+
+    if (updateError) {
+      console.error('Error updating quiz results:', updateError);
+      return null;
+    }
+
+    return quizResults;
+  }
+
+  return null;
+
+  }
+
 }
 
 
