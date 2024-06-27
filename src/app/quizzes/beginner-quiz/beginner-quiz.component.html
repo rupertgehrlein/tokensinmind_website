@@ -1,6 +1,6 @@
 <div class="container mt-5 text">
-  <h1>Beginner Quiz</h1>
-  <div class="row">
+  <h1>Anfänger Quiz</h1>
+  <div class="row" *ngIf="score == null">
     <div class="col">
       <form>
         <div *ngFor="let question of questions; let i = index" class="mb-4">
