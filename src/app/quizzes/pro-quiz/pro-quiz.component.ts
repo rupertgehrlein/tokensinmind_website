@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, FormArray, Validators, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { SupabaseService } from 'src/app/services/supabase.service';
 
 @Component({
   selector: 'app-pro-quiz',
@@ -113,21 +114,39 @@ export class ProQuizComponent {
     }
   ];
 
-
+  alreadyTried;
   answers: number[] = Array(this.questions.length).fill(null);
   score: number | null = null;
+
+  constructor(private supabaseService: SupabaseService) { }
+
+  async ngOnInit() {
+    this.alreadyTried = await this.supabaseService.getQuizStatus();
+    this.alreadyTried = this.alreadyTried.pro;
+  }
 
   onAnswerSelected(questionIndex: number, optionIndex: number) {
     this.answers[questionIndex] = optionIndex;
   }
 
-  submitQuiz() {
+  async submitQuiz() {
     let score = 0;
+    let scoreboard = [];
+    let totalTime = await this.supabaseService.getOverallTime();
     this.questions.forEach((question, index) => {
       if (this.answers[index] === question.correctAnswer) {
+        scoreboard.push(1)
         score++;
+      } else {
+        scoreboard.push(0)
       }
     });
+    scoreboard.push(score);
+    scoreboard.push(totalTime);
     this.score = score;
+    if (!this.alreadyTried) {
+      await this.supabaseService.setQuizData("pro", scoreboard);
+      await this.supabaseService.setQuizStatus("pro");
+    }
   }
 }

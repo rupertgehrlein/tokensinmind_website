@@ -11,7 +11,7 @@ import { SupabaseService } from 'src/app/services/supabase.service';
   styleUrls: ['./beginner-quiz.component.scss']
 })
 export class BeginnerQuizComponent {
-  constructor(private supabaseService: SupabaseService) {}
+  alreadyTried;
 
   questions = [
     {
@@ -64,11 +64,17 @@ export class BeginnerQuizComponent {
       options: ['Hohe Volatilität, Sicherheitsprobleme, fehlende Regulierungen, technische Herausforderungen und Umweltbelastungen', 'Hohe Transaktionsgebühren und schnelle Transaktionszeiten', 'Zentrale Kontrolle durch Regierungen', 'Zu gute Nutzerfreundlichkeit'],
       correctAnswer: 0
     },
-    // Weitere Fragen hier hinzufügen...
   ];
 
   answers: number[] = Array(this.questions.length).fill(null);
   score: number | null = null;
+
+  constructor(private supabaseService: SupabaseService) { }
+
+  async ngOnInit() {
+    this.alreadyTried = await this.supabaseService.getQuizStatus();
+    this.alreadyTried = this.alreadyTried.beginner;
+  }
 
   onAnswerSelected(questionIndex: number, optionIndex: number) {
     this.answers[questionIndex] = optionIndex;
@@ -89,6 +95,9 @@ export class BeginnerQuizComponent {
     scoreboard.push(score);
     scoreboard.push(totalTime);
     this.score = score;
-    this.supabaseService.setQuizData("beginner", scoreboard);
+    if (!this.alreadyTried) {
+      await this.supabaseService.setQuizData("beginner", scoreboard);
+      await this.supabaseService.setQuizStatus("beginner");
+    }
   }
 }

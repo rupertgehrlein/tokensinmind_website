@@ -220,7 +220,6 @@ export class SupabaseService {
     if (data && data.length > 0) {
       const timeData = data[0];
       const totalTime = Object.values(timeData).reduce((sum, time) => sum + (time || 0), 0);
-      console.log(totalTime);
       return totalTime;
     }
 
@@ -258,7 +257,7 @@ export class SupabaseService {
     const updatedVisited = { ...userData.already_visited };
     if (!updatedVisited[format]) updatedVisited[format] = {};
     if (!updatedVisited[format][type]) updatedVisited[format][type] = {};
-    if(updatedVisited[format][type][topic] == false){
+    if (updatedVisited[format][type][topic] == false) {
       await this.setCurrentCoins(10);
     }
     updatedVisited[format][type][topic] = true;
@@ -318,7 +317,7 @@ export class SupabaseService {
   }
 
   //alles rund um Quizzes
-  async getQuizStatus(){
+  async getQuizStatus() {
     const userId = await this.getUserId();
 
     try {
@@ -338,10 +337,55 @@ export class SupabaseService {
     }
   }
 
-  async getQuizData(){
+  async setQuizStatus(quizType){
     const userId = await this.getUserId();
 
-    try{
+    if (!userId) {
+      throw new Error('User ID could not be retrieved');
+    }
+
+    // Abfrage zur Ermittlung der aktuellen Quiz-Daten
+    const { data, error } = await this.client
+      .from('usernames')
+      .select('quiz_status')
+      .eq('userid', userId)
+      .single(); // Erwarte einen einzelnen Datensatz
+
+    if (error) {
+      console.error('Error fetching quiz status:', error);
+      return null;
+    }
+    console.log(data);
+    if (data) {
+      const quizStatus = data.quiz_status;
+
+      if (!quizStatus[quizType]){
+        quizStatus[quizType] = {};
+      }
+
+      quizStatus[quizType] = true;
+      console.log(quizStatus[quizType]);
+      // Aktualisiere die Datenbank
+      const { error: updateError } = await this.client
+        .from('usernames')
+        .update({ quiz_status: quizStatus })
+        .eq('userid', userId);
+
+      if (updateError) {
+        console.error('Error updating quiz status:', updateError);
+        return null;
+      }
+
+      return quizStatus;
+    }
+
+    return null;
+  }
+
+  async getQuizData() {
+    const userId = await this.getUserId();
+
+    try {
       const { data, error } = await this.client
         .from('usernames')
         .select('quiz_results')
@@ -361,51 +405,51 @@ export class SupabaseService {
   async setQuizData(quizType, scoreboard) {
     const userId = await this.getUserId();
 
-  if (!userId) {
-    throw new Error('User ID could not be retrieved');
-  }
-
-  // Abfrage zur Ermittlung der aktuellen Quiz-Daten
-  const { data, error } = await this.client
-    .from('usernames')
-    .select('quiz_results')
-    .eq('userid', userId)
-    .single(); // Erwarte einen einzelnen Datensatz
-
-  if (error) {
-    console.error('Error fetching quiz results:', error);
-    return null;
-  }
-
-  if (data) {
-    const quizResults = data.quiz_results;
-
-    // Aktualisiere die Quiz-Daten
-    if (!quizResults[quizType]) {
-      quizResults[quizType] = {};
+    if (!userId) {
+      throw new Error('User ID could not be retrieved');
     }
 
-    for (let i = 0; i < 10; i++) {
-      quizResults[quizType][i + 1] = scoreboard[i];
-    }
-    quizResults[quizType]['total'] = scoreboard[10];
-    quizResults[quizType]['total_time'] = scoreboard[11];
-
-    // Aktualisiere die Datenbank
-    const { error: updateError } = await this.client
+    // Abfrage zur Ermittlung der aktuellen Quiz-Daten
+    const { data, error } = await this.client
       .from('usernames')
-      .update({ quiz_results: quizResults })
-      .eq('userid', userId);
+      .select('quiz_results')
+      .eq('userid', userId)
+      .single(); // Erwarte einen einzelnen Datensatz
 
-    if (updateError) {
-      console.error('Error updating quiz results:', updateError);
+    if (error) {
+      console.error('Error fetching quiz results:', error);
       return null;
     }
 
-    return quizResults;
-  }
+    if (data) {
+      const quizResults = data.quiz_results;
 
-  return null;
+      // Aktualisiere die Quiz-Daten
+      if (!quizResults[quizType]) {
+        quizResults[quizType] = {};
+      }
+
+      for (let i = 0; i < 10; i++) {
+        quizResults[quizType][i + 1] = scoreboard[i];
+      }
+      quizResults[quizType]['total'] = scoreboard[10];
+      quizResults[quizType]['total_time'] = scoreboard[11];
+
+      // Aktualisiere die Datenbank
+      const { error: updateError } = await this.client
+        .from('usernames')
+        .update({ quiz_results: quizResults })
+        .eq('userid', userId);
+
+      if (updateError) {
+        console.error('Error updating quiz results:', updateError);
+        return null;
+      }
+
+      return quizResults;
+    }
+
+    return null;
 
   }
 
