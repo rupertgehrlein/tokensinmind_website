@@ -68,6 +68,7 @@ export class BeginnerQuizComponent {
 
   answers: number[] = Array(this.questions.length).fill(null);
   score: number | null = null;
+  currentQuestionIndex: number = 0;
 
   constructor(private supabaseService: SupabaseService) { }
 
@@ -80,16 +81,30 @@ export class BeginnerQuizComponent {
     this.answers[questionIndex] = optionIndex;
   }
 
+  nextQuestion() {
+    if (this.currentQuestionIndex < this.questions.length - 1) {
+      this.currentQuestionIndex++;
+    } else {
+      this.submitQuiz();
+    }
+  }
+
+  previousQuestion() {
+    if (this.currentQuestionIndex > 0) {
+      this.currentQuestionIndex--;
+    }
+  }
+
   async submitQuiz() {
     let score = 0;
     let scoreboard = [];
     let totalTime = await this.supabaseService.getOverallTime();
     this.questions.forEach((question, index) => {
       if (this.answers[index] === question.correctAnswer) {
-        scoreboard.push(1)
+        scoreboard.push(1);
         score++;
       } else {
-        scoreboard.push(0)
+        scoreboard.push(0);
       }
     });
     scoreboard.push(score);

@@ -337,7 +337,7 @@ export class SupabaseService {
     }
   }
 
-  async setQuizStatus(quizType){
+  async setQuizStatus(quizType) {
     const userId = await this.getUserId();
 
     if (!userId) {
@@ -359,12 +359,11 @@ export class SupabaseService {
     if (data) {
       const quizStatus = data.quiz_status;
 
-      if (!quizStatus[quizType]){
+      if (!quizStatus[quizType]) {
         quizStatus[quizType] = {};
       }
 
       quizStatus[quizType] = true;
-      console.log(quizStatus[quizType]);
       // Aktualisiere die Datenbank
       const { error: updateError } = await this.client
         .from('usernames')
@@ -375,7 +374,6 @@ export class SupabaseService {
         console.error('Error updating quiz status:', updateError);
         return null;
       }
-
       return quizStatus;
     }
 
@@ -445,7 +443,6 @@ export class SupabaseService {
         console.error('Error updating quiz results:', updateError);
         return null;
       }
-
       return quizResults;
     }
 

@@ -117,6 +117,7 @@ export class ProQuizComponent {
   alreadyTried;
   answers: number[] = Array(this.questions.length).fill(null);
   score: number | null = null;
+  currentQuestionIndex: number = 0;
 
   constructor(private supabaseService: SupabaseService) { }
 
@@ -127,6 +128,20 @@ export class ProQuizComponent {
 
   onAnswerSelected(questionIndex: number, optionIndex: number) {
     this.answers[questionIndex] = optionIndex;
+  }
+
+  nextQuestion() {
+    if (this.currentQuestionIndex < this.questions.length - 1) {
+      this.currentQuestionIndex++;
+    } else {
+      this.submitQuiz();
+    }
+  }
+
+  previousQuestion() {
+    if (this.currentQuestionIndex > 0) {
+      this.currentQuestionIndex--;
+    }
   }
 
   async submitQuiz() {
