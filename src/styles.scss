@@ -182,3 +182,16 @@ input:disabled {
   padding: 16px;
   box-shadow: 5px 5px 1px 1px rgba(0, 0, 0, 0.2);
 }
+
+.quiz {
+  box-shadow: 10px 10px 2px 1px rgba(0, 0, 0, 0.3);
+  border: none;
+  border-radius: 10px;
+  padding: 2rem;
+  background-color: var(--primary_color);
+  color: var(--text-color);
+}
+
+.quiz h5 {
+  margin-bottom: 2rem;
+}
