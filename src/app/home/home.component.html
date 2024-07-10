@@ -87,7 +87,7 @@
             <div class="card-body">
               <h2 class="card-title">Profi</h2>
               <p class="card-text">Wenn du mindestens 100 Coins verdient hast und das Anfänger-Quiz gemacht hast, kannst
-                du dich am Profi-Quiz probieren. Auch hier wird nur dein erster Versuch gewertet, du kannst das Quiz
+                du dich am Profi-Quiz probieren. Auch hier wird nur dein erster Versuch gespeichert, du kannst das Quiz
                 jedoch so oft wiederholen, wie du magst.</p>
               <a [routerLink]="canStartProQuiz() ? '/quizzes/pro' : null" class="btn btn-primary"
                 [class.disabled]="!canStartProQuiz()">Starten</a>

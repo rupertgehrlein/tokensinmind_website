@@ -2,6 +2,12 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { authGuardFactory } from './auth.guard';
+import { BeginnerQuizComponent } from './quizzes/beginner-quiz/beginner-quiz.component';
+import { beginnerQuizGuardFactory } from './quizzes/guards/beginner-quiz.guard';
+import { ProQuizComponent } from './quizzes/pro-quiz/pro-quiz.component';
+import { proQuizGuardFactory } from './quizzes/guards/pro-quiz.guard';
+import { ExpertQuizComponent } from './quizzes/expert-quiz/expert-quiz.component';
+import { expertQuizGuardFactory } from './quizzes/guards/expert-quiz.guard';
 
 const routes: Routes = [
   {
@@ -28,17 +34,15 @@ const routes: Routes = [
   },
   {
     path: 'login',
-    loadChildren: () => import('./login/login.module').then(m=>m.LoginModule)
+    loadChildren: () => import('./login/login.module').then(m => m.LoginModule)
   },
-  {
-    path: 'quizzes',
-    loadChildren: () => import('./quizzes/quizzes.module').then(m => m.QuizzesModule),
-    canActivate: [authGuardFactory]
-  }
+  { path: 'quizzes/beginner', component: BeginnerQuizComponent, canActivate: [beginnerQuizGuardFactory] },
+  { path: 'quizzes/pro', component: ProQuizComponent, canActivate: [proQuizGuardFactory] },
+  { path: 'quizzes/expert', component: ExpertQuizComponent, canActivate: [expertQuizGuardFactory] }
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, {scrollPositionRestoration: 'enabled'})],
+  imports: [RouterModule.forRoot(routes, { scrollPositionRestoration: 'enabled' })],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
