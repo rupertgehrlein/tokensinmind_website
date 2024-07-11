@@ -98,7 +98,6 @@ export class BeginnerQuizComponent {
   async submitQuiz() {
     let score = 0;
     let scoreboard = [];
-    let totalTime = await this.supabaseService.getOverallTime();
     this.questions.forEach((question, index) => {
       if (this.answers[index] === question.correctAnswer) {
         scoreboard.push(1);
@@ -108,7 +107,6 @@ export class BeginnerQuizComponent {
       }
     });
     scoreboard.push(score);
-    scoreboard.push(totalTime);
     this.score = score;
     if (!this.alreadyTried) {
       await this.supabaseService.setQuizData("beginner", scoreboard);

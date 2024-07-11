@@ -18,7 +18,9 @@ export class HomeComponent implements OnInit {
   private coinsSubscription: Subscription;
   private loggedInSubscription: Subscription;
   quizStatus: any;
-  quizData;
+  quizDataBeginner;
+  quizDataPro;
+  quizDataExpert;
   triedBeginner;
   triedPro;
   triedExpert;
@@ -47,14 +49,13 @@ export class HomeComponent implements OnInit {
     });
 
     this.quizStatus = await this.supabaseService.getQuizStatus();
-    this.quizData = await this.supabaseService.getQuizData();
+    this.pointsBeginner = await this.supabaseService.getQuizDataBeginner();
+    this.pointsPro = await this.supabaseService.getQuizDataPro();
+    this.pointsExpert = await this.supabaseService.getQuizDataExpert();
     /* this.quizStatus = this.quizStatus[0].quiz_status; */
     this.triedBeginner = this.quizStatus.beginner;
-    this.pointsBeginner = this.quizData.beginner.total;
     this.triedPro = this.quizStatus.pro;
-    this.pointsPro = this.quizData.pro.total;
     this.triedExpert = this.quizStatus.expert;
-    this.pointsExpert = this.quizData.expert.total;
   }
 
   ngOnChanges() {
