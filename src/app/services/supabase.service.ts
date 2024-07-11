@@ -190,7 +190,7 @@ export class SupabaseService {
     }
   }
 
-  async getOverallTime() {
+  /* async getOverallTime() {
     const userId = await this.getUserId();
 
     if (!userId) {
@@ -221,10 +221,11 @@ export class SupabaseService {
       const timeData = data[0];
       const totalTime = Object.values(timeData).reduce((sum, time) => sum + (time || 0), 0);
       return totalTime;
+      return timeData;
     }
 
     return 0;
-  }
+  } */
 
 
   //alles rund um User hat Unterseite bereits besucht
@@ -355,7 +356,7 @@ export class SupabaseService {
       console.error('Error fetching quiz status:', error);
       return null;
     }
-    console.log(data);
+
     if (data) {
       const quizStatus = data.quiz_status;
 
@@ -380,27 +381,70 @@ export class SupabaseService {
     return null;
   }
 
-  async getQuizData() {
+  async getQuizDataBeginner() {
     const userId = await this.getUserId();
 
     try {
       const { data, error } = await this.client
-        .from('usernames')
-        .select('quiz_results')
-        .eq('userid', userId);
+        .from('test_results')
+        .select('result')
+        .eq('user_id', userId)
+        .eq('quiz_type', "beginner")
 
       if (error) {
         console.error("Fehler beim Abrufen der Quizdaten:", error);
         return null;
       }
-      return data[0].quiz_results;
+      return data[0].result;
     } catch (error) {
       console.error("Unbekannter Fehler:", error);
       return null;
     }
   }
 
-  async setQuizData(quizType, scoreboard) {
+  async getQuizDataPro() {
+    const userId = await this.getUserId();
+
+    try {
+      const { data, error } = await this.client
+        .from('test_results')
+        .select('result')
+        .eq('user_id', userId)
+        .eq('quiz_type', "pro")
+
+      if (error) {
+        console.error("Fehler beim Abrufen der Quizdaten:", error);
+        return null;
+      }
+      return data[0].result;
+    } catch (error) {
+      console.error("Unbekannter Fehler:", error);
+      return null;
+    }
+  }
+
+  async getQuizDataExpert() {
+    const userId = await this.getUserId();
+
+    try {
+      const { data, error } = await this.client
+        .from('test_results')
+        .select('result')
+        .eq('user_id', userId)
+        .eq('quiz_type', "expert")
+
+      if (error) {
+        console.error("Fehler beim Abrufen der Quizdaten:", error);
+        return null;
+      }
+      return data[0].result;
+    } catch (error) {
+      console.error("Unbekannter Fehler:", error);
+      return null;
+    }
+  }
+
+  /* async setQuizData(quizType, scoreboard) {
     const userId = await this.getUserId();
 
     if (!userId) {
@@ -448,7 +492,79 @@ export class SupabaseService {
 
     return null;
 
-  }
+  } */
+
+    async setQuizData(quizType, scoreboard) {
+      const userId = await this.getUserId();
+
+      if (!userId) {
+        throw new Error('User ID could not be retrieved');
+      }
+
+      // Abrufen der aktuellen Daten aus der Tabelle 'usernames'
+      const { data: userData, error: userError } = await this.client
+        .from('usernames')
+        .select(`
+          current_coins,
+          time_lektion_kryptographie,
+          time_lektion_blockchain,
+          time_lektion_waehrung,
+          time_lektion_nft,
+          time_uebung_kryptographie,
+          time_uebung_blockchain,
+          time_uebung_waehrung,
+          time_uebung_nft
+        `)
+        .eq('userid', userId)
+        .single();
+
+      if (userError) {
+        console.error('Error fetching user data:', userError);
+        return null;
+      }
+
+      if (userData) {
+        // Erstellen eines neuen Datensatzes für die neue Tabelle
+        const newQuizData = {
+          user_id: userId,
+          quiz_type: quizType,
+          time_lektion_kryptographie: userData.time_lektion_kryptographie,
+          time_lektion_blockchain: userData.time_lektion_blockchain,
+          time_lektion_waehrung: userData.time_lektion_waehrung,
+          time_lektion_nft: userData.time_lektion_nft,
+          time_uebung_kryptographie: userData.time_uebung_kryptographie,
+          time_uebung_blockchain: userData.time_uebung_blockchain,
+          time_uebung_waehrung: userData.time_uebung_waehrung,
+          time_uebung_nft: userData.time_uebung_nft,
+          question01: scoreboard[0],
+          question02: scoreboard[1],
+          question03: scoreboard[2],
+          question04: scoreboard[3],
+          question05: scoreboard[4],
+          question06: scoreboard[5],
+          question07: scoreboard[6],
+          question08: scoreboard[7],
+          question09: scoreboard[8],
+          question10: scoreboard[9],
+          result: scoreboard[10],
+          coins: userData.current_coins
+        };
+
+        // Einfügen des neuen Datensatzes in die neue Tabelle
+        const { error: insertError } = await this.client
+          .from('test_results')
+          .insert(newQuizData);
+
+        if (insertError) {
+          console.error('Error inserting quiz data:', insertError);
+          return null;
+        }
+
+        return newQuizData;
+      }
+
+      return null;
+    }
 
 }
 
