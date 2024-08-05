@@ -1,0 +1,41 @@
+
+.textbox {
+    border: solid;
+    border-color: var(--primary_color);
+    border-width: 1px;
+    border-radius: 16px;
+    margin: 8px;
+    padding: 8px;
+    background-image: linear-gradient(-150deg, #311e68, #12092b);
+    box-shadow: 5px 5px 1px 1px rgba(0, 0, 0, 0.2);
+  }
+  
+  
+  .imgbox{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width:200px;
+    margin-right: 50px;
+    margin-left: 50px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+
+  .col {
+    margin-right: 10px;
+    margin-left: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+  
+  .img {
+    margin: 10px;
+    width: 256px;
+    border-radius: 16px;
+  }
+
+  .text {
+    color: rgb(194, 194, 194);
+    text-decoration: none;
+  }

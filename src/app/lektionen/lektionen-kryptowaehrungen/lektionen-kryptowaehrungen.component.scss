@@ -15,9 +15,18 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    width:300px;
+    width:200px;
     margin-right: 50px;
     margin-left: 50px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+
+  .col {
+    margin-right: 10px;
+    margin-left: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
   }
   
   .img {
@@ -29,4 +38,44 @@
   .text {
     color: rgb(194, 194, 194);
     text-decoration: none;
+  }
+
+  .tooltipword {
+    position: relative;
+    display: inline-block;
+    //border-bottom: 1px dotted var(--text-color);
+    border-bottom: 1px dotted rgb(194, 194, 194);
+  }
+  
+  .tooltipword .tooltiptext {
+    visibility: hidden;
+    width: 300px;
+    background-color: #5c496d;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    margin-left: -150px;
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  
+  .tooltipword .tooltiptext::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #555 transparent transparent transparent;
+  }
+  
+  .tooltipword:hover .tooltiptext {
+    visibility: visible;
+    opacity: 1;
   }
