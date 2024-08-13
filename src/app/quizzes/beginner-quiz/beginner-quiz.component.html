@@ -27,9 +27,11 @@
         </form>
       </div>
     </div>
-  </div>
 
-  <div *ngIf="score !== null" class="mt-4">
-    <h2>Du hast {{ score }} von {{ questions.length }} Fragen richtig beantwortet!</h2>
+
+    <div *ngIf="score !== null" class="mt-4">
+      <h2>Du hast {{ score }} von {{ questions.length }} Fragen richtig beantwortet!</h2>
+      <button routerLink="/" routerLinkActive="router-link-active" class="btn btn-primary">Zurück zur Homepage</button>
+    </div>
   </div>
 </div>

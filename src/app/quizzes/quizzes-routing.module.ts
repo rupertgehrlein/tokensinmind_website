@@ -6,11 +6,13 @@ import { ExpertQuizComponent } from './expert-quiz/expert-quiz.component';
 import { beginnerQuizGuardFactory } from './guards/beginner-quiz.guard';
 import { proQuizGuardFactory } from './guards/pro-quiz.guard';
 import { expertQuizGuardFactory } from './guards/expert-quiz.guard';
+import { HomeComponent } from '../home/home.component';
 
 const routes: Routes = [
+  /* { path: '', component: HomeComponent },
   { path: 'beginner', component: BeginnerQuizComponent, canActivate: [beginnerQuizGuardFactory] },
   { path: 'pro', component: ProQuizComponent, canActivate: [proQuizGuardFactory] },
-  { path: 'expert', component: ExpertQuizComponent, canActivate: [expertQuizGuardFactory] },
+  { path: 'expert', component: ExpertQuizComponent, canActivate: [expertQuizGuardFactory] } */
 ];
 
 @NgModule({
