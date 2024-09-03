@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { LektionenRoutingModule } from './lektionen-routing.module';
 import { LektionenHomeComponent } from './lektionen-home/lektionen-home.component';
 import { CommonModule } from '@angular/common';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 
 
@@ -12,7 +13,8 @@ import { CommonModule } from '@angular/common';
   ],
   imports: [
     LektionenRoutingModule,
-    CommonModule
+    CommonModule,
+    DragDropModule
   ]
 })
 export class LektionenModule { }

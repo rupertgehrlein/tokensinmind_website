@@ -32,6 +32,10 @@
             type="button" role="tab" aria-controls="lektion4-tab-pane" aria-selected="false"
             (click)="setVisited('lektionen', 'kryptographie', 'sha256')">SHA-256</button>
         </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link" id="lektion5-tab" data-bs-toggle="tab" data-bs-target="#lektion5-tab-pane"
+            type="button" role="tab" aria-controls="lektion5-tab-pane" aria-selected="false">Lückentext</button>
+        </li>
       </ul>
 
       <div class="tab-content" id="myTabContent">
@@ -179,7 +183,8 @@
                 Dieses System zweier Schlüssel wird z.B. auch bei Messengern wie Whatsapp oder Signal verwendet.<br><br>
 
                 <b>Ist RSA Verschlüsselung sicher?</b> <br>
-                RSA ist sehr sicher. Selbst mit den modernsten Computern ist es sehr schwierig, die Nachricht ohne den privaten Schlüssel zu
+                RSA ist sehr sicher. Selbst mit den modernsten Computern ist es sehr schwierig, die Nachricht ohne den
+                privaten Schlüssel zu
                 knacken. <br><br>
               </div>
             </div>
@@ -267,6 +272,42 @@
                   <li>SHA-256 wird auch für Blockchains genutzt, dazu aber im anderen Kapitel mehr...</li>
                 </ul>
               </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Lückentext -->
+
+        <div class="tab-pane fade" id="lektion5-tab-pane" role="tabpanel" aria-labelledby="lektion5-tab" tabindex="0">
+          <div class="container tabs">
+            <div class="container mt-4">
+
+              <h3>Lückentext</h3>
+
+              <p>
+                Kryptographie ist die Wissenschaft der <span class="dropzone" id="dropzone1"></span>. <br>
+                Eine einfache Methode der Verschlüsselung ist die <span class="dropzone" id="dropzone2"></span>, bei der
+                das Alphabet um eine bestimmte Anzahl an Stellen verschoben wird. <br>
+                Eine deutlich sicherere Methode ist die <span class="dropzone" id="dropzone3"></span> Verschlüsselung,
+                bei der zwei Schlüssel verwendet werden: ein öffentlicher und ein privater. <br>
+                Der <span class="dropzone" id="dropzone4"></span> ist eine wirre Kombination aus Buchstaben und Zahlen.
+                Anders als bei der RSA-Verschlüsselung, ist es nicht möglich nach dem <span class="dropzone"
+                  id="dropzone5"></span> wieder an die Informationen zu kommen. <br>
+                SHA steht für <span class="dropzone" id="dropzone6"></span> und wird vorallem in der Verschlüsselung in
+                Datenbanken und dem Internet eingesetzt. <br>
+              </p>
+
+              <div class="list">
+                <div class="dragItem" id="dragItem5" draggable="true">Hashing</div>
+                <div class="dragItem" id="dragItem3" draggable="true">RSA</div>
+                <div class="dragItem" id="dragItem1" draggable="true">Verschlüsselung</div>
+                <div class="dragItem" id="dragItem6" draggable="true">Secure Hash Algorithm</div>
+                <div class="dragItem" id="dragItem4" draggable="true">Hashwert</div>
+                <div class="dragItem" id="dragItem2" draggable="true">Caesar-Chiffre</div>
+              </div>
+
+              <button class="btn btn-primary" (click)="checkResults()">Ergebnisse überprüfen</button>
+
             </div>
           </div>
         </div>
