@@ -246,11 +246,11 @@ input:disabled {
 }
 
 .dropzone {
-  width: 200px;
-  height: 30px;
+  min-width: 100px;
+  min-height: 10px;
   border: 2px dashed var(--text-color);
   margin: 5px;
-  padding: 10px;
+  padding: 5px;
 
   &.filled {
     border: none;  // Entfernt die gepunkteten Linien
@@ -267,7 +267,7 @@ input:disabled {
 }
 
 .dragItem {
-  padding: 10px;
+  padding: 5px;
   border: 1px solid var(--secondary_color);
   border-radius: 4px;
   background-color: var(--secondary_color);

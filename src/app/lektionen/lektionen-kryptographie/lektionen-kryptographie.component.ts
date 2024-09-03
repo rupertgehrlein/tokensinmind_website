@@ -82,57 +82,100 @@ export class LektionenKryptographieComponent {
     }
   } */
 
-  draggedElement: HTMLElement | null = null;
+    draggedElement: HTMLElement | null = null;
 
-  handleDrag() {
-    console.log("HALLO");
-    const dragItems = document.querySelectorAll(".dragItem");
-    const dropZones = document.querySelectorAll(".dropzone");
+    handleDrag() {
+      const dragItems = document.querySelectorAll(".dragItem");
+      const dropZones = document.querySelectorAll(".dropzone");
 
-    dragItems.forEach(item => {
-      item.addEventListener("dragstart", (event) => {
-        this.draggedElement = event.target as HTMLElement;
-        this.draggedElement.classList.add("dragging");
-      });
+      dragItems.forEach(item => {
+        // Maus-Events
+        item.addEventListener("dragstart", (event) => {
+          this.draggedElement = event.target as HTMLElement;
+          this.draggedElement.classList.add("dragging");
+        });
 
-      item.addEventListener("dragend", (event) => {
-        (event.target as HTMLElement).classList.remove("dragging");
-      });
-    });
+        item.addEventListener("dragend", (event) => {
+          (event.target as HTMLElement).classList.remove("dragging");
+        });
 
-    dropZones.forEach(zone => {
-      zone.addEventListener("dragover", (event) => {
-        event.preventDefault();
-      });
+        // Touch-Events
+        item.addEventListener("touchstart", (event: TouchEvent) => {
+          this.draggedElement = event.target as HTMLElement;
+          this.draggedElement.classList.add("dragging");
 
-      zone.addEventListener("dragenter", (event) => {
-        const target = event.target as HTMLElement;
-        if (target.classList.contains("dropzone")) {
-          target.classList.add("dragover");
-        }
-      });
+          const touch = event.touches[0];
+          const target = document.elementFromPoint(touch.clientX, touch.clientY) as HTMLElement;
 
-      zone.addEventListener("dragleave", (event) => {
-        const target = event.target as HTMLElement;
-        if (target.classList.contains("dropzone")) {
-          target.classList.remove("dragover");
-        }
-      });
-
-      zone.addEventListener("drop", (event) => {
-        event.preventDefault();
-
-        const target = event.target as HTMLElement;
-        if (target.classList.contains("dropzone")) {
-          target.classList.remove("dragover");
-          if (this.draggedElement) {
-            target.appendChild(this.draggedElement);
-            this.draggedElement = null;
+          if (target && target.classList.contains("dropzone")) {
+            target.classList.add("dragover");
           }
-        }
+        });
+
+        item.addEventListener("touchmove", (event: TouchEvent) => {
+          const touch = event.touches[0];
+          const target = document.elementFromPoint(touch.clientX, touch.clientY) as HTMLElement;
+
+          // Handle dragging effect on dropzones
+          dropZones.forEach(zone => {
+            zone.classList.remove("dragover");
+          });
+
+          if (target && target.classList.contains("dropzone")) {
+            target.classList.add("dragover");
+          }
+        });
+
+        item.addEventListener("touchend", (event: TouchEvent) => {
+          this.draggedElement?.classList.remove("dragging");
+
+          const touch = event.changedTouches[0];
+          const target = document.elementFromPoint(touch.clientX, touch.clientY) as HTMLElement;
+
+          if (target && target.classList.contains("dropzone")) {
+            target.classList.remove("dragover");
+            if (this.draggedElement) {
+              target.appendChild(this.draggedElement);
+              this.draggedElement = null;
+            }
+          }
+        });
       });
-    });
-  }
+
+      dropZones.forEach(zone => {
+        zone.addEventListener("dragover", (event) => {
+          event.preventDefault();
+        });
+
+        zone.addEventListener("dragenter", (event) => {
+          const target = event.target as HTMLElement;
+          if (target.classList.contains("dropzone")) {
+            target.classList.add("dragover");
+          }
+        });
+
+        zone.addEventListener("dragleave", (event) => {
+          const target = event.target as HTMLElement;
+          if (target.classList.contains("dropzone")) {
+            target.classList.remove("dragover");
+          }
+        });
+
+        zone.addEventListener("drop", (event) => {
+          event.preventDefault();
+
+          const target = event.target as HTMLElement;
+          if (target.classList.contains("dropzone")) {
+            target.classList.remove("dragover");
+            if (this.draggedElement) {
+              target.appendChild(this.draggedElement);
+              this.draggedElement = null;
+            }
+          }
+        });
+      });
+    }
+
 
   checkResults() {
     const dropZone1 = document.getElementById('dropzone1');
