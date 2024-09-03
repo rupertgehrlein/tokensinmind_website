@@ -494,17 +494,17 @@ export class SupabaseService {
 
   } */
 
-    async setQuizData(quizType, scoreboard) {
-      const userId = await this.getUserId();
+  async setQuizData(quizType, scoreboard) {
+    const userId = await this.getUserId();
 
-      if (!userId) {
-        throw new Error('User ID could not be retrieved');
-      }
+    if (!userId) {
+      throw new Error('User ID could not be retrieved');
+    }
 
-      // Abrufen der aktuellen Daten aus der Tabelle 'usernames'
-      const { data: userData, error: userError } = await this.client
-        .from('usernames')
-        .select(`
+    // Abrufen der aktuellen Daten aus der Tabelle 'usernames'
+    const { data: userData, error: userError } = await this.client
+      .from('usernames')
+      .select(`
           current_coins,
           time_lektion_kryptographie,
           time_lektion_blockchain,
@@ -515,56 +515,56 @@ export class SupabaseService {
           time_uebung_waehrung,
           time_uebung_nft
         `)
-        .eq('userid', userId)
-        .single();
+      .eq('userid', userId)
+      .single();
 
-      if (userError) {
-        console.error('Error fetching user data:', userError);
+    if (userError) {
+      console.error('Error fetching user data:', userError);
+      return null;
+    }
+
+    if (userData) {
+      // Erstellen eines neuen Datensatzes für die neue Tabelle
+      const newQuizData = {
+        user_id: userId,
+        quiz_type: quizType,
+        time_lektion_kryptographie: userData.time_lektion_kryptographie,
+        time_lektion_blockchain: userData.time_lektion_blockchain,
+        time_lektion_waehrung: userData.time_lektion_waehrung,
+        time_lektion_nft: userData.time_lektion_nft,
+        time_uebung_kryptographie: userData.time_uebung_kryptographie,
+        time_uebung_blockchain: userData.time_uebung_blockchain,
+        time_uebung_waehrung: userData.time_uebung_waehrung,
+        time_uebung_nft: userData.time_uebung_nft,
+        question01: scoreboard[0],
+        question02: scoreboard[1],
+        question03: scoreboard[2],
+        question04: scoreboard[3],
+        question05: scoreboard[4],
+        question06: scoreboard[5],
+        question07: scoreboard[6],
+        question08: scoreboard[7],
+        question09: scoreboard[8],
+        question10: scoreboard[9],
+        result: scoreboard[10],
+        coins: userData.current_coins
+      };
+
+      // Einfügen des neuen Datensatzes in die neue Tabelle
+      const { error: insertError } = await this.client
+        .from('test_results')
+        .insert(newQuizData);
+
+      if (insertError) {
+        console.error('Error inserting quiz data:', insertError);
         return null;
       }
 
-      if (userData) {
-        // Erstellen eines neuen Datensatzes für die neue Tabelle
-        const newQuizData = {
-          user_id: userId,
-          quiz_type: quizType,
-          time_lektion_kryptographie: userData.time_lektion_kryptographie,
-          time_lektion_blockchain: userData.time_lektion_blockchain,
-          time_lektion_waehrung: userData.time_lektion_waehrung,
-          time_lektion_nft: userData.time_lektion_nft,
-          time_uebung_kryptographie: userData.time_uebung_kryptographie,
-          time_uebung_blockchain: userData.time_uebung_blockchain,
-          time_uebung_waehrung: userData.time_uebung_waehrung,
-          time_uebung_nft: userData.time_uebung_nft,
-          question01: scoreboard[0],
-          question02: scoreboard[1],
-          question03: scoreboard[2],
-          question04: scoreboard[3],
-          question05: scoreboard[4],
-          question06: scoreboard[5],
-          question07: scoreboard[6],
-          question08: scoreboard[7],
-          question09: scoreboard[8],
-          question10: scoreboard[9],
-          result: scoreboard[10],
-          coins: userData.current_coins
-        };
-
-        // Einfügen des neuen Datensatzes in die neue Tabelle
-        const { error: insertError } = await this.client
-          .from('test_results')
-          .insert(newQuizData);
-
-        if (insertError) {
-          console.error('Error inserting quiz data:', insertError);
-          return null;
-        }
-
-        return newQuizData;
-      }
-
-      return null;
+      return newQuizData;
     }
+
+    return null;
+  }
 
 }
 

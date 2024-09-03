@@ -195,3 +195,97 @@ input:disabled {
 .quiz h5 {
   margin-bottom: 2rem;
 }
+
+/* .blank-drop-list {
+  display: inline-block;
+  width: 150px;
+  height: 40px;  // Höhe erhöht
+  border: 2px dashed var(--text-color);
+  margin: 0 5px;
+  text-align: center;
+  vertical-align: middle;
+  padding: 10px;  // Padding hinzugefügt
+}
+
+
+.word-bank {
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-around;
+}
+
+.word-item {
+  padding: 10px;
+  border: 1px solid var(--secondary_color);
+  border-radius: 4px;
+  background-color: var(--secondary_color);
+  cursor: move;
+  margin: 5px;
+  text-align: center;
+  width: 150px;
+  user-select: none;  // Verhindert Textauswahl während des Ziehens
+}
+.cdk-drag-placeholder {
+  background: #f0f0f0;
+  border: 2px dashed #ccc;
+  height: 40px;
+  width: 150px;
+}
+
+.cdk-drag-preview {
+  background: #d0d0d0;
+  border-radius: 4px;
+  width: 150px;
+  text-align: center;
+  padding: 10px;
+} */
+
+
+#draggable {
+  text-align: center;
+}
+
+.dropzone {
+  width: 200px;
+  height: 30px;
+  border: 2px dashed var(--text-color);
+  margin: 5px;
+  padding: 10px;
+
+  &.filled {
+    border: none;  // Entfernt die gepunkteten Linien
+    padding: 10px 0;  // Anpassung des Paddings, um den Inhalt nicht zu verschieben
+  }
+}
+
+.dropzone.dragover {
+  background-color: var(--secondary_color);
+}
+
+.dragging {
+  opacity: 0.5;
+}
+
+.dragItem {
+  padding: 10px;
+  border: 1px solid var(--secondary_color);
+  border-radius: 4px;
+  background-color: var(--secondary_color);
+  cursor: move;
+  margin: 5px;
+  text-align: center;
+  width: 150px;
+  user-select: none;
+}
+
+.correct {
+  background-color: green;
+  border-color: green;
+  color: white;
+}
+
+.incorrect {
+  background-color: red;
+  border-color: red;
+  color: white;
+}

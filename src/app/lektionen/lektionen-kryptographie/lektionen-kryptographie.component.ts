@@ -1,10 +1,13 @@
 import { Component } from '@angular/core';
 import { SupabaseService } from 'src/app/services/supabase.service';
+import { DragDropModule, CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-lektionen-kryptographie',
   templateUrl: './lektionen-kryptographie.component.html',
-  styleUrls: ['./lektionen-kryptographie.component.scss']
+  styleUrls: ['./lektionen-kryptographie.component.scss'],
+  imports: [DragDropModule],
+  standalone: true,
 })
 export class LektionenKryptographieComponent {
   startTime: number;
@@ -14,7 +17,11 @@ export class LektionenKryptographieComponent {
   timer: any;
   isVisible: boolean = true;
 
-  constructor(private supabaseService: SupabaseService) {}
+  correctAnswers = ['Verschlüsselung', 'Caesar-Chiffre', 'RSA'];
+  dropZones = ['', '', ''];
+  wordBank = ['Caesar-Chiffre', 'RSA', 'Verschlüsselung'];
+
+  constructor(private supabaseService: SupabaseService) { }
 
   async ngOnInit() {
     this.userId = await this.supabaseService.getUserId();
@@ -23,6 +30,7 @@ export class LektionenKryptographieComponent {
     this.startTimer();
 
     document.addEventListener('visibilitychange', this.handleVisibilityChange);
+    this.handleDrag();
   }
 
   ngOnDestroy() {
@@ -30,7 +38,7 @@ export class LektionenKryptographieComponent {
     document.removeEventListener('visibilitychange', this.handleVisibilityChange);
   }
 
-  startTimer(){
+  startTimer() {
     this.timer = setInterval(() => {
       if (this.isVisible) {
         this.updateTimeAndSaveToDatabase();
@@ -56,4 +64,103 @@ export class LektionenKryptographieComponent {
   setVisited(format, type, topic) {
     this.supabaseService.setVisited(format, type, topic, this.userId);
   }
+
+  /* drop(event: CdkDragDrop<string[]>, index: number | null) {
+    // Überprüfe, ob das Element von der Word-Bank in eine Drop-Zone verschoben wurde
+    if (event.previousContainer !== event.container && index !== null) {
+      transferArrayItem(event.previousContainer.data,
+                        event.container.data,
+                        event.previousIndex,
+                        event.currentIndex);
+
+      // Überprüfe, ob das abgelegte Wort korrekt ist
+      if (this.dropZones[index] === this.correctAnswers[index]) {
+        console.log('Richtige Antwort!');
+      } else {
+        console.log('Falsche Antwort. Versuche es erneut.');
+      }
+    }
+  } */
+
+  draggedElement: HTMLElement | null = null;
+
+  handleDrag() {
+    console.log("HALLO");
+    const dragItems = document.querySelectorAll(".dragItem");
+    const dropZones = document.querySelectorAll(".dropzone");
+
+    dragItems.forEach(item => {
+      item.addEventListener("dragstart", (event) => {
+        this.draggedElement = event.target as HTMLElement;
+        this.draggedElement.classList.add("dragging");
+      });
+
+      item.addEventListener("dragend", (event) => {
+        (event.target as HTMLElement).classList.remove("dragging");
+      });
+    });
+
+    dropZones.forEach(zone => {
+      zone.addEventListener("dragover", (event) => {
+        event.preventDefault();
+      });
+
+      zone.addEventListener("dragenter", (event) => {
+        const target = event.target as HTMLElement;
+        if (target.classList.contains("dropzone")) {
+          target.classList.add("dragover");
+        }
+      });
+
+      zone.addEventListener("dragleave", (event) => {
+        const target = event.target as HTMLElement;
+        if (target.classList.contains("dropzone")) {
+          target.classList.remove("dragover");
+        }
+      });
+
+      zone.addEventListener("drop", (event) => {
+        event.preventDefault();
+
+        const target = event.target as HTMLElement;
+        if (target.classList.contains("dropzone")) {
+          target.classList.remove("dragover");
+          if (this.draggedElement) {
+            target.appendChild(this.draggedElement);
+            this.draggedElement = null;
+          }
+        }
+      });
+    });
+  }
+
+  checkResults() {
+    const dropZone1 = document.getElementById('dropzone1');
+    const dropZone2 = document.getElementById('dropzone2');
+    const dropZone3 = document.getElementById('dropzone3');
+    const dropZone4 = document.getElementById('dropzone4');
+    const dropZone5 = document.getElementById('dropzone5');
+    const dropZone6 = document.getElementById('dropzone6');
+
+    const correctAnswers = ['Verschlüsselung', 'Caesar-Chiffre', 'RSA', 'Hashwert', 'Hashing', 'Secure Hash Algorithm'];
+
+    const dropZones = [dropZone1, dropZone2, dropZone3, dropZone4, dropZone5, dropZone6];
+    dropZones.forEach((zone, index) => {
+      if (zone?.children.length > 0) {
+        const draggedItem = zone.children[0] as HTMLElement;
+        if (draggedItem.innerText.trim() === correctAnswers[index]) {
+          draggedItem.classList.add('correct');
+          draggedItem.classList.remove('incorrect');
+        } else {
+          draggedItem.classList.add('incorrect');
+          draggedItem.classList.remove('correct');
+        }
+      } else {
+        // Wenn keine Elemente in der Dropzone sind, entfernen Sie die Farben
+        const emptyItem = zone?.querySelector('.dragItem');
+        emptyItem?.classList.remove('correct', 'incorrect');
+      }
+    });
+  }
+
 }
