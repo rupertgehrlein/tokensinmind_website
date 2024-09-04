@@ -27,6 +27,10 @@
             type="button" role="tab" aria-controls="lektion4-tab-pane" aria-selected="false"
             (click)="setVisited('lektionen', 'nfts', 'dangers')">Wo liegen die Gefahren?</button>
         </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link" id="lektion5-tab" data-bs-toggle="tab" data-bs-target="#lektion5-tab-pane"
+            type="button" role="tab" aria-controls="lektion5-tab-pane" aria-selected="false">Lückentext</button>
+        </li>
       </ul>
 
       <div class="tab-content" id="myTabContent">
@@ -166,7 +170,8 @@
 
                 Es gibt auch Sicherheitsrisiken. Das bedeutet, dass jemand versuchen könnte, dein NFT zu stehlen,
                 entweder von deinem Computer oder von einer Webseite, auf der du es gekauft hast. Deshalb ist es
-                wichtig, dass man aufpasst, wo man seine NFTs speichert und dass man sichere Webseiten verwendet.<br><br>
+                wichtig, dass man aufpasst, wo man seine NFTs speichert und dass man sichere Webseiten
+                verwendet.<br><br>
 
                 Ein weiteres Problem ist, dass der Markt für NFTs noch nicht so gut geregelt ist wie andere Märkte, zum
                 Beispiel der Markt für Aktien. Das bedeutet, dass es mehr Betrug geben könnte oder dass man nicht so gut
@@ -185,6 +190,48 @@
                 Künstler nicht fair behandelt werden. Das sind alles Dinge, über die man nachdenken sollte, bevor man in
                 NFTs investiert oder sie kauft.
               </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Lückentext -->
+
+        <div class="tab-pane fade" id="lektion5-tab-pane" role="tabpanel" aria-labelledby="lektion5-tab" tabindex="0">
+          <div class="container tabs">
+            <div class="container mt-4">
+
+              <h3>Lückentext</h3>
+
+              <p style="line-height: 250%;">
+                Ein Non-Fungible Token, kurz <span class="dropzone" id="dropzone1"></span>, ist eine besondere Art von
+                digitalem Zertifikat, das beweist, dass du der Eigentümer eines einzigartigen digitalen Objekts
+                bist.<br>
+                „Non-Fungible“ bedeutet, dass es nicht <span class="dropzone" id="dropzone2"></span> ist. Das heißt,
+                jedes NFT ist einzigartig und kann nicht durch ein anderes ersetzt werden.<br>
+                Das Eigentumsrecht eines NFTs wird in einer speziellen Datenbank, der sogenannten <span class="dropzone"
+                  id="dropzone3"></span>, gespeichert.<br>
+                Die Blockchain ist wie ein großes digitales Buch, das alle <span class="dropzone" id="dropzone4"></span>
+                aufzeichnet und sicherstellt, dass niemand das Eigentum fälschen kann.<br>
+                Ein Beispiel, das vielleicht einfacher zu verstehen ist: Stell dir vor, du sammelst <span
+                  class="dropzone" id="dropzone5"></span>. Jede Karte hat einen bestimmten Spieler und ist einzigartig.
+                NFTs sind wie digitale Fußballkarten.<br>
+                Zusammengefasst ist ein <span class="dropzone" id="dropzone6"></span> ein einzigartiges digitales
+                Zertifikat, das beweist, dass du der Besitzer eines bestimmten digitalen Objekts bist.
+              </p>
+
+              <div class="list" style="margin: 1rem 0;">
+                <span class="dragItem" id="dragItem4" draggable="true">Transaktionen</span>
+                <span class="dragItem" id="dragItem5" draggable="true">Fußballkarten</span>
+                <span class="dragItem" id="dragItem2" draggable="true">austauschbar</span>
+                <span class="dragItem" id="dragItem6" draggable="true">Non-Fungible Token</span>
+                <span class="dragItem" id="dragItem1" draggable="true">NFT</span>
+                <span class="dragItem" id="dragItem3" draggable="true">Blockchain</span>
+              </div>
+
+              <button class="btn btn-primary" (click)="checkResults()">Ergebnisse überprüfen</button>
+
+
+
             </div>
           </div>
         </div>

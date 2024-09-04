@@ -28,6 +28,10 @@
             type="button" role="tab" aria-controls="lektion4-tab-pane" aria-selected="false"
             (click)="setVisited('lektionen', 'currency', 'dangers')">Gibt es da Gefahren?</button>
         </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link" id="lektion5-tab" data-bs-toggle="tab" data-bs-target="#lektion5-tab-pane"
+            type="button" role="tab" aria-controls="lektion5-tab-pane" aria-selected="false">Lückentext</button>
+        </li>
       </ul>
 
       <div class="tab-content" id="myTabContent">
@@ -80,7 +84,7 @@
             </div>
             </div>
             <div class="row textbox">
-              
+
               <div class="imgbox">
                   <img class="img" src="../assets/KI_Bilder/blockchain4.png"> <br><br>
             </div>
@@ -91,9 +95,9 @@
               Damit das ganze aber nicht leicht zu raten ist kommt eine Herausforderung dazu.
               Es wird nämlich im Vorhinein festgelegt, wie der Hash auszusehen hat.
               Z.B. Soll der Hash des ersten Blocks mit 20 Nullen anfangen, des Zweiten mit 21 Nullen.
-              Das kann ziemlich lange dauern den richtigen Hash zu finden, weil man auch hier eigentlich nur ausprobieren kann, bis man aus Zufall den Richtigen findet. 
+              Das kann ziemlich lange dauern den richtigen Hash zu finden, weil man auch hier eigentlich nur ausprobieren kann, bis man aus Zufall den Richtigen findet.
               <br><br>
-          
+
             </div>
           </div>
         </div>
@@ -248,7 +252,45 @@
           </div>
         </div>
 
-      
+        <!-- Lückentext -->
+
+        <div class="tab-pane fade" id="lektion5-tab-pane" role="tabpanel" aria-labelledby="lektion5-tab" tabindex="0">
+          <div class="container tabs">
+            <div class="container mt-4">
+
+              <h3>Lückentext</h3>
+
+              <p style="line-height: 250%;">
+                Kryptowährungen basieren auf der Technologie der <span class="dropzone" id="dropzone1"></span>.<br>
+                Diese digitalen Währungen ermöglichen <span class="dropzone" id="dropzone2"></span> Transaktionen ohne
+                die Notwendigkeit einer Bank oder eines Staates.<br>
+                Der Wert von Kryptowährungen wird hauptsächlich durch <span class="dropzone" id="dropzone3"></span> und
+                Nachfrage bestimmt.<br>
+                Eine der bekanntesten Kryptowährungen ist <span class="dropzone" id="dropzone4"></span>, die 2009
+                eingeführt wurde.<br>
+                Ein großes Risiko bei Kryptowährungen ist die <span class="dropzone" id="dropzone5"></span>, das heißt,
+                dass die Preise stark schwanken können.<br>
+                Ein weiterer wichtiger Aspekt ist das <span class="dropzone" id="dropzone6"></span>, das erforderlich
+                ist, um sicher mit Kryptowährungen umzugehen.<br>
+              </p>
+
+              <div class="list" style="margin: 1rem 0;">
+                <span class="dragItem" id="dragItem4" draggable="true">Bitcoin</span>
+                <span class="dragItem" id="dragItem2" draggable="true">anonyme</span>
+                <span class="dragItem" id="dragItem1" draggable="true">Blockchain</span>
+                <span class="dragItem" id="dragItem6" draggable="true">technische Wissen</span>
+                <span class="dragItem" id="dragItem3" draggable="true">Angebot</span>
+                <span class="dragItem" id="dragItem5" draggable="true">Volatilität</span>
+              </div>
+
+              <button class="btn btn-primary" (click)="checkResults()">Ergebnisse überprüfen</button>
+
+
+            </div>
+          </div>
+        </div>
+
+
 
     </div>
   </div>

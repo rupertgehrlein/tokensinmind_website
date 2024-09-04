@@ -167,6 +167,7 @@ export class LektionenKryptographieComponent {
           const target = event.target as HTMLElement;
           if (target.classList.contains("dropzone")) {
             target.classList.remove("dragover");
+            target.classList.add("filled");
             if (this.draggedElement) {
               target.appendChild(this.draggedElement);
               this.draggedElement = null;

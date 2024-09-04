@@ -246,15 +246,19 @@ input:disabled {
 }
 
 .dropzone {
-  min-width: 100px;
-  min-height: 10px;
+  min-width: 150px;
+  min-height: 30px;
   border: 2px dashed var(--text-color);
-  margin: 5px;
-  padding: 5px;
+  border-radius: 10px;
+  margin: 0 5px;
+  /* padding: 5px; */
+  display: inline-block;
 
   &.filled {
     border: none;  // Entfernt die gepunkteten Linien
     padding: 10px 0;  // Anpassung des Paddings, um den Inhalt nicht zu verschieben
+    min-width: 50px;
+    min-height: auto;
   }
 }
 
@@ -270,6 +274,7 @@ input:disabled {
   padding: 5px;
   border: 1px solid var(--secondary_color);
   border-radius: 4px;
+  color: black;
   background-color: var(--secondary_color);
   cursor: move;
   margin: 5px;
